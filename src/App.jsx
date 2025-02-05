@@ -1,10 +1,12 @@
-import Inicio from "./components/sections/Inicio/Inicio.jsx";
+// import Login from "./components/pages/Login/Login.jsx";
+import Rotas from "./rotas/Rotas.jsx";
 
 function App() {
 
   return (
     <>
-      <Inicio />
+      {/* <Login /> */}
+      <Rotas />
     </>
   )
 }

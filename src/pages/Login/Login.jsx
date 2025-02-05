@@ -1,5 +1,6 @@
+// Import Link
 // Import de Módulo de Estilização
-import styles from './Inicio.module.scss';
+import styles from './Login.module.scss';
 // Import de Imagens
 import Capa from '@/assets/capaInicio.svg';
 import Logo from '@/assets/logoSispar.svg';
@@ -8,7 +9,7 @@ import Logo from '@/assets/logoSispar.svg';
 import { Button } from '@/components/users/Buttons/Button';
 import { Input } from '@/components/users/Inputs/Input';
 
-export default function Inicio(){
+export default function Login(){
     return(
         <main className={styles.container}>
 
@@ -47,7 +48,7 @@ export default function Inicio(){
                                 type='text'
                             />
                             
-                            <a href="">Esqueci minha senha</a>
+                            <a href="/inicio">Esqueci minha senha</a>
 
                         </div>
 
@@ -56,11 +57,13 @@ export default function Inicio(){
                             <Button 
                                 texto="Entrar"
                                 className="azulEscuro"
+                                rota="/inicio"
                             />
 
                             <Button 
                                 texto="Criar conta"
                                 className="azulClaro"
+                                rota="/reembolso"
                             />
 
                         </div>
