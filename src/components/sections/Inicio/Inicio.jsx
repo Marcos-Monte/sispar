@@ -11,7 +11,7 @@ export default function Inicio(){
 
             <img 
                 className={styles.imagemCapa}
-                src="public\capaInicio.svg" 
+                src="./src/assets/capaInicio.svg" 
                 alt="Imagem de uma navio cheio de conteiners navegando junto a um rebocador" 
             />
 
@@ -22,7 +22,7 @@ export default function Inicio(){
                     <div className={styles.descricao}>
 
                         <img 
-                            src="public\logoSispar.svg" 
+                            src="src/assets/logoSispar.svg" 
                             alt="Logo da Wilson Sons" 
                         />
 
