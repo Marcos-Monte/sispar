@@ -1,9 +1,12 @@
 // Import de Módulo de Estilização
-import styles from './Inicio.module.scss'
+import styles from './Inicio.module.scss';
+// Import de Imagens
+import Capa from '@/assets/capaInicio.svg';
+import Logo from '@/assets/logoSispar.svg';
 
 // Import de Componentes
-import { Button } from '../../users/Buttons/Button'
-import { Input } from '../../users/Inputs/Input'
+import { Button } from '@/components/users/Buttons/Button';
+import { Input } from '@/components/users/Inputs/Input';
 
 export default function Inicio(){
     return(
@@ -11,7 +14,7 @@ export default function Inicio(){
 
             <img 
                 className={styles.imagemCapa}
-                src="./src/assets/capaInicio.svg" 
+                src={Capa} 
                 alt="Imagem de uma navio cheio de conteiners navegando junto a um rebocador" 
             />
 
@@ -22,7 +25,7 @@ export default function Inicio(){
                     <div className={styles.descricao}>
 
                         <img 
-                            src="src/assets/logoSispar.svg" 
+                            src={Logo} 
                             alt="Logo da Wilson Sons" 
                         />
 
