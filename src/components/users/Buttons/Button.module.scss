@@ -1,21 +1,40 @@
-.container {
-    width: 7.5rem;
-    height: 3.4rem;
+.container, .icon {
     border-radius: 6px;
     border: none;
     color: var(--background);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.container:hover {
-    filter: brightness(80%); /* Escurecer 20% ao passar o mouse */
-    width: 7rem;
+.icon{
+    width: 3rem;
     height: 3rem;
+}
+
+.container{
+    width: 7.5rem;
+    height: 3.4rem;
+}
+
+.container:hover, .icon:hover {
+    filter: brightness(80%); /* Escurecer 20% ao passar o mouse */
+    // width: 7rem;
+    // height: 3rem;
 }
 
 .azulEscuro {
     background-color: var(--primary-dark);
 }
 
+.azul {
+    background-color: var(--primary);
+}
+
 .azulClaro {
     background-color: var(--secondary);
+}
+
+.cinza {
+    background-color: var(--text-secondary);
 }

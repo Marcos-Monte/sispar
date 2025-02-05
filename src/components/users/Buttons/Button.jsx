@@ -7,18 +7,15 @@ function Button(props){
     return (
         <Link to={props.rota}>
             <button 
-            className={`${styles.container} ${styles[props.className]}`}
+                className={`${styles[props.tipo]} ${styles[props.cor]}`}
+                onClick={props.funcao}
             >
-                {props.texto}
+                {props.children}
             </button>
         </Link>
     )
 }
-function InputButton(){
-    return (
-        <button className={styles.container}></button>
-    )
-}
 
-export { Button, InputButton }
+
+export { Button }
 

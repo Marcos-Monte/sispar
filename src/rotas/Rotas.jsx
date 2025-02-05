@@ -1,9 +1,9 @@
 // Import de Elementos para trabalhar com Rotas
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 // Paginas
-import Inicio from "../pages/Inicio/Inicio";
-import Login from "../pages/Login/Login";
-import Reembolso from "../pages/Reembolso/Reembolso";
+import Home from "../pages/Home/Home.jsx";
+import Login from "../pages/Login/Login.jsx";
+// import Reembolso from "../pages/Reembolso/Reembolso";
 
 export default function Rotas(){
     return (
@@ -13,8 +13,8 @@ export default function Rotas(){
             <Routes>
                 {/* Associa um componente a uma rota, tendo como o 'exact' a  */}
                 <Route exact path='/' element={<Login />}/> 
-                <Route path='/inicio' element={<Inicio />}/>
-                <Route path='/reembolso' element={<Reembolso />}/>
+                <Route path='/home' element={<Home />}/>
+                {/* <Route path='/reembolso' element={<Reembolso />}/> */}
             </Routes>
         </BrowserRouter>
     )

@@ -48,23 +48,29 @@ export default function Login(){
                                 type='text'
                             />
                             
-                            <a href="/inicio">Esqueci minha senha</a>
+                            <a href="/home">Esqueci minha senha</a>
 
                         </div>
 
                         <div className={styles.box}>
 
                             <Button 
+                                tipo='container'
                                 texto="Entrar"
-                                className="azulEscuro"
-                                rota="/inicio"
-                            />
+                                cor="azulEscuro"
+                                rota="/home"
+                            >
+                                Entrar
+                            </Button>
 
                             <Button 
+                                tipo='container'
                                 texto="Criar conta"
-                                className="azulClaro"
-                                rota="/reembolso"
-                            />
+                                cor="azulClaro"
+                                // rota="/reembolso"
+                            >
+                                Criar conta
+                            </Button>
 
                         </div>
 
