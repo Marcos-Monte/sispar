@@ -1,0 +1,24 @@
+/* Import de Fontes */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+    --primary-dark: #001A3D;    // Azul muito escuro
+    --primary: #0844C4;         // Azul intenso
+    --secondary: #00BEDD;       // Azul-turquesa vibrante
+    --accent: #A60B2F;          // Vermelho bordô
+    --background: #F1F4F9;      // Cinza muito claro (quase branco)
+    --surface: #CBD4E1;         // Cinza azulado claro
+    --text-primary: #23282F;    // Cinza escuro (quase preto)
+    --text-secondary: #63758D;  // Cinza azulado médio
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', serif;
+    font-size: 1rem;
+}
+
+
+

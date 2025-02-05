@@ -1,0 +1,21 @@
+.container {
+    width: 7.5rem;
+    height: 3.4rem;
+    border-radius: 6px;
+    border: none;
+    color: var(--background);
+}
+
+.container:hover {
+    filter: brightness(80%); /* Escurecer 20% ao passar o mouse */
+    width: 7rem;
+    height: 3rem;
+}
+
+.azulEscuro {
+    background-color: var(--primary-dark);
+}
+
+.azulClaro {
+    background-color: var(--secondary);
+}

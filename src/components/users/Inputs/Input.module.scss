@@ -1,0 +1,20 @@
+.container {
+    width: 100%;
+    height: 45px;
+    padding: 12px 13px;
+    border: .8px  solid var(--surface);
+    border-radius: 6px;
+    color: var(--text-secondary);
+}
+
+.container:hover{
+    border: .8px solid var(--text-secondary);
+}
+
+.container:focus {
+    box-shadow: 0px 0px 0px 5px var(--surface);
+}
+
+.container:focus::placeholder {
+    visibility: hidden;
+}
