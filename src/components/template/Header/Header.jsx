@@ -26,47 +26,70 @@ export default function Header(props){
 
             <nav>
                 {/* Imagem ilutrativa que irá receber a foto do usuário cadastrado */}
-                <img src={Imagem} alt="" />
+                <figure>
+                    <img src={Imagem} alt="" />
+                    <div>
+                        <figcaption>Marcos Monte</figcaption>
+                        <span>Desenvolvedor Web</span>
+                    </div>
+                </figure>
                 
 
-                <div>
-                    {/* Botão que recebe 'função', tem evento de 'click' que renderiza um novo componente central na 'pagina atual'. Não recebe 'Rota'*/}
-                    <Button 
-                        tipo='icon'
-                        cor='azul'
-                        funcao={() => props.alterarComponente('Dashboard')}
-                    >
-                        <img src={IconeHome} alt="" />
-                    </Button>
+                <section>
+                    <div>
+                        {/* Botão que recebe 'função', tem evento de 'click' que renderiza um novo componente central na 'pagina atual'. Não recebe 'Rota'*/}
+                        <Button 
+                            tipo='icon'
+                            cor='azul'
+                            funcao={() => props.alterarComponente('Dashboard')}
+                        >
+                            <img src={IconeHome} alt="" />
+                        </Button>
 
-                    {/* Botão que recebe 'função', tem evento de 'click' que renderiza um novo componente central na 'pagina atual'. Não recebe 'Rota'*/}
-                    <Button 
-                        tipo='icon'
-                        cor='azul'
-                        funcao={() => props.alterarComponente("Reembolso")} 
-                    >
-                        <img src={IconeCifra} alt="" />
-                    </Button>
+                        <p>Inicio</p>
+                    </div>
 
-                    {/* Botão que recebe 'função', tem evento de 'click' que renderiza um novo componente central na 'pagina atual'. Não recebe 'Rota'*/}
-                    <Button 
-                        tipo='icon'
-                        cor='azul'
-                        funcao={() => props.alterarComponente("Opcional1")} 
-                    >
-                        <img src={IconeLupa} alt="" />
-                    </Button>
+                    <div>
+                        
+                        {/* Botão que recebe 'função', tem evento de 'click' que renderiza um novo componente central na 'pagina atual'. Não recebe 'Rota'*/}
+                        <Button 
+                            tipo='icon'
+                            cor='azul'
+                            funcao={() => props.alterarComponente("Reembolso")} 
+                        >
+                            <img src={IconeCifra} alt="" />
+                        </Button>
 
-                    {/* Botão que recebe 'função', tem evento de 'click' que renderiza um novo componente central na 'pagina atual'. Não recebe 'Rota'*/}
-                    <Button 
-                        tipo='icon'
-                        cor='azul'
-                        funcao={() => props.alterarComponente("Opcional2")} 
-                    >
-                        <img src={IconeReload} alt="" />
-                    </Button>
+                        <p>Reembolsos</p>
+                    </div>
 
-                </div>
+                    <div>
+                        {/* Botão que recebe 'função', tem evento de 'click' que renderiza um novo componente central na 'pagina atual'. Não recebe 'Rota'*/}
+                        <Button 
+                            tipo='icon'
+                            cor='azul'
+                            funcao={() => props.alterarComponente("Opcional1")} 
+                        >
+                            <img src={IconeLupa} alt="" />
+                        </Button>
+
+                        <p>Análises</p>
+                    </div>
+
+                    <div>
+                        {/* Botão que recebe 'função', tem evento de 'click' que renderiza um novo componente central na 'pagina atual'. Não recebe 'Rota'*/}
+                        <Button 
+                            tipo='icon'
+                            cor='azul'
+                            funcao={() => props.alterarComponente("Opcional2")} 
+                        >
+                            <img src={IconeReload} alt="" />
+                        </Button>
+
+                        <p>Histórico</p>
+                    </div>
+
+                </section>
 
             </nav>
 

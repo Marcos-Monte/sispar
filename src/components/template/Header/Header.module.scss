@@ -4,23 +4,77 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem 0;
+    align-items: flex-start;
+    padding: 1.5rem ;
+
+    transition: width 0.5s ease-in-out;
 
     nav{
         height: 50%;
+        width: 100%;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
 
-        div{
-            height: 50%;
+        figure{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+
+            div{
+                visibility: hidden;
+                text-align: center;
+
+                figcaption{
+                    font-size: 700;
+                }
+    
+                span {
+                    color: var(--primary)
+                }
+            }
+        }
+
+        section{
+            width: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             gap: .5rem;
+
+            div{
+                width: 100%;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 1rem;
+
+                p{
+                    visibility: hidden;
+                }
+            }
         }
     }
+}
+
+/* Fazendo a transição de opacidade */
+.container figure div, 
+.container section div p {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.container:hover {
+    width: 15%;
+
+    figure div, section div p{
+        visibility: visible;
+        opacity: 1;
+    }
+
 }
