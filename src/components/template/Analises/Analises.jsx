@@ -1,8 +1,8 @@
 // Componente Ilustrativo de Renderização
-export default function Opcional1(){
+export default function Analises(){
     return(
         <>
-            <h1>Opcional 1</h1> 
+            <h1>Analises</h1> 
         </>
     )
 }

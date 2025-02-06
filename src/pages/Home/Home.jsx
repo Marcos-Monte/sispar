@@ -6,9 +6,9 @@ import Header from "../../components/template/Header/Header";
 import styles from './Home.module.scss';
 
 // Componentes
+import Analises from "../../components/template/Analises/Analises";
 import Dashboard from "../../components/template/Dashboard/Dashboard";
-import Opcional1 from "../../components/template/Opcional1/Opcional1";
-import Opcional2 from "../../components/template/Opcional2/Opcional2";
+import Historico from "../../components/template/Historico/Historico";
 import Reembolso from "../../components/template/Reembolso/Reembolso";
 
 
@@ -23,10 +23,10 @@ export default function Inicio(){
             return <Reembolso />
         } else if (componente === 'Dashboard'){
             return <Dashboard />
-        }  else if (componente === 'Opcional1'){
-            return <Opcional1 />
-        } else if (componente === 'Opcional2'){
-            return <Opcional2 />
+        }  else if (componente === 'Analises'){
+            return <Analises />
+        } else if (componente === 'Historico'){
+            return <Historico />
         } 
     }
 

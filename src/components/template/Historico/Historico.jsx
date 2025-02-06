@@ -1,8 +1,8 @@
 // Componente Ilustrativo de Renderização
-export default function Opcional2(){
+export default function Historico(){
     return(
         <>
-            <h1>Opcional 2</h1> 
+            <h1>Historico</h1> 
         </>
     )
 }

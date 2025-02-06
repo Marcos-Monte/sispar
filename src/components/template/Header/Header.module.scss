@@ -1,13 +1,16 @@
 .container {
-    width: 5%;
+    width: 95px;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
     padding: 1.5rem ;
-
-    transition: width 0.5s ease-in-out;
+    position: absolute;
+    left: 0;
+    
+    transition: opacity 0.8s ease-in-out;
+    transition: width 0.2s ease-in-out;
 
     nav{
         height: 50%;
@@ -66,11 +69,13 @@
 .container section div p {
     visibility: hidden;
     opacity: 0;
-    transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.8s ease-in-out;
+
 }
 
 .container:hover {
-    width: 15%;
+    width: 220px;
+    box-shadow: 0px 0px 30px 5px var(--surface);
 
     figure div, section div p{
         visibility: visible;

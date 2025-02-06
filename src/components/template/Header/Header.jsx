@@ -68,7 +68,7 @@ export default function Header(props){
                         <Button 
                             tipo='icon'
                             cor='azul'
-                            funcao={() => props.alterarComponente("Opcional1")} 
+                            funcao={() => props.alterarComponente("Analises")} 
                         >
                             <img src={IconeLupa} alt="" />
                         </Button>
@@ -81,7 +81,7 @@ export default function Header(props){
                         <Button 
                             tipo='icon'
                             cor='azul'
-                            funcao={() => props.alterarComponente("Opcional2")} 
+                            funcao={() => props.alterarComponente("Historico")} 
                         >
                             <img src={IconeReload} alt="" />
                         </Button>
