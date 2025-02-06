@@ -2,7 +2,65 @@
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
     // border: solid black
+
+    form {
+        width: 100%;
+        height: 20%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 2rem;
+        
+        .boxIdentificacao, .boxDados {
+            height: 100%;
+            border: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: .5rem;
+
+            .micro, .small, .medium, .large {
+                gap: 1rem;
+                label {
+                    font-weight: 700;
+                }
+
+            }
+            
+            .micro{
+                width: 10%;
+                
+            }
+
+            .small{
+                width: 15%;
+            }
+
+            .medium{
+                width: 40%;
+            }
+
+            .large {
+                width: 100%;
+            }
+        }
+        
+        .linha {
+            height: 100%;
+            border: .4px solid var(--background)
+        }
+    }
+}
+
+.boxIdentificacao{
+    width: 40%;
+}
+
+.boxDados{
+    width: 55%;
 }
