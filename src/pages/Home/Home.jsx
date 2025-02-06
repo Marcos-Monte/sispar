@@ -10,6 +10,7 @@ import Analises from "../../components/template/Analises/Analises";
 import Dashboard from "../../components/template/Dashboard/Dashboard";
 import Historico from "../../components/template/Historico/Historico";
 import Reembolso from "../../components/template/Reembolso/Reembolso";
+import Caminho from "../../components/users/Caminho/Caminho";
 
 
 export default function Inicio(){
@@ -36,6 +37,7 @@ export default function Inicio(){
             <Header alterarComponente={setComponente}/>
 
             <main>
+                <Caminho caminho={componente}/>
                 {/* Função que retorn o componente renderizado mediante clique do Usuário */}
                 {alterarComponente(componente)}
             </main>
