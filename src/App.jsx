@@ -1,11 +1,12 @@
 // import Login from "./components/pages/Login/Login.jsx";
 import Rotas from "./rotas/Rotas.jsx";
 
+// Componente Principal
 function App() {
 
   return (
     <>
-      {/* <Login /> */}
+      {/* Atribui as Rotas da Aplicação */}
       <Rotas />
     </>
   )
