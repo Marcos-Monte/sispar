@@ -49,7 +49,7 @@ export default function Login(){
                                 type='text'
                             />
                             {/* Envia para pagina de recuperação de senha */}
-                            <Link to="/home">Esqueci minha senha</Link>
+                            <Link to="/novasenha">Esqueci minha senha</Link>
 
                         </div>
 
@@ -68,7 +68,7 @@ export default function Login(){
                                 tipo='container'
                                 texto="Criar conta"
                                 cor="azulClaro"
-                                // rota="/reembolso"
+                                rota="/cadastro"
                             >
                                 Criar conta
                             </Button>

@@ -1,17 +1,16 @@
 // Import de Hook de Estado
 import { useState } from "react";
-// Import de Componentes
-import Header from "../../components/template/Header/Header";
+
 // Import de arquivo de estilização
 import styles from './Home.module.scss';
 
-// Componentes
-import Analises from "../../components/template/Analises/Analises";
-import Dashboard from "../../components/template/Dashboard/Dashboard";
-import Historico from "../../components/template/Historico/Historico";
-import Reembolso from "../../components/template/Reembolso/Reembolso";
-import Caminho from "../../components/users/Caminho/Caminho";
-
+// Import de Componentes
+import Analises from '../../components/sections/Analises/Analises.jsx';
+import Dashboard from "../../components/sections/Dashboard/Dashboard";
+import Historico from "../../components/sections/Historico/Historico.jsx";
+import Reembolso from "../../components/sections/Reembolso/Reembolso";
+import Caminho from "../../components/template/Caminho/Caminho";
+import Header from "../../components/template/Header/Header";
 
 export default function Inicio(){
 
