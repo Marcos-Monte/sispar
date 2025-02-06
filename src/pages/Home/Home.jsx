@@ -12,21 +12,21 @@ import Reembolso from "../../components/sections/Reembolso/Reembolso";
 import Caminho from "../../components/template/Caminho/Caminho";
 import Header from "../../components/template/Header/Header";
 
-export default function Inicio(){
+export default function Home(){
 
     // Estrutura gerenciamento de Estado. Define qual componente será renderizado no centro da aplicação
     const [componente, setComponente] = useState('Dashboard')
 
     // Função responsável por verificar qual o valor armazenado na variavel 'componente' e renderizar o Componente baseado nesse valor
-    function alterarComponente(componente){
+    function alterar(componente){
         if(componente === 'Reembolso'){
-            return <Reembolso />
+            return <Reembolso alterarComponente={setComponente}/>
         } else if (componente === 'Dashboard'){
-            return <Dashboard />
+            return <Dashboard alterarComponente={setComponente} />
         }  else if (componente === 'Analises'){
-            return <Analises />
+            return <Analises alterarComponente={setComponente}/>
         } else if (componente === 'Historico'){
-            return <Historico />
+            return <Historico alterarComponente={setComponente}/>
         } 
     }
 
@@ -36,9 +36,11 @@ export default function Inicio(){
             <Header alterarComponente={setComponente}/>
 
             <main>
-                <Caminho caminho={componente}/>
+                <Caminho caminho={componente === 'Dashboard'? null: componente}/>
                 {/* Função que retorn o componente renderizado mediante clique do Usuário */}
-                {alterarComponente(componente)}
+                {
+                    alterar(componente)
+                }
             </main>
 
         </div>
@@ -47,5 +49,5 @@ export default function Inicio(){
 
 // Lógica de Gerenciamento de Estado:
 // Home -> Passa via 'props' o 'setter' que recebe o valor da variável 'componente'
-// Header -> Recebe o 'setter' e repassa ele via 'props' para o componente 'Button', dentro de uma estrutura de função anônima: props={() => setter('valor')}
-// Button -> Recebe de 'Header' via 'props' a função anônima e atribui a um evento de 'click'
+// Header e Dashboard-> Recebem o 'setter' e repassa ele via 'props' para os componentes 'Button e Card', dentro de uma estrutura de função anônima: props={() => setter('valor')}
+// Button e Card -> Recebem de 'Header e Dashboard' via 'props' a função anônima e atribui a um evento de 'click'

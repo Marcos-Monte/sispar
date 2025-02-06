@@ -7,13 +7,12 @@ import IconeSolicitados from '@/assets/icons/indicadores/iconSolicitados.png';
 
 export function Card(props){
     return(
-        <div className={styles.cardIndividual}>
+        <div className={styles.cardIndividual} onClick={props.funcao}>
             <img src={props.imagem} alt="" />
             <h3>{props.texto}</h3>
         </div>
     )
 }
-
 
 export function CardIndicadores(props){
     return(

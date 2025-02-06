@@ -8,7 +8,8 @@ import IconeIndicadores from '@/assets/icons/iconIndicadores.png';
 import IconePrancheta from '@/assets/icons/iconPrancheta.png';
 
 // Componente Ilustrativo de Renderização
-export default function Dashboard(){
+export default function Dashboard(props){
+
     return(
         <section className={styles.container}>
             <div>
@@ -21,14 +22,18 @@ export default function Dashboard(){
                 <Card 
                     imagem={IconePrancheta}
                     texto='Solicitar Reembolso'
+                    funcao={() => props.alterarComponente('Reembolso')}
+
                 />
                 <Card 
                     imagem={IconeIndicadores}
                     texto='Verificar Analises'
+                    funcao={() => props.alterarComponente('Analises')}
                 />
                 <Card 
                     imagem={IconeHistorico}
                     texto='Histórico'
+                    funcao={() => props.alterarComponente('Historico')}
                 />
 
             </section>
