@@ -1,0 +1,64 @@
+.cardIndividual{
+    width: 290px;
+    height: 209px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 6px;
+    border: .8px solid var(--surface);
+}
+
+.cardIndividual:hover {
+    background-color: var(--background);
+    box-shadow: -1px 5px 5px 1px var(--surface);
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: .8px solid var(--surface);
+    border-radius: 6px;
+    padding: 1.5rem ;
+
+    .card {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: .5rem;
+
+        div {
+            width: 2.25rem;
+            height: 2.25rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 6px;
+        }
+
+        span {
+            font-weight: 700;
+        }
+    }
+
+    .solicitados {
+        background-color: var(--primary);
+    }
+    
+    .analise {
+        background-color: #E56700;
+    }
+    
+    .aprovados {
+        background-color: #007A6A;
+    }
+    
+    .rejeitado {
+        background-color: var(--accent);
+    }
+}
+
+

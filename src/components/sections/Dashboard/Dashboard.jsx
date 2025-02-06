@@ -1,9 +1,50 @@
 import styles from './Dashboard.module.scss';
+
+import { Card, CardIndicadores } from '../../users/Card/Card.jsx';
+
+import IconeAtualizado from '@/assets/icons/iconAtualizado.png';
+import IconeHistorico from '@/assets/icons/iconHistorico.png';
+import IconeIndicadores from '@/assets/icons/iconIndicadores.png';
+import IconePrancheta from '@/assets/icons/iconPrancheta.png';
+
 // Componente Ilustrativo de Renderização
 export default function Dashboard(){
     return(
         <section className={styles.container}>
-            <h1>Dashboard</h1> 
+            <div>
+                <h2>Sistema de Reembolsos</h2>
+                <p>Solicite novos pedidos de reembolso, visualize solicitações em análise e todo o histórico.</p>
+            </div>
+
+            <section className={styles.containerCards}>
+
+                <Card 
+                    imagem={IconePrancheta}
+                    texto='Solicitar Reembolso'
+                />
+                <Card 
+                    imagem={IconeIndicadores}
+                    texto='Verificar Analises'
+                />
+                <Card 
+                    imagem={IconeHistorico}
+                    texto='Histórico'
+                />
+
+            </section>
+
+            <CardIndicadores 
+                solicitados='182'
+                analise='74'
+                aprovados='195'
+                rejeitados='41'
+            />
+
+            <div className={styles.box}>
+                <img src={IconeAtualizado} alt="" />
+                <p>Sistema atualizado.</p>
+            </div>
+
         </section>
     )
 }
