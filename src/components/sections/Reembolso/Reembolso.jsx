@@ -1,14 +1,18 @@
+// Import arquivo de Estilização
 import styles from './Reembolso.module.scss';
-
+// Import Componentes
 import { Button } from '../../users/Buttons/Button';
 import { Input } from '../../users/Inputs/Input';
-
+import Tabela from '../../users/Tabela/Tabela';
+// Import Icones
 import IconeApagar from '@/assets/icons/iconApagar.png';
 import IconeCancelar from '@/assets/icons/iconCancelar.png';
 import IconeDoc from '@/assets/icons/iconDoc.png';
 import IconeEnviar from '@/assets/icons/iconEnviar.png';
 import IconeExcluir from '@/assets/icons/iconExcluir.png';
 import IconeSalvar from '@/assets/icons/iconSalvar.png';
+// Import Dados
+import solicitacoesReembolso from '../../../data/data';
 
 export default function Reembolso(){
     return(
@@ -160,6 +164,10 @@ export default function Reembolso(){
                 </fieldset>
 
             </form>
+            
+            <Tabela 
+                array={solicitacoesReembolso}
+            />
 
             <img src={IconeApagar} alt="" />
             <img src={IconeCancelar} alt="" />
