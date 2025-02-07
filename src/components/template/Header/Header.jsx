@@ -10,16 +10,25 @@ import IconeLupa from '@/assets/icons/iconLupa.png'
 import IconeReload from '@/assets/icons/iconReload.png'
 import IconeSair from '@/assets/icons/iconSair.png'
 import IconeVoltar from '@/assets/icons/iconVoltar.png'
+import { useState } from 'react'
 
 // OBS: Função do Button, é uma função anônima que vai receber um 'setter' (via props) e armazena um valor 'string'.
 export default function Header(props){
+
+    const [status, setStatus] = useState(false);
+
+    function alterarStatus(){
+        console.log(status)
+        return status === false? setStatus(true): setStatus(false)
+    }
     return(
-        <header className={styles.container}>
+        <header className={`${styles.container} ${styles[status? 'aberto': 'fechado']}`}>
             {/* Botão que recebe 'rota' será enviado para outra página. Não recebe 'função'*/}
             <Button
                 tipo='icon'
                 cor='azul'
-                rota='/'
+                // rota='/'
+                funcao={alterarStatus}
             >
                 <img src={IconeVoltar} alt="" />
             </Button>
@@ -28,7 +37,7 @@ export default function Header(props){
                 {/* Imagem ilutrativa que irá receber a foto do usuário cadastrado */}
                 <figure>
                     <img src={Imagem} alt="" />
-                    <div>
+                    <div className={styles.infos}>
                         <figcaption>Marcos Monte</figcaption>
                         <span>Desenvolvedor Web</span>
                     </div>
@@ -46,7 +55,7 @@ export default function Header(props){
                             <img src={IconeHome} alt="" />
                         </Button>
 
-                        <p>Inicio</p>
+                        <p className={styles.infos}>Inicio</p>
                     </div>
 
                     <div>
@@ -60,7 +69,7 @@ export default function Header(props){
                             <img src={IconeCifra} alt="" />
                         </Button>
 
-                        <p>Reembolsos</p>
+                        <p className={styles.infos}>Reembolsos</p>
                     </div>
 
                     <div>
@@ -73,7 +82,7 @@ export default function Header(props){
                             <img src={IconeLupa} alt="" />
                         </Button>
 
-                        <p>Análises</p>
+                        <p className={styles.infos}>Análises</p>
                     </div>
 
                     <div>
@@ -86,7 +95,7 @@ export default function Header(props){
                             <img src={IconeReload} alt="" />
                         </Button>
 
-                        <p>Histórico</p>
+                        <p className={styles.infos}>Histórico</p>
                     </div>
 
                 </section>
