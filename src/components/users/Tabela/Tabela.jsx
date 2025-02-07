@@ -1,8 +1,13 @@
+import styles from './Tabela.module.scss';
+
+import IconeExcluir from '@/assets/icons/iconExcluir.png';
+
 export default function Tabela(props){
     return(
         <table>
-            <thead>
-                <tr>
+            <thead className={styles.cabecalho}>
+                <tr className={styles.linha}>
+                    <th></th>
                     <th>Colaborador(a)</th>
                     <th>Empresa</th>
                     <th>Nº Prest.</th>
@@ -21,18 +26,18 @@ export default function Tabela(props){
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody className={styles.corpo}>
 
             {   
                 props.array.map((obj, index) => (
 
-                    <tr key={index}>
-
-                        <td>{obj.colaborador}</td>
+                    <tr className={styles.linha} key={index}>
+                        <td>{<img src={IconeExcluir} alt="" />}</td>
+                        <td>{obj.colab}</td>
                         <td>{obj.empresa}</td>
                         <td>{obj.prest}</td>
                         <td>{obj.data}</td>
-                        <td>{obj.motivo}</td>
+                        <td><img src={obj.motivo} alt="" /></td>
                         <td>{obj.tipo}</td>
                         <td>{obj.ctrCusto}</td>
                         <td>{obj.ordInt}</td>

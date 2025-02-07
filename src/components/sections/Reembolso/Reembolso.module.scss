@@ -3,9 +3,10 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: flex-start;
-    // border: solid black
+    gap: 2rem;
+    padding: 0 2rem;
 
     form {
         width: 100%;
@@ -13,7 +14,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0 2rem;
+        // padding: 0 2rem;
         
         .boxIdentificacao, .boxDados {
             height: 100%;
