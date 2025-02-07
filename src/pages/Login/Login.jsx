@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 // Import de Módulo de Estilização
 import styles from './Login.module.scss';
 // Import de Imagens
-import Capa from '@/assets/capaInicio.svg';
 import Logo from '@/assets/logoSispar.svg';
 
 // Import de Componentes
@@ -12,17 +11,14 @@ import { Input } from '@/components/users/Inputs/Input';
 export default function Login(){
     return(
         <main className={styles.container}>
-            {/* Imagem de Capa da Aplicação */}
-            <img 
-                className={styles.imagemCapa}
-                src={Capa} 
-                alt="Imagem de uma navio cheio de conteiners navegando junto a um rebocador" 
-            />
-            {/* Seção que divide o 'body' da aplicação com a Imagem de Capa */}
-            <section>
 
-                {/* Login */}
-                <article>
+            <section className={styles.imagemCapa}> 
+
+            </section>
+
+            <section className={styles.login}>
+
+                {/* <article> */}
 
                     <div className={styles.descricao}>
 
@@ -77,7 +73,7 @@ export default function Login(){
 
                     </form>
 
-                </article>
+                {/* </article> */}
 
             </section>
 
