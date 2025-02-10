@@ -2,7 +2,7 @@
 import styles from './Reembolso.module.scss';
 // Import Componentes
 import { Button } from '../../users/Buttons/Button';
-import { Input } from '../../users/Inputs/Input';
+import { Input, Select } from '../../users/Inputs/Input';
 import Tabela from '../../users/Tabela/Tabela';
 // Import Icones
 import IconeApagar from '@/assets/icons/apagar.png';
@@ -10,7 +10,8 @@ import IconeCancelar from '@/assets/icons/cancelar.png';
 import IconeEnviar from '@/assets/icons/enviar.png';
 import IconeSalvar from '@/assets/icons/salvar.png';
 // Import Dados
-import solicitacoesReembolso from '../../../data/data';
+import { controleCustos, tiposDespesa } from '../../../data/opcoes';
+import solicitacoesReembolso from '../../../data/registros';
 
 function calcular(array, propriedade){
 
@@ -84,16 +85,18 @@ export default function Reembolso(){
                     </div>
 
                     <div className={styles.small}>
-                        <label>Tipo de Despsa</label>
-                        <Input 
-                            tipo='text'
+                        <label>Tipo de Despesa</label>
+                        <Select
+                            array={tiposDespesa}
+                            
                         />
                     </div>
 
                     <div className={styles.medium}>
                         <label>Controle de Custo</label>
-                        <Input 
-                            tipo='text'
+                        <Select
+                            array={controleCustos}
+                            
                         />
                     </div>
 
