@@ -80,7 +80,7 @@ export default function Reembolso(){
                     <div className={styles.small}>
                         <label>Data</label>
                         <Input 
-                            tipo='text'
+                            type='date'
                         />
                     </div>
 
