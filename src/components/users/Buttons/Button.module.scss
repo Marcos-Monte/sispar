@@ -1,4 +1,4 @@
-.container, .icon {
+.container, .icon, .containerGrande {
     border-radius: 6px;
     border: none;
     color: var(--background);
@@ -18,7 +18,12 @@
     height: 3.4rem;
 }
 
-.container:hover, .icon:hover {
+.containerGrande {
+    width: 14rem;
+    height: 3.4rem;
+}
+
+.container:hover, .icon:hover, .containerGrande:hover {
     filter: brightness(80%); /* Escurecer 20% ao passar o mouse */
     // width: 7rem;
     // height: 3rem;
@@ -38,4 +43,8 @@
 
 .cinza {
     background-color: var(--text-secondary);
+}
+
+.vinho{
+    background-color: var(--accent);
 }

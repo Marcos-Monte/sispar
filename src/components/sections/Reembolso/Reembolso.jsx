@@ -6,11 +6,21 @@ import { Input } from '../../users/Inputs/Input';
 import Tabela from '../../users/Tabela/Tabela';
 // Import Icones
 import IconeApagar from '@/assets/icons/apagar.png';
-// import IconeCancelar from '@/assets/icons/cancelar.png';
-// import IconeEnviar from '@/assets/icons/enviar.png';
+import IconeCancelar from '@/assets/icons/cancelar.png';
+import IconeEnviar from '@/assets/icons/enviar.png';
 import IconeSalvar from '@/assets/icons/salvar.png';
 // Import Dados
 import solicitacoesReembolso from '../../../data/data';
+
+function calcular(array, propriedade){
+
+    const total = array.reduce(
+        (acumulador, registro) => acumulador + registro[propriedade], 0
+    )
+
+    return total > 0? total: 0.00;
+
+}
 
 export default function Reembolso(){
     return(
@@ -167,17 +177,42 @@ export default function Reembolso(){
                 array={solicitacoesReembolso}
             />
 
-            <section>
-                <div>
-                    span
-                </div>
-            </section>
-{/* 
-            <img src={IconeApagar} alt="" />
-            <img src={IconeCancelar} alt="" />
-            <img src={IconeEnviar} alt="" /> */}
-            
+            <section className={styles.controles}>
 
+                <div>
+                    <p>Total Faturado</p>
+
+                    <div className={styles.box}>
+                        {calcular(solicitacoesReembolso, 'valFaturado')}
+                    </div>
+
+                </div>
+
+                <div>
+                    <p>Total Despesa</p>
+                    <div className={styles.box}>
+                        {calcular(solicitacoesReembolso, 'despesa')}
+                    </div>
+                </div>
+
+                <Button 
+                    tipo='containerGrande'
+                    cor='azulEscuro'
+                >
+                    <img src={IconeEnviar} alt="" />
+                    Enviar para Análise
+                </Button>
+
+                <Button 
+                    tipo='containerGrande'
+                    cor='vinho'
+                >
+                    <img src={IconeCancelar} alt="" />
+                    Cancelar Solicitação
+                </Button>
+
+            </section>
+            
         </section>
     )
 }
