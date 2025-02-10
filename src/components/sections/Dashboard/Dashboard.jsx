@@ -2,10 +2,10 @@ import styles from './Dashboard.module.scss';
 
 import { Card, CardIndicadores } from '../../users/Card/Card.jsx';
 
-import IconeAtualizado from '@/assets/icons/iconAtualizado.png';
-import IconeHistorico from '@/assets/icons/iconHistorico.png';
-import IconeIndicadores from '@/assets/icons/iconIndicadores.png';
-import IconePrancheta from '@/assets/icons/iconPrancheta.png';
+import IconeAnalises from '@/assets/Dashboard/analises.png';
+import IconeHistorico from '@/assets/Dashboard/historico.png';
+import IconeReembolso from '@/assets/Dashboard/reembolso.png';
+import IconeAtualizado from '@/assets/Dashboard/sistema-atualizado.png';
 
 // Componente Ilustrativo de Renderização
 export default function Dashboard(props){
@@ -20,13 +20,13 @@ export default function Dashboard(props){
             <section className={styles.containerCards}>
 
                 <Card 
-                    imagem={IconePrancheta}
+                    imagem={IconeReembolso}
                     texto='Solicitar Reembolso'
                     funcao={() => props.alterarComponente('Reembolso')}
 
                 />
                 <Card 
-                    imagem={IconeIndicadores}
+                    imagem={IconeAnalises}
                     texto='Verificar Analises'
                     funcao={() => props.alterarComponente('Analises')}
                 />

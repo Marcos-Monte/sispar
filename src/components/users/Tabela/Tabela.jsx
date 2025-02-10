@@ -1,6 +1,6 @@
 import styles from './Tabela.module.scss';
 
-import IconeExcluir from '@/assets/icons/iconExcluir.png';
+import IconeExcluir from '@/assets/icons/lixeira.png';
 
 export default function Tabela(props){
     return(

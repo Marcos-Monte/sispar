@@ -5,10 +5,10 @@ import { Button } from '../../users/Buttons/Button';
 import { Input } from '../../users/Inputs/Input';
 import Tabela from '../../users/Tabela/Tabela';
 // Import Icones
-import IconeApagar from '@/assets/icons/iconApagar.png';
-import IconeCancelar from '@/assets/icons/iconCancelar.png';
-import IconeEnviar from '@/assets/icons/iconEnviar.png';
-import IconeSalvar from '@/assets/icons/iconSalvar.png';
+import IconeApagar from '@/assets/icons/apagar.png';
+import IconeCancelar from '@/assets/icons/cancelar.png';
+import IconeEnviar from '@/assets/icons/enviar.png';
+import IconeSalvar from '@/assets/icons/salvar.png';
 // Import Dados
 import solicitacoesReembolso from '../../../data/data';
 

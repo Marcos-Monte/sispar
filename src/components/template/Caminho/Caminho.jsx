@@ -1,7 +1,7 @@
 import styles from './Caminho.module.scss'
 
-import IconeHomeGray from '@/assets/icons/iconHomeGray.png'
-import IconeSeta from '@/assets/icons/iconSeta.png'
+import IconeHomeGray from '@/assets/icons/home.png'
+import IconeSeta from '@/assets/icons/seta.png'
 
 export default function Caminho(props){
     return(

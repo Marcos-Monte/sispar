@@ -1,9 +1,9 @@
 import styles from './Card.module.scss';
 
-import IconeAnalise from '@/assets/icons/indicadores/iconAnalise.png';
-import IconeAprovados from '@/assets/icons/indicadores/iconAprovados.png';
-import IconeRejeitados from '@/assets/icons/indicadores/iconRejeitados.png';
-import IconeSolicitados from '@/assets/icons/indicadores/iconSolicitados.png';
+import IconeAnalise from '@/assets/Dashboard/Cards/n-analises.png';
+import IconeAprovados from '@/assets/Dashboard/Cards/n-aprovados.png';
+import IconeRejeitados from '@/assets/Dashboard/Cards/n-rejeitados.png';
+import IconeSolicitados from '@/assets/Dashboard/Cards/n-solicitados.png';
 
 export function Card(props){
     return(

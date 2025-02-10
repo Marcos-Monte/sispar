@@ -1,4 +1,4 @@
-import iconArquivo from "@/assets/icons/iconArquivo.png";
+import iconArquivo from "@/assets/icons/arquivo.png";
 
 const solicitacoesReembolso = [
     { 

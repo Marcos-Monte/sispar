@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 // Import de Módulo de Estilização
 import styles from './Login.module.scss';
 // Import de Imagens
-import Logo from '@/assets/logoSispar.svg';
+import Logo from '@/assets/Login/logo-ws.png';
 
 // Import de Componentes
 import { Button } from '@/components/users/Buttons/Button';

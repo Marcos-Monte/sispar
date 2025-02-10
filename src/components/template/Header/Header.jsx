@@ -1,26 +1,29 @@
+// Import dependencias
+import { useState } from 'react'
 // Import do arquivo de estilização do componente
 import styles from './Header.module.scss'
 // Import de Componentes
 import { Button } from '@/components/users/Buttons/Button.jsx'
 // Import de Imagens / Icones 
-import Imagem from '@/assets/icons/foto.png'
-import IconeCifra from '@/assets/icons/iconCifra.png'
-import IconeHome from '@/assets/icons/iconHome.png'
-import IconeLupa from '@/assets/icons/iconLupa.png'
-import IconeReload from '@/assets/icons/iconReload.png'
-import IconeSair from '@/assets/icons/iconSair.png'
-import IconeVoltar from '@/assets/icons/iconVoltar.png'
-import { useState } from 'react'
+import IconeHistorico from '@/assets/Header/botao-historico.png'
+import IconeHome from '@/assets/Header/botao-home.png'
+import IconePesquisa from '@/assets/Header/botao-pesquisa.png'
+import IconeReembolso from '@/assets/Header/botao-reembolso.png'
+import IconeSair from '@/assets/Header/botao-sair.png'
+import Imagem from '@/assets/Header/image.png'
+import IconeMenu from '@/assets/Header/imagem-fechar-header.png'
 
 // OBS: Função do Button, é uma função anônima que vai receber um 'setter' (via props) e armazena um valor 'string'.
 export default function Header(props){
-
+    // Variaveld e Estado que armazena o 'status' do Menu Header
     const [status, setStatus] = useState(false);
 
     function alterarStatus(){
         console.log(status)
+        // Função que inverte (entre false e true) o valor da variavel Status
         return status === false? setStatus(true): setStatus(false)
     }
+
     return(
         <header className={`${styles.container} ${styles[status? 'aberto': 'fechado']}`}>
             {/* Botão que recebe 'rota' será enviado para outra página. Não recebe 'função'*/}
@@ -30,7 +33,7 @@ export default function Header(props){
                 // rota='/'
                 funcao={alterarStatus}
             >
-                <img src={IconeVoltar} alt="" />
+                <img src={IconeMenu} alt="" />
             </Button>
 
             <nav>
@@ -66,7 +69,7 @@ export default function Header(props){
                             cor='azul'
                             funcao={() => props.alterarComponente("Reembolso")} 
                         >
-                            <img src={IconeCifra} alt="" />
+                            <img src={IconeReembolso} alt="" />
                         </Button>
 
                         <p className={styles.infos}>Reembolsos</p>
@@ -79,7 +82,7 @@ export default function Header(props){
                             cor='azul'
                             funcao={() => props.alterarComponente("Analises")} 
                         >
-                            <img src={IconeLupa} alt="" />
+                            <img src={IconePesquisa} alt="" />
                         </Button>
 
                         <p className={styles.infos}>Análises</p>
@@ -92,7 +95,7 @@ export default function Header(props){
                             cor='azul'
                             funcao={() => props.alterarComponente("Historico")} 
                         >
-                            <img src={IconeReload} alt="" />
+                            <img src={IconeHistorico} alt="" />
                         </Button>
 
                         <p className={styles.infos}>Histórico</p>
