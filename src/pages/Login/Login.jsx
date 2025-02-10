@@ -42,7 +42,7 @@ export default function Login(){
                             />
                             <Input 
                                 placeholder='Senha'
-                                type='text'
+                                type='password'
                             />
                             {/* Envia para pagina de recuperação de senha */}
                             <Link to="/novasenha">Esqueci minha senha</Link>
