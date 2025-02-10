@@ -1,6 +1,7 @@
 // Import arquivo de Estilização
 import styles from './Reembolso.module.scss';
 // Import Componentes
+import Caminho from '../../template/Caminho/Caminho';
 import { Button } from '../../users/Buttons/Button';
 import { Input, Select } from '../../users/Inputs/Input';
 import Tabela from '../../users/Tabela/Tabela';
@@ -8,7 +9,9 @@ import Tabela from '../../users/Tabela/Tabela';
 import IconeApagar from '@/assets/icons/apagar.png';
 import IconeCancelar from '@/assets/icons/cancelar.png';
 import IconeEnviar from '@/assets/icons/enviar.png';
+import IconeHomeGray from '@/assets/icons/home.png';
 import IconeSalvar from '@/assets/icons/salvar.png';
+import IconeSeta from '@/assets/icons/seta.png';
 // Import Dados
 import { controleCustos, tiposDespesa } from '../../../data/opcoes';
 import solicitacoesReembolso from '../../../data/registros';
@@ -24,12 +27,22 @@ function calcular(array, propriedade){
 }
 
 export default function Reembolso(){
+
     return(
+        
         <section className={styles.container}>
+
+            <Caminho>
+                <img src={IconeHomeGray} alt="" />
+                <img src={IconeSeta} alt="" />
+                <p>Reembolsos</p>
+                <img src={IconeSeta} alt="" />
+                <p>Solicitação de Reembolso</p>
+            </Caminho>
 
             <form action="">
 
-                <fieldset className={styles.boxIdentificacao}>
+                <div className={styles.boxIdentificacao}>
 
                     <div className={styles.medium}>
 
@@ -71,11 +84,11 @@ export default function Reembolso(){
 
                     </div>
 
-                </fieldset>
+                </div>
 
                 <div className={styles.linha}></div>
 
-                <fieldset className={styles.boxDados}>
+                <div className={styles.boxDados}>
 
                     <div className={styles.small}>
                         <label>Data</label>
@@ -84,7 +97,7 @@ export default function Reembolso(){
                         />
                     </div>
 
-                    <div className={styles.small}>
+                    <div className={styles.medium}>
                         <label>Tipo de Despesa</label>
                         <Select
                             array={tiposDespesa}
@@ -157,22 +170,24 @@ export default function Reembolso(){
                         />
                     </div>
 
-                    <Button 
-                        tipo='container'
-                        cor='azulEscuro'
-                    >
-                        <img src={IconeSalvar} alt="" />
-                        Salvar
-                    </Button>
+                    <div className={styles.botoes}>
+                        <Button 
+                            tipo='container'
+                            cor='azulEscuro'
+                        >
+                            <img src={IconeSalvar} alt="" />
+                            Salvar
+                        </Button>
 
-                    <Button 
-                        tipo='icon'
-                        cor='azulClaro'
-                    >
-                        <img src={IconeApagar} alt="" />
-                    </Button>
+                        <Button 
+                            tipo='icon'
+                            cor='azulClaro'
+                        >
+                            <img src={IconeApagar} alt="" />
+                        </Button>
+                    </div>
 
-                </fieldset>
+                </div>
 
             </form>
             

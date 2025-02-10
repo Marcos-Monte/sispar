@@ -1,103 +1,210 @@
+// .container {
+//     width: 100%;
+//     height: 100%;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: flex-start;
+//     align-items: flex-start;
+//     gap: 2rem;
+//     padding: 0 2rem;
+
+//     form {
+//         width: 100%;
+//         height: 20%;
+//         display: flex;
+//         justify-content: space-between;
+//         align-items: center;
+//         // padding: 0 2rem;
+        
+//         .boxIdentificacao, .boxDados {
+//             height: 100%;
+//             border: none;
+//             display: flex;
+//             justify-content: space-between;
+//             align-items: center;
+//             flex-wrap: wrap;
+//             gap: .5rem;
+
+//             .micro, .small, .medium, .large {
+//                 gap: 1rem;
+
+//                 label {
+//                     font-weight: 700;
+//                 }
+
+//             }
+            
+//             .micro{
+//                 width: 10%;
+                
+//             }
+
+//             .small{
+//                 width: 15%;
+//             }
+
+//             .medium{
+//                 width: 40%;
+//             }
+
+//             .large {
+//                 width: 100%;
+//             }
+//         }
+        
+//         .linha {
+//             height: 100%;
+//             border: .4px solid var(--background)
+//         }
+//     }
+// }
+
+// .boxIdentificacao{
+//     width: 40%;
+// }
+
+// .boxDados{
+//     width: 55%;
+// }
+
+// .controles {
+//     width: 100%;
+//     height: 20%;
+//     display: flex;
+//     justify-content: flex-end;
+//     align-items: center;
+//     gap: 2rem;
+
+//     div {
+//         width: 10%;
+//         display: flex;
+//         flex-direction: column;
+//         align-items: flex-start;
+//         gap: .5rem ;
+
+//         p {
+//             font-weight: 700;
+//         }
+    
+//         .box {
+//             width: 100%;
+//             height: 45px;
+//             padding: 12px 13px;
+//             border: .8px  solid var(--surface);
+//             border-radius: 6px;
+//             color: var(--text-secondary);
+//         }
+        
+//         .box:hover{
+//             border: .8px solid var(--text-secondary);
+//         }
+        
+//     }
+// }
+
 .container {
     width: 100%;
     height: 100%;
+    padding: 0 2rem;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: flex-start;
-    gap: 2rem;
-    padding: 0 2rem;
+    gap: 1rem;
 
     form {
         width: 100%;
-        height: 20%;
         display: flex;
+        align-items: flex-start;
         justify-content: space-between;
-        align-items: center;
-        // padding: 0 2rem;
-        
-        .boxIdentificacao, .boxDados {
-            height: 100%;
-            border: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: .5rem;
 
-            .micro, .small, .medium, .large {
-                gap: 1rem;
-
-                label {
-                    font-weight: 700;
-                }
-
-            }
-            
-            .micro{
-                width: 10%;
-                
-            }
-
-            .small{
-                width: 15%;
-            }
-
-            .medium{
-                width: 40%;
-            }
-
-            .large {
-                width: 100%;
-            }
-        }
-        
-        .linha {
-            height: 100%;
-            border: .4px solid var(--background)
+        label{
+            font-weight: 700;
         }
     }
 }
 
-.boxIdentificacao{
-    width: 40%;
+.boxIdentificacao, .boxDados{
+    // height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+
+    button{
+        right: 0;
+    }
 }
 
-.boxDados{
-    width: 55%;
+.boxIdentificacao {
+    width: 30%;
+    padding-right: 1rem;
+}
+
+.boxDados {
+    width: 65%;
+    padding-left: 1rem;
+}
+
+.linha {
+    height: 100%;
+    border: .4px solid var(--background)
+}
+
+.micro, .small, .medium, .large {
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: .5rem;
+}
+
+.micro {
+    width: 8%;
+}
+
+.small {
+    width: 20%;
+}
+
+.medium {
+    width: 30%;
+}
+
+.large {
+    width: 100%;
+}
+
+.botoes {
+    // width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
 }
 
 .controles {
     width: 100%;
-    height: 20%;
+    // height: 25%;
+    padding: 2rem 0;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 2rem;
+    gap: 1rem;
 
-    div {
-        width: 10%;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: .5rem ;
-
-        p {
-            font-weight: 700;
-        }
-    
-        .box {
-            width: 100%;
-            height: 45px;
-            padding: 12px 13px;
-            border: .8px  solid var(--surface);
-            border-radius: 6px;
-            color: var(--text-secondary);
-        }
-        
-        .box:hover{
-            border: .8px solid var(--text-secondary);
-        }
-        
+    p{
+        font-weight: 700;
     }
+}
+
+.box {
+    padding: 12px 13px;
+    border: .8px  solid var(--surface);
+    border-radius: 6px;
+    color: var(--text-secondary);
+}
+
+.box:hover{
+    border: .8px solid var(--text-secondary);
 }

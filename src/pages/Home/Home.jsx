@@ -9,7 +9,6 @@ import Analises from '../../components/sections/Analises/Analises.jsx';
 import Dashboard from "../../components/sections/Dashboard/Dashboard";
 import Historico from "../../components/sections/Historico/Historico.jsx";
 import Reembolso from "../../components/sections/Reembolso/Reembolso";
-import Caminho from "../../components/template/Caminho/Caminho";
 import Header from "../../components/template/Header/Header";
 
 export default function Home(){
@@ -36,7 +35,6 @@ export default function Home(){
             <Header alterarComponente={setComponente}/>
 
             <main>
-                <Caminho caminho={componente === 'Dashboard'? null: componente}/>
                 {/* Função que retorn o componente renderizado mediante clique do Usuário */}
                 {
                     alterar(componente)

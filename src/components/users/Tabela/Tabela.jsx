@@ -32,22 +32,68 @@ export default function Tabela(props){
                 props.array.map((obj, index) => (
 
                     <tr className={styles.linha} key={index}>
+
                         <td>{<img src={IconeExcluir} alt="" />}</td>
-                        <td>{obj.colab}</td>
-                        <td>{obj.empresa}</td>
-                        <td>{obj.prest}</td>
-                        <td>{obj.data}</td>
-                        <td><img src={obj.motivo} alt="" /></td>
-                        <td>{obj.tipo}</td>
-                        <td>{obj.ctrCusto}</td>
-                        <td>{obj.ordInt}</td>
-                        <td>{obj.div}</td>
-                        <td>{obj.pep}</td>
-                        <td>{obj.moeda}</td>
-                        <td>{obj.distKm}</td>
-                        <td>{obj.valKm}</td>
-                        <td>{obj.valFaturado}</td>
-                        <td>{obj.despesa}</td>
+
+                        <td>
+                            <span>{obj.colab}</span>
+                        </td>
+
+                        <td>
+                            <span>{obj.empresa.toUpperCase()}</span>
+                        </td>
+                        
+                        <td>
+                            <span>{obj.prest}</span>
+                        </td>
+
+                        <td>
+                            <span>{obj.data}</span>
+                        </td>
+
+                        <td>
+                            <span><img src={obj.motivo} alt="" /></span>
+                        </td>
+
+                        <td>
+                            <span>{obj.tipo.toUpperCase()}</span>
+                        </td>
+
+                        <td>
+                            <span>{obj.ctrCusto}</span>
+                        </td>
+                        
+                        <td>
+                            <span>{obj.ordInt}</span>
+                        </td>
+                        
+                        <td>
+                            <span>{obj.div}</span>
+                        </td>
+
+                        <td>
+                            <span>{obj.pep}</span>
+                        </td>
+
+                        <td>
+                            <span>{obj.moeda}</span>
+                        </td>
+
+                        <td>
+                            <span>{obj.distKm}</span>
+                        </td>
+
+                        <td>
+                            <span>{obj.valKm}</span>
+                        </td>
+                        
+                        <td>
+                            <span>{obj.valFaturado}</span>
+                        </td>
+
+                        <td>
+                            <span>{obj.despesa}</span>
+                        </td>
 
                     </tr>
 

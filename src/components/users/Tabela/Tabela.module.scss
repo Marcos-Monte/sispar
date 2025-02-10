@@ -24,14 +24,14 @@ table {
 
 .linha {
     // width: 100%;
-    height: 50px !important;
+    height:  3rem !important;
     display: flex;
     width: 100%;
     
 
     td, th {
         flex: 1; /* Faz as colunas ocuparem espaço proporcionalmente */
-        min-width: 50px;
+        min-width: 2%;
         font-weight: 400;
         border-right: solid 0.8px var(--surface);
         border-bottom: solid 0.8px var(--surface);
@@ -40,6 +40,15 @@ table {
         display: flex;
         justify-content: center;
         align-items: center;
+        
+    }
+
+    td span{
+        white-space: nowrap;  /* Impede que o texto quebre para a próxima linha */
+        overflow: hidden;     /* Oculta o conteúdo que ultrapassa a célula */
+        text-overflow:ellipsis; /* Adiciona as reticências (...) */
+        max-width: 100%; /* Define um limite de largura para que o efeito funcione */
+        display: block; /* Necessário para aplicar ellipsis */
     }
 
     td:last-child{
