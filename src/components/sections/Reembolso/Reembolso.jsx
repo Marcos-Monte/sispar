@@ -6,8 +6,8 @@ import { Input } from '../../users/Inputs/Input';
 import Tabela from '../../users/Tabela/Tabela';
 // Import Icones
 import IconeApagar from '@/assets/icons/apagar.png';
-import IconeCancelar from '@/assets/icons/cancelar.png';
-import IconeEnviar from '@/assets/icons/enviar.png';
+// import IconeCancelar from '@/assets/icons/cancelar.png';
+// import IconeEnviar from '@/assets/icons/enviar.png';
 import IconeSalvar from '@/assets/icons/salvar.png';
 // Import Dados
 import solicitacoesReembolso from '../../../data/data';
@@ -167,9 +167,15 @@ export default function Reembolso(){
                 array={solicitacoesReembolso}
             />
 
+            <section>
+                <div>
+                    span
+                </div>
+            </section>
+{/* 
             <img src={IconeApagar} alt="" />
             <img src={IconeCancelar} alt="" />
-            <img src={IconeEnviar} alt="" />
+            <img src={IconeEnviar} alt="" /> */}
             
 
         </section>
