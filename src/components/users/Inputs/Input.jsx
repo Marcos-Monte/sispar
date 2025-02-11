@@ -14,33 +14,13 @@ function Input(props){
     )
 }
 
-// // Input Select recebe o seu 'tipo' via props. Exemplo: text, email, password, etc...
-// function Select(props){
-//     return(
-//             <select 
-//                 className={styles.containerSelect}
-//                 placeholder={props.placeholder}
-//             >
-//                 <div className={styles.selectArrow}>▼</div>
-//                 {/* Opção padrão que não conta como seleção */}
-//                 <option selected disabled>Selecionar</option>
-//                 {/* Utilizando 'Array.map' para renderizar valores de um Array como 'option' do Select */}
-//                 {
-//                     props.array.map(
-//                         (option, index) => <option key={index}>{ option.toUpperCase() }</option>
-//                     )
-//                 }
-//             </select>
-//     )
-// }
-
 // Input Select recebe o seu 'tipo' via props. Exemplo: text, email, password, etc...
 function Select(props){
     return(
             <div className={styles.containerSelect}>
-                <select>
+                <select defaultValue={'Selecionar'}>
                     {/* Opção padrão que não conta como seleção */}
-                    <option selected disabled>Selecionar</option>
+                    <option disabled>Selecionar</option>
                     {/* Utilizando 'Array.map' para renderizar valores de um Array como 'option' do Select */}
                     {
                         props.array.map(
@@ -49,7 +29,7 @@ function Select(props){
                     }
                 </select>
 
-                <div>
+                <div className={styles.botao}>
                     <img src={setaBaixo} alt="" />
                 </div>
             </div>

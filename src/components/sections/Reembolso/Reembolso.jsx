@@ -64,7 +64,7 @@ export default function Reembolso(){
 
                     </div>
 
-                    <div className={styles.medium}>
+                    <div className={styles.small}>
 
                         <label>Nº Prest.Contas</label>
 
@@ -74,7 +74,7 @@ export default function Reembolso(){
 
                     </div>
 
-                    <div className={styles.large}>
+                    <div className={styles.total}>
 
                         <label>Descrição / Motivo do Reembolso</label>
 
@@ -90,7 +90,7 @@ export default function Reembolso(){
 
                 <div className={styles.boxDados}>
 
-                    <div className={styles.small}>
+                    <div className={styles.intermediario}>
                         <label>Data</label>
                         <Input 
                             type='date'
@@ -163,7 +163,7 @@ export default function Reembolso(){
                         />
                     </div>
 
-                    <div className={styles.small}>
+                    <div className={styles.micro}>
                         <label>Val. Faturado</label>
                         <Input 
                             tipo='text'
