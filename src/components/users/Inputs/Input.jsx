@@ -10,6 +10,9 @@ function Input(props){
             className={styles.container} 
             placeholder={props.placeholder}
             type={props.type} 
+            name={props.name}
+            value={props.value}
+            onChange={props.onChange}
         />
     )
 }
@@ -18,9 +21,14 @@ function Input(props){
 function Select(props){
     return(
             <div className={styles.containerSelect}>
-                <select defaultValue={'Selecionar'}>
+                <select 
+                    defaultValue={'Selecionar'}
+                    name={props.name}
+                    value={props.value}
+                    onChange={props.onChange}
+                >
                     {/* Opção padrão que não conta como seleção */}
-                    <option disabled>Selecionar</option>
+                    <option selected disabled>Selecionar</option>
                     {/* Utilizando 'Array.map' para renderizar valores de um Array como 'option' do Select */}
                     {
                         props.array.map(

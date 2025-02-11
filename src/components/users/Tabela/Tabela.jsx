@@ -40,7 +40,7 @@ export default function Tabela(props){
                         </td>
 
                         <td>
-                            <span>{obj.empresa.toUpperCase()}</span>
+                            <span>{obj.empresa}</span>
                         </td>
                         
                         <td>
@@ -56,7 +56,7 @@ export default function Tabela(props){
                         </td>
 
                         <td>
-                            <span>{obj.tipo.toUpperCase()}</span>
+                            <span>{obj.tipo}</span>
                         </td>
 
                         <td>
