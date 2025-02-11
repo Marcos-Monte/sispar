@@ -36,11 +36,11 @@ export default function Tabela(props){
                         <td>{<img src={IconeExcluir} alt="" />}</td>
 
                         <td>
-                            <span>{obj.colab}</span>
+                            <span>{obj.colab.toUpperCase()}</span>
                         </td>
 
                         <td>
-                            <span>{obj.empresa}</span>
+                            <span>{obj.empresa.toUpperCase()}</span>
                         </td>
                         
                         <td>
@@ -52,15 +52,15 @@ export default function Tabela(props){
                         </td>
 
                         <td>
-                            <span><img src={obj.motivo} alt="" /></span>
+                            <span><img src={obj.motivo.toUpperCase()} alt="" /></span>
                         </td>
 
                         <td>
-                            <span>{obj.tipo}</span>
+                            <span>{obj.tipo.toUpperCase()}</span>
                         </td>
 
                         <td>
-                            <span>{obj.ctrCusto}</span>
+                            <span>{obj.ctrCusto.toUpperCase()}</span>
                         </td>
                         
                         <td>
@@ -76,7 +76,7 @@ export default function Tabela(props){
                         </td>
 
                         <td>
-                            <span>{obj.moeda}</span>
+                            <span>{obj.moeda.toUpperCase()}</span>
                         </td>
 
                         <td>

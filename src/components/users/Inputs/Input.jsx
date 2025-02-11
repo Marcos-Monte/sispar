@@ -22,7 +22,7 @@ function Select(props){
     return(
             <div className={styles.containerSelect}>
                 <select 
-                    defaultValue={'Selecionar'}
+                    // defaultValue={'Selecionar'}
                     name={props.name}
                     value={props.value}
                     onChange={props.onChange}
