@@ -1,5 +1,6 @@
 // Import de Dependencia de Context
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 // Import dos Componentes que serão renderizados nas aplicações 'filho' da envolvida por RenderProvider
 import Analises from '@/components/sections/Analises/Analises.jsx';
@@ -12,6 +13,15 @@ const RenderContext = createContext({})
 
 // Componente que irá envolver o Componente Principal ou o Em comum entre os elementos que precisam se comunicar na aplicação
 function RenderProvider(props){
+
+    const location = useLocation(); // Obtém a URL atual da aplicação.
+
+    // **Reseta o estado `componente` para `<Dashboard />` sempre que o usuário sair da HOME**
+    useEffect(() => {
+        if (location.pathname !== "/home") { // Se a URL NÃO for a Home ("/"), reseta para Dashboard
+            setComponente(<Dashboard />);
+        }
+    }, [location.pathname]); // Executa sempre que a URL mudar
 
     // Variaveis de Estado
     const [componente, setComponente] = useState(<Dashboard />) // Componente Renderizado Inicialmente será o Dashboard
@@ -33,6 +43,8 @@ function RenderProvider(props){
             case 'Historico':
                 setComponente(<Historico />)
                 break;
+            default:
+                setComponente(<Dashboard />); // Garante um fallback
         }
 
     }
@@ -41,6 +53,8 @@ function RenderProvider(props){
     function openHeader(){
         return statusHeader === 'aberto'? setStatusHeader('fechado'): setStatusHeader('aberto')
     }
+
+
 
     return(
         // O value é um 'objeto' por padrão que recebe os valores, funções e afins, necessários
