@@ -10,8 +10,9 @@ import IconeHome from '@/assets/Header/botao-home.png'
 import IconePesquisa from '@/assets/Header/botao-pesquisa.png'
 import IconeReembolso from '@/assets/Header/botao-reembolso.png'
 import IconeSair from '@/assets/Header/botao-sair.png'
-import Imagem from '@/assets/Header/Fotos/cartoon.webp'
 import IconeMenu from '@/assets/Header/imagem-fechar-header.png'
+
+import cadastro from '../../../data/cadastros.js'
 
 // OBS: Função do Button, é uma função anônima que vai receber um 'setter' (via props) e armazena um valor 'string'.
 export default function Header(props){
@@ -20,12 +21,14 @@ export default function Header(props){
 
     function alterarStatus(){
         console.log(status)
+        console.log(cadastro.dados)
         // Função que inverte (entre false e true) o valor da variavel Status
         return status === false? setStatus(true): setStatus(false)
     }
 
     return(
         <header className={`${styles.container} ${styles[status? 'aberto': 'fechado']}`}>
+            {}
             {/* Botão que recebe 'rota' será enviado para outra página. Não recebe 'função'*/}
             <Button
                 tipo='icon'
@@ -39,10 +42,10 @@ export default function Header(props){
             <nav>
                 {/* Imagem ilutrativa que irá receber a foto do usuário cadastrado */}
                 <figure>
-                    <img src={Imagem} alt="" />
+                    <img src={cadastro.dados.foto} alt="" />
                     <div className={styles.infos}>
-                        <figcaption>Marcos Monte</figcaption>
-                        <span>Desenvolvedor Web</span>
+                        <figcaption>{cadastro.dados.nome}</figcaption>
+                        <span>{cadastro.dados.cargo}</span>
                     </div>
                 </figure>
                 

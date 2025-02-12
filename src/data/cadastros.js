@@ -1,9 +1,11 @@
-import Foto from '@/assets/Fotos/cartoon.webp'
+import Foto from '@/assets/Header/Fotos/cartoon.webp';
 
-const cadastros = [
+const cadastro = 
     {
-        login: 'exemplo@exemplo.com', 
+        login: 'marcos@exemplo.com', 
         senha: 123,
-        dados: ['marcos monte', 'desenvolvedor web', Foto]
-    }, 
-]
+        dados: {nome: 'Marcos Monte', cargo: 'Desenvolvedor Web', foto: Foto}
+    }
+
+
+export default cadastro;
