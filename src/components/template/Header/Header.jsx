@@ -10,7 +10,7 @@ import IconeHome from '@/assets/Header/botao-home.png'
 import IconePesquisa from '@/assets/Header/botao-pesquisa.png'
 import IconeReembolso from '@/assets/Header/botao-reembolso.png'
 import IconeSair from '@/assets/Header/botao-sair.png'
-import Imagem from '@/assets/Header/image.png'
+import Imagem from '@/assets/Header/Fotos/cartoon.webp'
 import IconeMenu from '@/assets/Header/imagem-fechar-header.png'
 
 // OBS: Função do Button, é uma função anônima que vai receber um 'setter' (via props) e armazena um valor 'string'.
