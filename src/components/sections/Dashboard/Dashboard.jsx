@@ -11,8 +11,14 @@ import IconeAtualizado from '@/assets/Dashboard/sistema-atualizado.png';
 import IconeHomeGray from '@/assets/icons/home.png';
 import IconeSeta from '@/assets/icons/seta.png';
 
+import { useContext } from 'react';
+import { RenderContext } from '../../../contexts/RenderContext.jsx';
+
 // Componente Ilustrativo de Renderização
-export default function Dashboard(props){
+export default function Dashboard(){
+
+    // Importando Funções de um Componente de Contexto'. Veio de um Contexto
+    const {alterarRender} = useContext(RenderContext)
 
     return(
         <section className={styles.container}>
@@ -35,18 +41,21 @@ export default function Dashboard(props){
                     <Card 
                         imagem={IconeReembolso}
                         texto='Solicitar Reembolso'
-                        funcao={() => props.alterarComponente('Reembolso')}
+                        // Função recebe outra função do Componente de Contexto
+                        funcao={() => alterarRender('Reembolso')}
 
                     />
                     <Card 
                         imagem={IconeAnalises}
                         texto='Verificar Analises'
-                        funcao={() => props.alterarComponente('Analises')}
+                        // Função recebe outra função do Componente de Contexto
+                        funcao={() => alterarRender('Analises')}
                     />
                     <Card 
                         imagem={IconeHistorico}
                         texto='Histórico'
-                        funcao={() => props.alterarComponente('Historico')}
+                        // Função recebe outra função do Componente de Contexto
+                        funcao={() => alterarRender('Historico')}
                     />
 
                 </section>
