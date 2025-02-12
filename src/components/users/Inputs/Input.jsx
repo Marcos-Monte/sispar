@@ -28,7 +28,7 @@ function Select(props){
                     onChange={props.onChange}
                 >
                     {/* Opção padrão que não conta como seleção */}
-                    <option selected disabled>Selecionar</option>
+                    <option disabled>Selecionar</option>
                     {/* Utilizando 'Array.map' para renderizar valores de um Array como 'option' do Select */}
                     {
                         props.array.map(

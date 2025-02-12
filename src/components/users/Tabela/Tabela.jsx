@@ -52,7 +52,7 @@ export default function Tabela(props){
                         </td>
 
                         <td>
-                            <span><img src={obj.motivo.toUpperCase()} alt="" /></span>
+                            <span><img src={obj.motivo} alt="" /></span>
                         </td>
 
                         <td>
