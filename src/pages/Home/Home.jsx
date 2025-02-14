@@ -7,6 +7,8 @@ import Header from '@/components/template/Header/Header.jsx';
 // Import de Contexto
 import { RenderContext } from '../../contexts/RenderContext.jsx';
 
+import TestModal from '../../components/users/Modal/Modal.jsx';
+
 export default function Home(){
     
     // Importando Variavel de Estado de um Componente de Contexto'. Veio de um Contexto
@@ -15,9 +17,12 @@ export default function Home(){
     return(
     
         <div className={styles.container}>
+
             <Header />
 
             <main>
+                <TestModal openModal='true' />
+
                 {/* Variavel de Estado, Renderizada no Componente de Contexto */}
                 {
                     componente

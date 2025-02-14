@@ -1,5 +1,5 @@
 // Import de hooks
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 // Import arquivo de Estilização
 import styles from './Reembolso.module.scss';
 // Import Componentes
@@ -17,6 +17,7 @@ import IconeSeta from '@/assets/icons/seta.png';
 // Import Dados
 import { controleCustos, tiposDespesa } from '@/data/opcoes.js';
 import solicitacoesReembolso from '@/data/registros.js';
+import { RenderContext } from '../../../contexts/RenderContext';
 
 // Função para calcular total de valores
 function calcular(array, propriedade){
@@ -30,6 +31,8 @@ function calcular(array, propriedade){
 }
 
 export default function Reembolso(){
+
+    const {openModal} = useContext(RenderContext)
 
     // Gerencia o Estado do Array de Objetos importado para a aplicação (Esse 'registros' que irá ser renderizado na tela e não os valores do BD)
     const [registros, setRegistros] = useState([])
@@ -327,6 +330,7 @@ export default function Reembolso(){
                         <Button 
                             tipo='icon'
                             cor='azulClaro'
+                            funcao={openModal}
                         >
                             <img src={IconeApagar} alt="" />
                         </Button>

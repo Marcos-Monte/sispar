@@ -27,6 +27,18 @@ function RenderProvider(props){
     const [componente, setComponente] = useState(<Dashboard />) // Componente Renderizado Inicialmente será o Dashboard
     const [statusHeader, setStatusHeader] = useState('fechado') // Header iniciará a aplicação 'fechado'
 
+    const [modalIsOpen, setIsOpen] = useState(false);
+
+    function openModal(){
+        console.log('abriu')
+        setIsOpen(true);
+    }
+    
+    function closeModal(){
+        console.log('fechou')
+        setIsOpen(false);
+    }
+
     // Função que será utilizada em botões e cards na aplicação, para renderizar os componentes indicados
     function alterarRender(texto){
 
@@ -63,6 +75,10 @@ function RenderProvider(props){
             alterarRender,
             statusHeader,
             openHeader,
+
+            modalIsOpen,
+            openModal,
+            closeModal,
         }}>
 
             {/* Elementos Filhos envolvidos pelo Componente.. Estão dentro deste 'contexto' */}
