@@ -8,7 +8,7 @@ import Header from '@/components/template/Header/Header.jsx';
 import { CrudProvider } from '../../contexts/CrudContext.jsx';
 import { RenderContext } from '../../contexts/RenderContext.jsx';
 
-import { ModalButton } from '../../components/users/Modal/Modal.jsx';
+import { ModalCancelar, ModalExcluir, ModalLimpar } from '../../components/users/Modal/Modal.jsx';
 
 export default function Home(){
     
@@ -20,7 +20,13 @@ export default function Home(){
         <CrudProvider>
             <div className={styles.container}>
                 
-                <ModalButton 
+                <ModalCancelar 
+                    openModal='false'
+                />
+                <ModalExcluir 
+                    openModal='false'
+                />
+                <ModalLimpar 
                     openModal='false'
                 />
 

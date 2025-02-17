@@ -46,7 +46,7 @@ export default function Tabela(props){
                             <Button
                                 tipo='icon'
                                 cor='transparente'
-                                funcao={openModal}
+                                funcao={() => openModal('excluir')}
 
                             >
                                 {<img src={IconeExcluir} alt="" />}

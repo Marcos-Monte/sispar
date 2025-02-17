@@ -27,7 +27,9 @@ function RenderProvider(props){
     const [componente, setComponente] = useState(<Dashboard />) // Componente Renderizado Inicialmente será o Dashboard
     const [statusHeader, setStatusHeader] = useState('fechado') // Header iniciará a aplicação 'fechado'
     // Variavel de estado que indica abertura e fechamento de Modal
-    const [modalIsOpen, setIsOpen] = useState(false);
+    const [cancelarIsOpen, setCancelarIsOpen] = useState(false);
+    const [limparIsOpen, setLimparIsOpen] = useState(false);
+    const [excluirIsOpen, setExcluirIsOpen] = useState(false);
 
     // Função que será utilizada em botões e cards na aplicação, para renderizar os componentes indicados
     function alterarRender(texto){
@@ -57,14 +59,26 @@ function RenderProvider(props){
     }
 
     // Funções que atribuem a 'abertura' e 'fechamento' do Modal
-    function openModal(){
+    function openModal(modal){
         // console.log('abriu')
-        setIsOpen(true)
+        if(modal === 'cancelar'){
+            setCancelarIsOpen(true)
+        } else if (modal === 'limpar'){
+            setLimparIsOpen(true)
+        } else {
+            setExcluirIsOpen(true)
+        }
     }
     
-    function closeModal(){
+    function closeModal(modal){
         // console.log('fechou')
-        setIsOpen(false)
+        if(modal === 'cancelar'){
+            setCancelarIsOpen(false)
+        } else if (modal === 'limpar'){
+            setLimparIsOpen(false)
+        } else {
+            setExcluirIsOpen(false)
+        }
     }
 
     return(
@@ -76,7 +90,9 @@ function RenderProvider(props){
             openHeader,
 
             // Contextos de Modal
-            modalIsOpen,
+            limparIsOpen,
+            cancelarIsOpen,
+            excluirIsOpen,
             openModal,
             closeModal,
         }}>

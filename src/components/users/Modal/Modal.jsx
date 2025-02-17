@@ -11,22 +11,22 @@ import { RenderContext } from '../../../contexts/RenderContext.jsx';
 
 Modal.setAppElement('#root');
 // Adicionar condição de não permitir clicar fora dos botões quando abrir o modal
-function ModalButton(){
+function ModalLimpar(){
 
-    const {modalIsOpen, closeModal} = useContext(RenderContext)
+    const {limparIsOpen, closeModal} = useContext(RenderContext)
     const {limparDados} = useContext(CrudContext)
 
     function limpar(){
         limparDados()
 
         setTimeout(() => {
-            closeModal()
+            closeModal('limpar')
         }, 100)
     }
 
     return(
         <Modal
-            isOpen={modalIsOpen} // Verificar se o modal está visível ou não
+            isOpen={limparIsOpen} // Verificar se o modal está visível ou não
             onRequestClose={closeModal} // Requisição de fechar o modal
             contentLabel='Exemplo'
             overlayClassName={styles.modalOverlay} // Estilizar o Background do Modal
@@ -48,6 +48,80 @@ function ModalButton(){
     )
 }
 
+function ModalCancelar(){
+
+    const {cancelarIsOpen, closeModal} = useContext(RenderContext)
+
+    function cancelar(){
+        console.log('cancelando solicitação')
+
+        setTimeout(() => {
+            closeModal('cancelar')
+        }, 100)
+    }
+
+    return(
+        <Modal
+            isOpen={cancelarIsOpen} // Verificar se o modal está visível ou não
+            onRequestClose={closeModal} // Requisição de fechar o modal
+            contentLabel='Exemplo'
+            overlayClassName={styles.modalOverlay} // Estilizar o Background do Modal
+            className={styles.modalContent} // Estilizar o container do modal
+        >
+            <p>Tem certeza que deseja cancelar a solicitação?</p>
+
+            <div className={styles.boxButtons}>
+                <Button funcao={closeModal} tipo='container' cor='azul'>
+                    Continuar Editando
+                </Button>
+
+                <Button funcao={cancelar} tipo='container' cor='vinho'>
+                    Sim, cancelar
+                </Button>
+            </div>
+            
+        </Modal>
+    )
+}
+
+function ModalExcluir(){
+
+    const {excluirIsOpen, closeModal} = useContext(RenderContext)
+
+    function excluir(){
+        console.log('excluindo registro')
+
+        setTimeout(() => {
+            closeModal('excluir')
+        }, 100)
+    }
+
+    return(
+        <Modal
+            isOpen={excluirIsOpen} // Verificar se o modal está visível ou não
+            onRequestClose={closeModal} // Requisição de fechar o modal
+            contentLabel='Exemplo'
+            overlayClassName={styles.modalOverlay} // Estilizar o Background do Modal
+            className={styles.modalContent} // Estilizar o container do modal
+        >
+            <p>Deseja realmente excluir os dados dessa linha?</p>
+
+            <div className={styles.boxButtons}>
+                <Button funcao={closeModal} tipo='container' cor='azul'>
+                    Continuar Editando
+                </Button>
+
+                <Button funcao={excluir} tipo='container' cor='vinho'>
+                    Sim, excluir
+                </Button>
+            </div>
+            
+        </Modal>
+    )
+}
 
 
-export { ModalButton };
+
+
+export { ModalCancelar, ModalExcluir, ModalLimpar };
+
