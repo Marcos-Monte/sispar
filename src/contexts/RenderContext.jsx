@@ -26,18 +26,8 @@ function RenderProvider(props){
     // Variaveis de Estado
     const [componente, setComponente] = useState(<Dashboard />) // Componente Renderizado Inicialmente será o Dashboard
     const [statusHeader, setStatusHeader] = useState('fechado') // Header iniciará a aplicação 'fechado'
-
+    // Variavel de estado que indica abertura e fechamento de Modal
     const [modalIsOpen, setIsOpen] = useState(false);
-
-    function openModal(){
-        console.log('abriu')
-        setIsOpen(true);
-    }
-    
-    function closeModal(){
-        console.log('fechou')
-        setIsOpen(false);
-    }
 
     // Função que será utilizada em botões e cards na aplicação, para renderizar os componentes indicados
     function alterarRender(texto){
@@ -66,7 +56,16 @@ function RenderProvider(props){
         return statusHeader === 'aberto'? setStatusHeader('fechado'): setStatusHeader('aberto')
     }
 
-
+    // Funções que atribuem a 'abertura' e 'fechamento' do Modal
+    function openModal(){
+        console.log('abriu')
+        setIsOpen(true);
+    }
+    
+    function closeModal(){
+        console.log('fechou')
+        setIsOpen(false);
+    }
 
     return(
         // O value é um 'objeto' por padrão que recebe os valores, funções e afins, necessários
@@ -76,6 +75,7 @@ function RenderProvider(props){
             statusHeader,
             openHeader,
 
+            // Contextos de Modal
             modalIsOpen,
             openModal,
             closeModal,

@@ -7,8 +7,8 @@ import Modal from 'react-modal';
 import { RenderContext } from '../../../contexts/RenderContext';
 
 Modal.setAppElement('#root');
-
-export default function TestModal(){
+// Adicionar condição de não permitir clicar fora dos botões quando abrir o modal
+export default function ModalButton(props){
 
     const {modalIsOpen, closeModal} = useContext(RenderContext)
 
@@ -20,15 +20,15 @@ export default function TestModal(){
             overlayClassName={styles.modalOverlay} // Estilizar o Background do Modal
             className={styles.modalContent} // Estilizar o container do modal
         >
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. doloribus praesentium! Consectetur neque omnis adipisci accusantium. Nam?</p>
+            <p>{props.texto}</p>
 
             <div className={styles.boxButtons}>
                 <Button funcao={closeModal} tipo='container' cor='azul'>
-                    Sim
+                    Continuar Editando
                 </Button>
 
                 <Button funcao={closeModal}tipo='container' cor='vinho'>
-                    Não
+                    {props.textoButton}
                 </Button>
             </div>
             

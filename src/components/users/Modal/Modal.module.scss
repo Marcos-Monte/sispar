@@ -1,5 +1,4 @@
 .modalOverlay {
-    background-color: var(--surface);
     position: fixed;
     top: 0;
     bottom: 0;
@@ -10,29 +9,52 @@
     justify-content: center;
     align-items: center;
 
-    opacity: 0.4; /* Reduzi a opacidade para um efeito mais suave */
     backdrop-filter: blur(5px); /* Adiciona um leve desfoque ao fundo */
     z-index: 4000;
 }
 
+// Para que apenas o 'fundo' fique com a cor do background
+.modalOverlay::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: var(--surface);
+    opacity: .6;
+}
+
 .modalContent{
-    width: 25%;
+    width: 18%;
     // height: 25%;
-    padding: 2%;
+    padding: 1%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 1rem;
     z-index: 500000;
-    background-color: var(--background);
+    background-color: #fff;
     border: none;
     border-radius: 6px;
+
+
+    p{
+        text-align: center;
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: var(--primary-dark);
+    }
 }
 
 .boxButtons{
     width: 100%;
+    height: 100%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
+    flex-wrap: wrap;
+    font-size: 1rem;
+    
 }

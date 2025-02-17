@@ -1,8 +1,17 @@
+// Import Estilização
 import styles from './Tabela.module.scss';
-
+// Import Icones
+import IconeArquivo from '@/assets/icons/arquivo.png';
 import IconeExcluir from '@/assets/icons/lixeira.png';
+// Import Componentes
+import { Button } from '@/components/users/Buttons/Button.jsx';
+import { useContext } from 'react';
+import { RenderContext } from '../../../contexts/RenderContext';
 
 export default function Tabela(props){
+
+    const {openModal} = useContext(RenderContext)
+
     return(
         <table>
             <thead className={styles.cabecalho}>
@@ -33,7 +42,16 @@ export default function Tabela(props){
 
                     <tr className={styles.linha} key={index}>
 
-                        <td>{<img src={IconeExcluir} alt="" />}</td>
+                        <td>
+                            <Button
+                                tipo='icon'
+                                cor='transparente'
+                                funcao={openModal}
+
+                            >
+                                {<img src={IconeExcluir} alt="" />}
+                            </Button>
+                        </td>
 
                         <td>
                             <span>{obj.colab.toUpperCase()}</span>
@@ -52,7 +70,7 @@ export default function Tabela(props){
                         </td>
 
                         <td>
-                            <span><img src={obj.motivo} alt="" /></span>
+                            <span>{<img src={IconeArquivo} alt="" />}</span>
                         </td>
 
                         <td>

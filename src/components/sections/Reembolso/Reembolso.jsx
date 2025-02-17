@@ -330,7 +330,7 @@ export default function Reembolso(){
                         <Button 
                             tipo='icon'
                             cor='azulClaro'
-                            funcao={openModal}
+                            funcao={openModal} // Abrir Modal
                         >
                             <img src={IconeApagar} alt="" />
                         </Button>
@@ -374,6 +374,7 @@ export default function Reembolso(){
                 <Button 
                     tipo='containerGrande'
                     cor='vinho'
+                    funcao={openModal} // Abrir Modal
                 >
                     <img src={IconeCancelar} alt="" />
                     Cancelar Solicitação

@@ -55,6 +55,8 @@ table {
         border-right: none;
     }
 
-
+    td:first-child:hover{
+        background-color: var(--accent);
+    }
 }
 
