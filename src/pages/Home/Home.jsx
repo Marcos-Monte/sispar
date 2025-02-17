@@ -7,7 +7,7 @@ import Header from '@/components/template/Header/Header.jsx';
 // Import de Contexto
 import { RenderContext } from '../../contexts/RenderContext.jsx';
 
-import ModalButton from '../../components/users/Modal/Modal.jsx';
+import { ModalCancelar, ModalExcluir, ModalLimpar } from '../../components/users/Modal/Modal.jsx';
 
 export default function Home(){
     
@@ -21,10 +21,14 @@ export default function Home(){
             <Header />
 
             <main>
-                <ModalButton 
+                <ModalLimpar 
                     openModal='false'
-                    texto='Deseja realmente limpar os campos preenchidos acima?'
-                    textoButton='Sim, limpar'
+                />
+                <ModalCancelar 
+                    openModal='false'
+                />
+                <ModalExcluir 
+                    openModal='false'
                 />
 
                 {/* Variavel de Estado, Renderizada no Componente de Contexto */}
