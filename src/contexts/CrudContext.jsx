@@ -67,7 +67,16 @@ function CrudProvider(props){
         console.log(novoRegistro)
 
         // Limpando Campos do Formulário
-        setDados({
+        limparDados()
+
+        console.log('Limpou')
+    }
+
+    function limparDados(){
+        // Limpando Campos do Formulário
+        console.log('limpar')
+        setDados(prevState => ({
+            ...prevState,
             colab:'',
             empresa: '',
             prest: '',
@@ -83,18 +92,26 @@ function CrudProvider(props){
             valKm: '',
             despesa: '',
             valFaturado: '',
-        })
-
-        console.log('Limpou')
+        }))
+        
     }
 
+    function excluirRegistro(){
+        console.log('excluido')
+    }
+
+    function cancelarSolicitacao(){
+        console.log('solicitação cancelada')
+    }
+    
     return (
         // Tag que envolve o componente em comum (Home)
         <CrudContext.Provider value={{
             registros,
             dados,
             handleChange,
-            handleSalvar
+            handleSalvar,
+            limparDados,
         }}>
             {props.children}
         </CrudContext.Provider>

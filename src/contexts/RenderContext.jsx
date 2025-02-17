@@ -58,13 +58,13 @@ function RenderProvider(props){
 
     // Funções que atribuem a 'abertura' e 'fechamento' do Modal
     function openModal(){
-        console.log('abriu')
-        setIsOpen(true);
+        // console.log('abriu')
+        setIsOpen(true)
     }
     
     function closeModal(){
-        console.log('fechou')
-        setIsOpen(false);
+        // console.log('fechou')
+        setIsOpen(false)
     }
 
     return(

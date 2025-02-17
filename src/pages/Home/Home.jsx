@@ -8,7 +8,7 @@ import Header from '@/components/template/Header/Header.jsx';
 import { CrudProvider } from '../../contexts/CrudContext.jsx';
 import { RenderContext } from '../../contexts/RenderContext.jsx';
 
-import { ModalCancelar, ModalExcluir, ModalLimpar } from '../../components/users/Modal/Modal.jsx';
+import { ModalButton } from '../../components/users/Modal/Modal.jsx';
 
 export default function Home(){
     
@@ -19,25 +19,21 @@ export default function Home(){
         // Envolvendo componente pelo Contexto de 'CrudContext'
         <CrudProvider>
             <div className={styles.container}>
+                
+                <ModalButton 
+                    openModal='false'
+                />
 
                 <Header />
 
                 <main>
-                    <ModalLimpar 
-                        openModal='false'
-                    />
-                    <ModalCancelar 
-                        openModal='false'
-                    />
-                    <ModalExcluir 
-                        openModal='false'
-                    />
 
                     {/* Variavel de Estado, Renderizada no Componente de Contexto */}
                     {
                         componente
                     }
                 </main>
+                
 
             </div>
         </CrudProvider>
