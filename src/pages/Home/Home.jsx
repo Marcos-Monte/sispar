@@ -5,6 +5,7 @@ import styles from './Home.module.scss';
 // Import de Componentes
 import Header from '@/components/template/Header/Header.jsx';
 // Import de Contexto
+import { CrudProvider } from '../../contexts/CrudContext.jsx';
 import { RenderContext } from '../../contexts/RenderContext.jsx';
 
 import { ModalCancelar, ModalExcluir, ModalLimpar } from '../../components/users/Modal/Modal.jsx';
@@ -15,29 +16,31 @@ export default function Home(){
     const {componente} = useContext(RenderContext)
 
     return(
-    
-        <div className={styles.container}>
+        // Envolvendo componente pelo Contexto de 'CrudContext'
+        <CrudProvider>
+            <div className={styles.container}>
 
-            <Header />
+                <Header />
 
-            <main>
-                <ModalLimpar 
-                    openModal='false'
-                />
-                <ModalCancelar 
-                    openModal='false'
-                />
-                <ModalExcluir 
-                    openModal='false'
-                />
+                <main>
+                    <ModalLimpar 
+                        openModal='false'
+                    />
+                    <ModalCancelar 
+                        openModal='false'
+                    />
+                    <ModalExcluir 
+                        openModal='false'
+                    />
 
-                {/* Variavel de Estado, Renderizada no Componente de Contexto */}
-                {
-                    componente
-                }
-            </main>
+                    {/* Variavel de Estado, Renderizada no Componente de Contexto */}
+                    {
+                        componente
+                    }
+                </main>
 
-        </div>
+            </div>
+        </CrudProvider>
 
     )
 }

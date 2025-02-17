@@ -1,5 +1,5 @@
 // Import de hooks
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 // Import arquivo de Estilização
 import styles from './Reembolso.module.scss';
 // Import Componentes
@@ -16,102 +16,27 @@ import IconeSalvar from '@/assets/icons/salvar.png';
 import IconeSeta from '@/assets/icons/seta.png';
 // Import Dados
 import { controleCustos, tiposDespesa } from '@/data/opcoes.js';
-import solicitacoesReembolso from '@/data/registros.js';
+// import solicitacoesReembolso from '@/data/registros.js';
+import { CrudContext } from '../../../contexts/CrudContext';
 import { RenderContext } from '../../../contexts/RenderContext';
 
 // Função para calcular total de valores
 function calcular(array, propriedade){
 
     const total = array.reduce(
-        (acumulador, registro) => acumulador + registro[propriedade], 0
+        (acumulador, registro) => acumulador + parseFloat(registro[propriedade]), 0
     )
-
-    return total > 0? total: 0.00;
+    return total > 0? total.toFixed(2): 0.00;
 
 }
 
 export default function Reembolso(){
 
+    // Lógica dos Modais é gerenciado pelo 'contexto' indicado
     const {openModal} = useContext(RenderContext)
 
-    // Gerencia o Estado do Array de Objetos importado para a aplicação (Esse 'registros' que irá ser renderizado na tela e não os valores do BD)
-    const [registros, setRegistros] = useState([])
-
-    useEffect(() => {
-        setRegistros([...solicitacoesReembolso]);// Garante que ele seja atualizado corretamente
-    }, [])
-
-    // Gerenciamento de Estado do Objeto onde os dados serão compilados
-    const [dados, setDados] = useState({
-        colab:'',
-        empresa: '',
-        prest: '',
-        descricao: '',
-        data: '',
-        tipo: 'Selecionar',
-        ctrCusto: 'Selecionar',
-        ordInt: '',
-        pep: '',
-        div: '',
-        distKm: '',
-        moeda: '',
-        valKm: '',
-        despesa: '',
-        valFaturado: '',
-    })
-
-    function handleChange(event){
-        // console.log(event.target.name, event.target.value);
-        // Settando as propriedades dentro da variavel 'dados'. Recebe 'chave':'valor'
-        setDados({
-            ...dados, [event.target.name]: event.target.value
-        })
-        
-    }
-
-    // Função de Salvamento (clique no Botão)
-    function handleSalvar(event){
-        console.log('Entrou')
-        // Evita que o botão tenha o comportamento 'default'
-        event.preventDefault();
-
-        // Armazenando novo Registro
-        const novoRegistro = {
-            // Recebe todos os dados da Variavel de Estado 'dados'
-            ...dados,
-            // valFaturado: parseFloat(dados.valFaturado || 0), // Tratando propriedades especificas de 'dados'
-            // desapesa: parseFloat(dados.despesa || 0), // Tratando propriedades especificas de 'dados'
-        };
-
-        console.log('Criou')
-
-        // Atribuindo novo registro ao array de registros 'local'
-        setRegistros([...registros, novoRegistro]);
-
-        console.log('Registrou')
-        console.log(novoRegistro)
-
-        // Limpando Campos do Formulário
-        setDados({
-            colab:'',
-            empresa: '',
-            prest: '',
-            descricao: '',
-            data: '',
-            tipo: 'Selecionar',
-            ctrCusto: 'Selecionar',
-            ordInt: '',
-            pep: '',
-            div: '',
-            distKm: '',
-            moeda: '',
-            valKm: '',
-            despesa: '',
-            valFaturado: '',
-        })
-
-        console.log('Limpou')
-    }
+    // Toda a lógica de CRUD da aplicação é responsabilidade do 'contexto' indicado
+    const {registros, dados, handleChange, handleSalvar} = useContext(CrudContext)
 
     return(
         
