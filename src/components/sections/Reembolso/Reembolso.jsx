@@ -265,7 +265,7 @@ export default function Reembolso(){
             
             {/* Renderiza os Array de Dados 'local' */}
             <Tabela 
-                array={registros}
+                // array={registros}
             />
 
             <section className={styles.controles}>

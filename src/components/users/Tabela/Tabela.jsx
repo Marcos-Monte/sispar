@@ -6,13 +6,13 @@ import IconeExcluir from '@/assets/icons/lixeira.png';
 // Import Componentes
 import { Button } from '@/components/users/Buttons/Button.jsx';
 import { useContext } from 'react';
+import { CrudContext } from '../../../contexts/CrudContext';
 import { RenderContext } from '../../../contexts/RenderContext';
 
 export default function Tabela(props){
 
     const {openModal} = useContext(RenderContext)
-
-    let registro = '';
+    const {registros} = useContext(CrudContext)
 
     return(
         <table>
@@ -40,15 +40,15 @@ export default function Tabela(props){
             <tbody className={styles.corpo}>
 
             {   
-                props.array.map((obj, index) => (
+                registros.map((obj, index) => (
 
-                    <tr className={styles.linha} key={index} onMouseEnter={() => registro = obj}>
+                    <tr className={styles.linha} key={index}>
 
                         <td>
                             <Button
                                 tipo='icon'
                                 cor='transparente'
-                                funcao={() => openModal('excluir', registro)}
+                                funcao={() => openModal('excluir')}
                             >
                                 {<img src={IconeExcluir} alt="" />}
                             </Button>

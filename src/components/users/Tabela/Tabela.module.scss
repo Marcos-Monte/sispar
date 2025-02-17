@@ -22,8 +22,10 @@ table {
     flex-direction: column;
 
     .linha:hover {
-        filter: brightness(80%); /* Escurecer 20% ao passar o mouse */
+        background-color: var(--background);
+        
     }
+
 }
 
 .linha {
