@@ -97,7 +97,7 @@ function CrudProvider(props){
     }
 
     function excluirRegistro(){
-        console.log('excluido')
+        console.log('Registro Excluido')
     }
 
     function cancelarSolicitacao(){
@@ -112,6 +112,8 @@ function CrudProvider(props){
             handleChange,
             handleSalvar,
             limparDados,
+            excluirRegistro,
+            cancelarSolicitacao,
         }}>
             {props.children}
         </CrudContext.Provider>

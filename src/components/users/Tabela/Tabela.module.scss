@@ -20,6 +20,10 @@ table {
     flex: 1; /* Ocupa todo o espaço disponível */
     display: flex;
     flex-direction: column;
+
+    .linha:hover {
+        filter: brightness(80%); /* Escurecer 20% ao passar o mouse */
+    }
 }
 
 .linha {

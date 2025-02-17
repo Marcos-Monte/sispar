@@ -8,7 +8,6 @@ import Modal from 'react-modal';
 import { CrudContext } from '../../../contexts/CrudContext.jsx';
 import { RenderContext } from '../../../contexts/RenderContext.jsx';
 
-
 Modal.setAppElement('#root');
 // Adicionar condição de não permitir clicar fora dos botões quando abrir o modal
 function ModalLimpar(){
@@ -31,11 +30,12 @@ function ModalLimpar(){
             contentLabel='Exemplo'
             overlayClassName={styles.modalOverlay} // Estilizar o Background do Modal
             className={styles.modalContent} // Estilizar o container do modal
+            shouldCloseOnOverlayClick={false} // Impede o fechamento ao clicar fora
         >
             <p>Deseja realmente limpar os campos preenchidos acima?</p>
 
             <div className={styles.boxButtons}>
-                <Button funcao={closeModal} tipo='container' cor='azul'>
+                <Button funcao={() => closeModal('limpar')} tipo='container' cor='azul'>
                     Continuar Editando
                 </Button>
 
@@ -51,9 +51,10 @@ function ModalLimpar(){
 function ModalCancelar(){
 
     const {cancelarIsOpen, closeModal} = useContext(RenderContext)
+    const {cancelarSolicitacao} = useContext(CrudContext)
 
     function cancelar(){
-        console.log('cancelando solicitação')
+        cancelarSolicitacao()
 
         setTimeout(() => {
             closeModal('cancelar')
@@ -67,11 +68,12 @@ function ModalCancelar(){
             contentLabel='Exemplo'
             overlayClassName={styles.modalOverlay} // Estilizar o Background do Modal
             className={styles.modalContent} // Estilizar o container do modal
+            shouldCloseOnOverlayClick={false} // Impede o fechamento ao clicar fora
         >
             <p>Tem certeza que deseja cancelar a solicitação?</p>
 
             <div className={styles.boxButtons}>
-                <Button funcao={closeModal} tipo='container' cor='azul'>
+                <Button funcao={() => closeModal('cancelar')} tipo='container' cor='azul'>
                     Continuar Editando
                 </Button>
 
@@ -87,9 +89,10 @@ function ModalCancelar(){
 function ModalExcluir(){
 
     const {excluirIsOpen, closeModal} = useContext(RenderContext)
+    const {excluirRegistro} = useContext(CrudContext)
 
     function excluir(){
-        console.log('excluindo registro')
+        excluirRegistro()
 
         setTimeout(() => {
             closeModal('excluir')
@@ -103,11 +106,12 @@ function ModalExcluir(){
             contentLabel='Exemplo'
             overlayClassName={styles.modalOverlay} // Estilizar o Background do Modal
             className={styles.modalContent} // Estilizar o container do modal
+            shouldCloseOnOverlayClick={false} // Impede o fechamento ao clicar fora
         >
             <p>Deseja realmente excluir os dados dessa linha?</p>
 
             <div className={styles.boxButtons}>
-                <Button funcao={closeModal} tipo='container' cor='azul'>
+                <Button funcao={() => closeModal('excluir')} tipo='container' cor='azul'>
                     Continuar Editando
                 </Button>
 

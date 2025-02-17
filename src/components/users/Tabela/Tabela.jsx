@@ -12,6 +12,8 @@ export default function Tabela(props){
 
     const {openModal} = useContext(RenderContext)
 
+    let registro = '';
+
     return(
         <table>
             <thead className={styles.cabecalho}>
@@ -23,7 +25,7 @@ export default function Tabela(props){
                     <th>Data</th>
                     <th>Motivo</th>
                     <th>Tipo Reemb.</th>
-                    <th>Cth. Custo</th>
+                    <th>Ctr. Custo</th>
                     <th>Ord. Int.</th>
                     <th>Div.</th>
                     <th>PEP</th>
@@ -40,14 +42,13 @@ export default function Tabela(props){
             {   
                 props.array.map((obj, index) => (
 
-                    <tr className={styles.linha} key={index}>
+                    <tr className={styles.linha} key={index} onMouseEnter={() => registro = obj}>
 
                         <td>
                             <Button
                                 tipo='icon'
                                 cor='transparente'
-                                funcao={() => openModal('excluir')}
-
+                                funcao={() => openModal('excluir', registro)}
                             >
                                 {<img src={IconeExcluir} alt="" />}
                             </Button>
