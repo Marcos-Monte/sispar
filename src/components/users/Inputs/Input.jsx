@@ -17,6 +17,20 @@ function Input(props){
     )
 }
 
+// Input recebe o seu 'tipo' via props. Exemplo: text, email, password, etc...
+function InputData(props){
+    return(
+        <input 
+            className={`${styles.container} ${styles.iconeData}`} 
+            placeholder={props.placeholder}
+            type={props.type} 
+            name={props.name}
+            value={props.value}
+            onChange={props.onChange}
+        />
+    )
+}
+
 // Input Select recebe o seu 'tipo' via props. Exemplo: text, email, password, etc...
 function Select(props){
     return(
@@ -38,12 +52,12 @@ function Select(props){
                 </select>
 
                 <div className={styles.botao}>
-                    <img src={setaBaixo} alt="" />
+                    <img src={setaBaixo} alt="Ícone de seta para baixo, demonstra que existem outras opções ao clicar no componente" />
                 </div>
             </div>
     )
 }
 
 
-export { Input, Select };
+export { Input, InputData, Select };
 

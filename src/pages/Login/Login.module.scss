@@ -64,14 +64,14 @@
                 justify-content: center;
                 gap: .5rem;
 
-                a{
+                .link, a{
                     padding: 1rem 0;
                     text-align: center;
                     text-decoration: none;
                     color: var(--text-primary)
                 }
 
-                a:hover{
+                .link:hover{
                     text-decoration: underline;
                     color: var(--primary)
                 }

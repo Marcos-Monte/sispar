@@ -24,8 +24,8 @@ export default function Dashboard(){
         <section className={styles.container}>
 
             <Caminho>
-                <img src={IconeHomeGray} alt="" />
-                <img src={IconeSeta} alt="" />
+                <img src={IconeHomeGray} alt="Ícone no formato de casa na cor cinza" />
+                <img src={IconeSeta} alt="Ícone do símbolo 'maior que'" />
                 <p>Reembolsos</p>
             </Caminho>
             
@@ -68,7 +68,7 @@ export default function Dashboard(){
                 />
 
                 <div className={styles.boxSistema}>
-                    <img src={IconeAtualizado} alt="" />
+                    <img src={IconeAtualizado} alt="Ícone de uma nuvem com o símbolo de 'correto', indicando que o sistema está atualizado" />
                     <p>Sistema atualizado.</p>
                 </div>
             </section>

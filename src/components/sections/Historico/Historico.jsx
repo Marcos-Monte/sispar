@@ -12,10 +12,10 @@ export default function Historico(){
         <section className={styles.container}>
 
             <Caminho>
-                <img src={IconeHomeGray} alt="" />
-                <img src={IconeSeta} alt="" />
+                <img src={IconeHomeGray} alt="Ícone no formato de casa na cor cinza" />
+                <img src={IconeSeta} alt="Ícone do símbolo 'maior que'" />
                 <p>Reembolsos</p>
-                <img src={IconeSeta} alt="" />
+                <img src={IconeSeta} alt="Ícone do símbolo 'maior que'" />
                 <p>Histórico de Reembolsos</p>
             </Caminho>
 

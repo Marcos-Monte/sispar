@@ -6,12 +6,14 @@ import IconeExcluir from '@/assets/icons/lixeira.png';
 // Import Componentes
 import { Button } from '@/components/users/Buttons/Button.jsx';
 import { useContext } from 'react';
+// Import de Contextos
 import { CrudContext } from '../../../contexts/CrudContext';
 import { RenderContext } from '../../../contexts/RenderContext';
 
-export default function Tabela(props){
-
+export default function Tabela(){
+    // Importando função que renderiza a abertura de um modal 
     const {openModal} = useContext(RenderContext)
+    // Importa um array de registros para renderizar o conteudo na tela
     const {registros} = useContext(CrudContext)
 
     return(
@@ -40,17 +42,18 @@ export default function Tabela(props){
             <tbody className={styles.corpo}>
 
             {   
+                // Percorre o array 'registros' e adiciona cada registro na devida posição da tabela
                 registros.map((obj, index) => (
 
                     <tr className={styles.linha} key={index}>
 
                         <td>
                             <Button
-                                tipo='icon'
+                                tipo='container'
                                 cor='transparente'
                                 funcao={() => openModal('excluir')}
                             >
-                                {<img src={IconeExcluir} alt="" />}
+                                {<img src={IconeExcluir} alt="Ícone de uma lixeira" />}
                             </Button>
                         </td>
 

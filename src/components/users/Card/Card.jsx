@@ -8,7 +8,7 @@ import IconeSolicitados from '@/assets/Dashboard/Cards/n-solicitados.png';
 export function Card(props){
     return(
         <div className={styles.cardIndividual} onClick={props.funcao}>
-            <img src={props.imagem} alt="" />
+            <img src={props.imagem} alt="Ícone simbolizando a atividade" />
             <h3>{props.texto}</h3>
         </div>
     )
@@ -20,7 +20,7 @@ export function CardIndicadores(props){
 
             <div className={styles.card}>
                 <div className={styles.solicitados} >
-                    <img src={IconeSolicitados} alt="" />
+                    <img src={IconeSolicitados} alt="Ícone de seta aportando pra esquerda" />
                 </div>
 
                 <span>{props.solicitados}</span>
@@ -30,7 +30,7 @@ export function CardIndicadores(props){
 
             <div className={styles.card}>
                 <div className={styles.analise} >
-                    <img src={IconeAnalise} alt="" />
+                    <img src={IconeAnalise} alt="Ícone de um relogio" />
                 </div>
                 
                 <span>{props.analise}</span>
@@ -40,7 +40,7 @@ export function CardIndicadores(props){
 
             <div className={styles.card}>
                 <div className={styles.aprovados} >
-                    <img src={IconeAprovados} alt="" />
+                    <img src={IconeAprovados} alt="Ícone de sinal de 'certo'" />
                 </div>
                 
                 <span>{props.aprovados}</span>
@@ -50,7 +50,7 @@ export function CardIndicadores(props){
 
             <div className={styles.card}>
                 <div className={styles.rejeitado} >
-                    <img src={IconeRejeitados} alt="" />
+                    <img src={IconeRejeitados} alt="Ícone com um X" />
                 </div>
                 
                 <span>{props.rejeitados}</span>

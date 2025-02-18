@@ -45,7 +45,7 @@ export default function Login(){
                                 type='password'
                             />
                             {/* Envia para pagina de recuperação de senha */}
-                            <Link to="/novasenha">Esqueci minha senha</Link>
+                            <Link className={styles.link} to="/novasenha">Esqueci minha senha</Link>
 
                         </div>
 

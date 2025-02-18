@@ -6,4 +6,6 @@ const controleCustos = [
     '1100109002 - fin contabilidade mtz',
 ]
 
-export { controleCustos, tiposDespesa };
+const tiposMoeda = ['brl', 'ars', 'usd']
+
+export { controleCustos, tiposDespesa, tiposMoeda };

@@ -13,7 +13,7 @@ Modal.setAppElement('#root');
 function ModalLimpar(){
 
     const {limparIsOpen, closeModal} = useContext(RenderContext)
-    const {limparDados, excluirRegistro} = useContext(CrudContext)
+    const {limparDados} = useContext(CrudContext)
 
     function limpar(){
         limparDados()

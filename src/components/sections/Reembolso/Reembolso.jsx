@@ -5,7 +5,7 @@ import styles from './Reembolso.module.scss';
 // Import Componentes
 import Caminho from '../../template/Caminho/Caminho';
 import { Button } from '../../users/Buttons/Button';
-import { Input, Select } from '../../users/Inputs/Input';
+import { Input, InputData, Select } from '../../users/Inputs/Input';
 import Tabela from '../../users/Tabela/Tabela';
 // Import Icones
 import IconeApagar from '@/assets/icons/apagar.png';
@@ -15,17 +15,18 @@ import IconeHomeGray from '@/assets/icons/home.png';
 import IconeSalvar from '@/assets/icons/salvar.png';
 import IconeSeta from '@/assets/icons/seta.png';
 // Import Dados
-import { controleCustos, tiposDespesa } from '@/data/opcoes.js';
+import { controleCustos, tiposDespesa, tiposMoeda } from '@/data/opcoes.js';
 // import solicitacoesReembolso from '@/data/registros.js';
 import { CrudContext } from '../../../contexts/CrudContext';
 import { RenderContext } from '../../../contexts/RenderContext';
 
 // Função para calcular total de valores
 function calcular(array, propriedade){
-
+    // Armazena a soma dos valores da propriedade indicada
     const total = array.reduce(
         (acumulador, registro) => acumulador + parseFloat(registro[propriedade]), 0
     )
+    // Ternario
     return total > 0? total.toFixed(2): 0.00;
 
 }
@@ -43,10 +44,10 @@ export default function Reembolso(){
         <section className={styles.container}>
 
             <Caminho>
-                <img src={IconeHomeGray} alt="" />
-                <img src={IconeSeta} alt="" />
+                <img src={IconeHomeGray} alt="Ícone no formato de casa na cor cinza" />
+                <img src={IconeSeta} alt="Ícone do símbolo 'maior que'" />
                 <p>Reembolsos</p>
-                <img src={IconeSeta} alt="" />
+                <img src={IconeSeta} alt="Ícone do símbolo 'maior que'" />
                 <p>Solicitação de Reembolso</p>
             </Caminho>
 
@@ -119,7 +120,7 @@ export default function Reembolso(){
 
                     <div className={styles.intermediario}>
                         <label>Data</label>
-                        <Input 
+                        <InputData 
                             type='date'
                             name='data'
                             value={dados.data}
@@ -195,10 +196,10 @@ export default function Reembolso(){
                         />
                     </div>
 
-                    <div className={styles.micro}>
+                    <div className={styles.small}>
                         <label>Moeda</label>
-                        <Input 
-                            tipo='text'
+                        <Select
+                            array={tiposMoeda}
                             name='moeda'
                             value={dados.moeda}
                             onChange={handleChange}
@@ -263,10 +264,8 @@ export default function Reembolso(){
 
             </form>
             
-            {/* Renderiza os Array de Dados 'local' */}
-            <Tabela 
-                // array={registros}
-            />
+            {/* Array de Registros renderizado diretamente no Componente Tabela */}
+            <Tabela />
 
             <section className={styles.controles}>
 

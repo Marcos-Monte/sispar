@@ -1,5 +1,5 @@
 // Import dependencias React
-import { useState, useContext } from 'react'
+import { useContext } from 'react'
 // Import do arquivo de estilização do componente
 import styles from './Header.module.scss'
 // Import de Componentes
@@ -16,7 +16,7 @@ import IconeMenu from '@/assets/Header/imagem-fechar-header.png'
 import cadastro from '../../../data/cadastros.js'
 
 // Import de Contexto
-import { RenderContext } from '@/contexts/RenderContext.jsx';
+import { RenderContext } from '@/contexts/RenderContext.jsx'
 
 // OBS: Função do Button, é uma função anônima que vai receber um 'setter' (via props) e armazena um valor 'string'.
 export default function Header(){
@@ -35,13 +35,13 @@ export default function Header(){
                 // rota='/'
                 funcao={openHeader}
             >
-                <img src={IconeMenu} alt="" />
+                <img src={IconeMenu} alt="Ícone do Menu, abrir e fechar a navegação" />
             </Button>
 
             <nav>
                 {/* Imagem ilutrativa que irá receber a foto do usuário cadastrado */}
                 <figure>
-                    <img src={cadastro.dados.foto} alt="" />
+                    <img src={cadastro.dados.foto} alt="Foto do usuário logado" />
                     <div className={styles.infos}>
                         <figcaption>{cadastro.dados.nome}</figcaption>
                         <span>{cadastro.dados.cargo}</span>
@@ -57,7 +57,7 @@ export default function Header(){
                             cor='azul'
                             funcao={() => alterarRender('Dashboard')}
                         >
-                            <img src={IconeHome} alt="" />
+                            <img src={IconeHome} alt="Ícone no formato de casa na cor branca" />
                         </Button>
 
                         <p className={styles.infos}>Inicio</p>
@@ -71,7 +71,7 @@ export default function Header(){
                             cor='azul'
                             funcao={() => alterarRender('Reembolso')}
                         >
-                            <img src={IconeReembolso} alt="" />
+                            <img src={IconeReembolso} alt="Ícone no formato de uma folha com um cifrão" />
                         </Button>
 
                         <p className={styles.infos}>Reembolsos</p>
@@ -84,7 +84,7 @@ export default function Header(){
                             cor='azul'
                             funcao={() => alterarRender('Analises')}
                         >
-                            <img src={IconePesquisa} alt="" />
+                            <img src={IconePesquisa} alt="Ícone com uma lupa de pesquisa" />
                         </Button>
 
                         <p className={styles.infos}>Análises</p>
@@ -97,7 +97,7 @@ export default function Header(){
                             cor='azul'
                             funcao={() => alterarRender('Historico')}
                         >
-                            <img src={IconeHistorico} alt="" />
+                            <img src={IconeHistorico} alt="Ícone com um relógio apontando no sentido anti-horário, significa que deseja ver o histórico" />
                         </Button>
 
                         <p className={styles.infos}>Histórico</p>
@@ -113,7 +113,7 @@ export default function Header(){
                 cor='cinza'
                 rota='/'
             >
-                <img src={IconeSair} alt="" />
+                <img src={IconeSair} alt="Ícone de saída da aplicação, Log off" />
             </Button>
 
         </header>
