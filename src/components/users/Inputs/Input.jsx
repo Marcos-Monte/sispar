@@ -1,6 +1,7 @@
 // Import de arquivo de estilização do componente
 import styles from './Input.module.scss';
 // Import Imagens
+import calendario from '@/assets/icons/calendario.png';
 import setaBaixo from '@/assets/icons/setaBaixo.png';
 
 // Input recebe o seu 'tipo' via props. Exemplo: text, email, password, etc...
@@ -20,14 +21,18 @@ function Input(props){
 // Input recebe o seu 'tipo' via props. Exemplo: text, email, password, etc...
 function InputData(props){
     return(
-        <input 
-            className={`${styles.container} ${styles.iconeData}`} 
-            placeholder={props.placeholder}
-            type={props.type} 
-            name={props.name}
-            value={props.value}
-            onChange={props.onChange}
-        />
+        <div className={styles.containerData} >
+            <input 
+                // placeholder={props.placeholder}
+                type={props.type} 
+                name={props.name}
+                value={props.value}
+                onChange={props.onChange}
+            />
+            <div className={styles.botao}>
+                <img src={calendario} alt="Ícone de seta para baixo, demonstra que existem outras opções ao clicar no componente" />
+            </div>
+        </div>
     )
 }
 
