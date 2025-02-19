@@ -16,7 +16,7 @@
 
         label{
             font-weight: 700;
-            font-size: .8rem;
+            font-size: .7rem;
         }
     }
 }
@@ -32,6 +32,7 @@
 
     button{
         right: 0;
+        text-decoration: none;
     }
 }
 
@@ -50,7 +51,7 @@
     border: .4px solid var(--background)
 }
 
-.micro, .small, .medium, .large {
+.micro, .small, .medium, .large, .total {
     height: 50%;
     display: flex;
     flex-direction: column;

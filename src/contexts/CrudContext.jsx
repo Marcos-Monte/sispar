@@ -23,13 +23,13 @@ function CrudProvider(props){
         prest: '',
         descricao: '',
         data: '',
-        tipo: 'Selecionar',
-        ctrCusto: 'Selecionar',
+        tipo: 'Selec.',
+        ctrCusto: 'Selec.',
         ordInt: '',
         pep: '',
         div: '',
         distKm: '',
-        moeda: '',
+        moeda: 'Selec.',
         valKm: '',
         despesa: '',
         valFaturado: '',
@@ -82,13 +82,13 @@ function CrudProvider(props){
             prest: '',
             descricao: '',
             data: '',
-            tipo: 'Selecionar',
-            ctrCusto: 'Selecionar',
+            tipo: 'Selec.',
+            ctrCusto: 'Selec.',
             ordInt: '',
             pep: '',
             div: '',
             distKm: '',
-            moeda: '',
+            moeda: 'Selec.',
             valKm: '',
             despesa: '',
             valFaturado: '',
@@ -122,3 +122,4 @@ function CrudProvider(props){
 }
 
 export { CrudContext, CrudProvider };
+

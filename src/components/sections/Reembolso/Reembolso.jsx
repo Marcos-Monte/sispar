@@ -5,7 +5,7 @@ import styles from './Reembolso.module.scss';
 // Import Componentes
 import Caminho from '../../template/Caminho/Caminho';
 import { Button } from '../../users/Buttons/Button';
-import { Input, InputData, Select } from '../../users/Inputs/Input';
+import { Input, InputData, Select, TextArea } from '../../users/Inputs/Input';
 import Tabela from '../../users/Tabela/Tabela';
 // Import Icones
 import IconeApagar from '@/assets/icons/apagar.png';
@@ -102,13 +102,12 @@ export default function Reembolso(){
 
                         <label>Descrição / Motivo do Reembolso</label>
 
-                        <Input 
-                            tipo='text'
+                        <TextArea 
+                            type='text'
                             name='descricao'
                             value={dados.descricao}
                             onChange={handleChange}
-                            required
-                        />
+                        ></TextArea>
 
                     </div>
 
@@ -219,7 +218,7 @@ export default function Reembolso(){
                     </div>
 
                     <div className={styles.micro}>
-                        <label>Val. despesa</label>
+                        <label>Valor Desp.</label>
                         <Input 
                             tipo='text'
                             name='despesa'
@@ -230,7 +229,7 @@ export default function Reembolso(){
                     </div>
 
                     <div className={styles.micro}>
-                        <label>Val. Faturado</label>
+                        <label>Valor Fat.</label>
                         <Input 
                             tipo='text'
                             name='valFaturado'

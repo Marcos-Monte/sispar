@@ -42,7 +42,7 @@ function Select(props){
                     onChange={props.onChange}
                 >
                     {/* Opção padrão que não conta como seleção */}
-                    <option disabled>Selecionar</option>
+                    <option disabled>Selec.</option>
                     {/* Utilizando 'Array.map' para renderizar valores de um Array como 'option' do Select */}
                     {
                         props.array.map(
@@ -58,6 +58,19 @@ function Select(props){
     )
 }
 
+function TextArea(props){
+    return(
+        <textarea 
+            className={`${styles.containerTextArea}`} 
+            placeholder={props.placeholder}
+            type={props.type} 
+            name={props.name}
+            value={props.value}
+            onChange={props.onChange}
+        ></textarea>
+    )
+}
 
-export { Input, InputData, Select };
+
+export { Input, InputData, Select, TextArea };
 

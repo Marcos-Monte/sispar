@@ -8,7 +8,7 @@ import styles from './Button.module.scss'
 function Button(props){
     return (
         // Tag Link recebe a rota para onde o Botão vai levar via 'props' (Botão pode ou não receber a Rota)
-        <Link to={props.rota}>
+        <Link className={styles.link} to={props.rota}>
             {/* Evento de Click (pode ou não acontecer).  */}
             <button 
                 className={`${styles[props.tipo]} ${styles[props.cor]}`}
