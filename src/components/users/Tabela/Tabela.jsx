@@ -74,7 +74,7 @@ export default function Tabela(){
                         </td>
 
                         <td>
-                            <span>{<img src={IconeArquivo} alt="" />}</span>
+                            <span>{<img src={IconeArquivo} alt="Ícone em formado de um arquivo" />}</span>
                         </td>
 
                         <td>

@@ -246,7 +246,7 @@ export default function Reembolso(){
                             // type='submit'
                             funcao={handleSalvar}
                         >
-                            <img src={IconeSalvar} alt="" />
+                            <img src={IconeSalvar} alt="Ícone de somar" />
                             Salvar
                         </Button>
 
@@ -255,7 +255,7 @@ export default function Reembolso(){
                             cor='azulClaro'
                             funcao={() => openModal('limpar')} // Abrir Modal
                         >
-                            <img src={IconeApagar} alt="" />
+                            <img src={IconeApagar} alt="Ícone de apagar valores inseridos" />
                         </Button>
                     </div>
 
@@ -288,7 +288,7 @@ export default function Reembolso(){
                     tipo='containerGrande'
                     cor='azulEscuro'
                 >
-                    <img src={IconeEnviar} alt="" />
+                    <img src={IconeEnviar} alt="Ícone com o símbolo de 'certo'" />
                     Enviar para Análise
                 </Button>
 
@@ -297,7 +297,7 @@ export default function Reembolso(){
                     cor='vinho'
                     funcao={() => openModal('cancelar')} // Abrir Modal
                 >
-                    <img src={IconeCancelar} alt="" />
+                    <img src={IconeCancelar} alt="Ícone com um X" />
                     Cancelar Solicitação
                 </Button>
 
