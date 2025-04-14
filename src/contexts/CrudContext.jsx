@@ -1,8 +1,8 @@
 // Import de Dependencia de Context
 import { createContext, useEffect, useState } from "react";
 
-// Lista de Registros
-import solicitacoesReembolso from '@/data/registros.js';
+// Lista de Registros -> Desnecessário ao utilizar o BackEnd
+//import solicitacoesReembolso from '@/data/registros.js';
 
 // Intancia o 'Contexto' com um Objeto Vazio como Padrão
 const CrudContext = createContext({})
@@ -13,7 +13,9 @@ function CrudProvider(props){
     const [registros, setRegistros] = useState([])
     
     useEffect(() => {
-        setRegistros([...solicitacoesReembolso]);// Garante que ele seja atualizado corretamente
+        //setRegistros([...solicitacoesReembolso]);// Garante que ele seja atualizado corretamente
+
+        // Ideia de fazer a requisição para a API de forma assincrona aqui dentro, fazendo um Get em todos os dados persistidos no BD
     }, [])
 
      // Gerenciamento de Estado do Objeto onde os dados serão compilados
@@ -50,8 +52,15 @@ function CrudProvider(props){
         // Evita que o botão tenha o comportamento 'default'
         event.preventDefault();
 
+        // Validação dos campos
+        if (!dados.colab || !dados.empresa || !dados.prest || !dados.descricao || !dados.data) {
+            console.warn('Por favor, preencha todos os campos obrigatórios!');
+            return; // Impede o salvamento caso algum campo esteja vazio
+        }
+
         // Armazenando novo Registro
         const novoRegistro = {
+            id: Date.now(), // Exemplo de um id único baseado no timestamp
             // Recebe todos os dados da Variavel de Estado 'dados'
             ...dados,
             // valFaturado: parseFloat(dados.valFaturado || 0), // Tratando propriedades especificas de 'dados'
@@ -96,12 +105,22 @@ function CrudProvider(props){
         
     }
 
-    function excluirRegistro(){
-        console.log('Registro Excluido')
+    function excluirRegistro(item){
+        console.log('Registro Excluido: ', item)
+        
+        // if (!item || !item.id) {
+        //     console.warn('Nenhum item selecionado para exclusão.');
+        //     return;
+        // }
+
+        // const registrosFiltrados = registros.filter(r => r.id !== item.id)
+        // setRegistros(registrosFiltrados)
+
     }
 
     function cancelarSolicitacao(){
         console.log('solicitação cancelada')
+        setRegistros([])
     }
     
     return (

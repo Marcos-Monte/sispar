@@ -31,6 +31,7 @@ function RenderProvider(props){
     const [limparIsOpen, setLimparIsOpen] = useState(false);
     const [excluirIsOpen, setExcluirIsOpen] = useState(false);
 
+
     // Função que será utilizada em botões e cards na aplicação, para renderizar os componentes indicados
     function alterarRender(texto){
 
@@ -59,13 +60,13 @@ function RenderProvider(props){
     }
 
     // Funções que atribuem a 'abertura' e 'fechamento' do Modal
-    function openModal(modal){
+    function openModal(modal, item=null){
         // console.log('abriu')
         if(modal === 'cancelar'){
             setCancelarIsOpen(true)
         } else if (modal === 'limpar'){
             setLimparIsOpen(true)
-        } else {
+        } else if(modal === 'excluir') {
             setExcluirIsOpen(true)
         }
     }
@@ -76,7 +77,7 @@ function RenderProvider(props){
             setCancelarIsOpen(false)
         } else if (modal === 'limpar'){
             setLimparIsOpen(false)
-        } else {
+        } else if(modal === 'excluir'){
             setExcluirIsOpen(false)
         }
     }
@@ -108,3 +109,4 @@ function RenderProvider(props){
 // - RenderContext: Será importado sempre que um componente for utilizar seus métodos
 // - RenderProvider: Será importado, apenas, no componente 'comum' entre os que irão utilizar os métodos
 export { RenderContext, RenderProvider };
+

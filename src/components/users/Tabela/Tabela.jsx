@@ -51,7 +51,7 @@ export default function Tabela(){
                             <Button
                                 tipo='container'
                                 cor='transparente'
-                                funcao={() => openModal('excluir')}
+                                funcao={() => openModal('excluir', obj)}
                             >
                                 {<img src={IconeExcluir} alt="Ícone de uma lixeira" />}
                             </Button>
