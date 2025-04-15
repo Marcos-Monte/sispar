@@ -48,6 +48,7 @@ export default function Tabela(){
                     <tr className={styles.linha} key={index}>
 
                         <td>
+                            {/* Passa o 'objeto / registro' que será excluído dos registros! */}
                             <Button
                                 tipo='container'
                                 cor='transparente'

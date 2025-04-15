@@ -88,11 +88,12 @@ function ModalCancelar(){
 
 function ModalExcluir(){
 
-    const {excluirIsOpen, closeModal} = useContext(RenderContext)
+    const {excluirIsOpen, closeModal, itemSelecionado} = useContext(RenderContext)
     const {excluirRegistro} = useContext(CrudContext)
 
+    // Passando o item que será excluído (itemSelecionado)
     function excluir(){
-        excluirRegistro()
+        excluirRegistro(itemSelecionado)
 
         setTimeout(() => {
             closeModal('excluir')

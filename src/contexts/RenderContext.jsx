@@ -31,6 +31,7 @@ function RenderProvider(props){
     const [limparIsOpen, setLimparIsOpen] = useState(false);
     const [excluirIsOpen, setExcluirIsOpen] = useState(false);
 
+    const [itemSelecionado, setItemSelecionado] = useState(null);
 
     // Função que será utilizada em botões e cards na aplicação, para renderizar os componentes indicados
     function alterarRender(texto){
@@ -67,6 +68,7 @@ function RenderProvider(props){
         } else if (modal === 'limpar'){
             setLimparIsOpen(true)
         } else if(modal === 'excluir') {
+            setItemSelecionado(item); // <- AQUI armazenamos o item
             setExcluirIsOpen(true)
         }
     }
@@ -96,6 +98,8 @@ function RenderProvider(props){
             excluirIsOpen,
             openModal,
             closeModal,
+
+            itemSelecionado, // Item que será excluído
         }}>
 
             {/* Elementos Filhos envolvidos pelo Componente.. Estão dentro deste 'contexto' */}

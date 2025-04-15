@@ -108,10 +108,13 @@ function CrudProvider(props){
     function excluirRegistro(item){
         console.log('Registro Excluido: ', item)
         
-        // if (!item || !item.id) {
-        //     console.warn('Nenhum item selecionado para exclusão.');
-        //     return;
-        // }
+        if (!item || !item.id) {
+            console.warn('Nenhum item selecionado para exclusão.');
+            return;
+        }
+        const novosRegistros = registros.filter(reg => reg.id !== item.id);
+        setRegistros(novosRegistros);
+        
 
         // const registrosFiltrados = registros.filter(r => r.id !== item.id)
         // setRegistros(registrosFiltrados)
