@@ -37,7 +37,7 @@ export default function Reembolso(){
     const {openModal} = useContext(RenderContext)
 
     // Toda a lógica de CRUD da aplicação é responsabilidade do 'contexto' indicado
-    const {registros, dados, handleChange, handleSalvar} = useContext(CrudContext)
+    const {registros, dados, handleChange, handleSalvar, enviarSolicitacao} = useContext(CrudContext)
 
     return(
         
@@ -287,6 +287,7 @@ export default function Reembolso(){
                 <Button 
                     tipo='containerGrande'
                     cor='azulEscuro'
+                    funcao={() => enviarSolicitacao()}
                 >
                     <img src={IconeEnviar} alt="Ícone com o símbolo de 'certo'" />
                     Enviar para Análise

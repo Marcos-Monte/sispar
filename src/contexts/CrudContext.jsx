@@ -1,6 +1,8 @@
 // Import de Dependencia de Context
 import { createContext, useEffect, useState } from "react";
 
+import api from '../services/Api.jsx';
+
 // Lista de Registros -> Desnecessário ao utilizar o BackEnd
 //import solicitacoesReembolso from '@/data/registros.js';
 
@@ -11,12 +13,20 @@ function CrudProvider(props){
 
     // Gerencia o Estado do Array de Objetos importado para a aplicação (Esse 'registros' que irá ser renderizado na tela e não os valores do BD)
     const [registros, setRegistros] = useState([])
+    const [foiEnviado, setFoiEnviado] = useState(false)
     
     useEffect(() => {
         //setRegistros([...solicitacoesReembolso]);// Garante que ele seja atualizado corretamente
 
         // Ideia de fazer a requisição para a API de forma assincrona aqui dentro, fazendo um Get em todos os dados persistidos no BD
     }, [])
+
+    useEffect(() => {
+        if(foiEnviado){
+            setRegistros({})
+            setFoiEnviado(false)
+        }
+    }, [foiEnviado]) // será iniciado apenas quando o estado 'foiEnviado' for alterado
 
      // Gerenciamento de Estado do Objeto onde os dados serão compilados
     const [dados, setDados] = useState({
@@ -54,7 +64,7 @@ function CrudProvider(props){
 
         // Validação dos campos
         if (!dados.colab || !dados.empresa || !dados.prest || !dados.descricao || !dados.data) {
-            console.warn('Por favor, preencha todos os campos obrigatórios!');
+            alert('Por favor, preencha todos os campos obrigatórios!');
             return; // Impede o salvamento caso algum campo esteja vazio
         }
 
@@ -125,6 +135,18 @@ function CrudProvider(props){
         console.log('solicitação cancelada')
         setRegistros([])
     }
+
+    async function enviarSolicitacao(){
+        try { // O que queremos 'tentar' fazer
+            const response = await api.post('/refunds/new', registros) // Dois argumentos: rota, objetoEnviado
+            console.log('Resposta da API: ', response)
+            alert('Reembolso solicitado com sucesso!')
+            setFoiEnviado(true)
+
+        } catch (error) { // Se algo der errado no 'try' executar esse bloco
+            console.error('Não foi enviar os registros: ', error)
+        }
+    }
     
     return (
         // Tag que envolve o componente em comum (Home)
@@ -136,6 +158,7 @@ function CrudProvider(props){
             limparDados,
             excluirRegistro,
             cancelarSolicitacao,
+            enviarSolicitacao,
         }}>
             {props.children}
         </CrudContext.Provider>
