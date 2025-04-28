@@ -4,13 +4,10 @@ let baseURL;
 
 switch (location.hostname) {
     case "localhost" :
-        baseURL = "https:localhost:5000";
-        break;
-    case "vcpodesaude.com.br":
-        baseURL = "https:localhost:5000";
+        baseURL = "http://localhost:5000";
         break;
     default:
-        baseURL = "https:localhost:5000/";
+        baseURL = "http://localhost:5000";
         break;
 }
 

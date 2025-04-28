@@ -8,7 +8,42 @@ import Logo from '@/assets/Login/logo-ws.png';
 import { Button } from '@/components/users/Buttons/Button';
 import { Input } from '@/components/users/Inputs/Input';
 
+// Conexão do Front com o Back
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import api from '../../services/Api';
+
 export default function Login(){
+
+    // Iniciando os estados
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
+
+    const navigate = useNavigate();
+
+    const fazerLogin = async (event) => {
+        // Prevenir os comportamentos padrão
+        event.preventDefault();
+
+        try {
+            // Requisição para a API
+            const response = await api.post('/colaborador/login', {
+                email: email,
+                senha: senha,
+            })
+            console.log(response.data)
+            // Se a requisição for bem sucedida enviar para a rota indicada
+            navigate('/home')
+            
+        } catch (error) {
+
+            console.error('Não foi possível fazer o Login: ', error?.response?.data || error?.message || error);
+            alert('Não foi possível fazer o Login')
+
+        }
+
+    }
+
     return(
         <main className={styles.container}>
 
@@ -39,10 +74,16 @@ export default function Login(){
                             <Input 
                                 placeholder='Email'
                                 type='email'
+                                value = {email}
+                                onChange={(event) => setEmail(event.target.value)}
+                                autocomplete="current-email"
                             />
                             <Input 
                                 placeholder='Senha'
                                 type='password'
+                                value ={senha}
+                                onChange={(event) => setSenha(event.target.value)}
+                                autocomplete="current-password"
                             />
                             {/* Envia para pagina de recuperação de senha */}
                             <Link className={styles.link} to="/novasenha">Esqueci minha senha</Link>
@@ -55,8 +96,9 @@ export default function Login(){
                                 tipo='container'
                                 texto="Entrar"
                                 cor="azulEscuro"
-                                rota="/home"
+                                funcao={fazerLogin}
                             >
+                                {/* rota="/home" */}
                                 Entrar
                             </Button>
 
