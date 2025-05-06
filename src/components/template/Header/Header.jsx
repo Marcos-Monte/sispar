@@ -13,7 +13,7 @@ import IconeSair from '@/assets/Header/botao-sair.png'
 import IconeMenu from '@/assets/Header/imagem-fechar-header.png'
 
 // Import de Dados Cadastrais
-import cadastro from '../../../data/cadastros.js'
+import Foto from '@/assets/Header/image.png'
 
 // Import de Contexto
 import { RenderContext } from '@/contexts/RenderContext.jsx'
@@ -22,7 +22,7 @@ import { RenderContext } from '@/contexts/RenderContext.jsx'
 export default function Header(){
 
     // Importando Funções e Variáveis de Estado de um Componente de Contexto'. Veio de um Contexto
-    const {alterarRender, openHeader, statusHeader} = useContext(RenderContext)
+    const {alterarRender, openHeader, statusHeader, cadastro} = useContext(RenderContext)
 
     return(
         // Condicional de abrir ou fechar o 'header' ativada por Funções e Variaveis de Estado do Componente de Contexto
@@ -41,10 +41,10 @@ export default function Header(){
             <nav>
                 {/* Imagem ilutrativa que irá receber a foto do usuário cadastrado */}
                 <figure>
-                    <img src={cadastro.dados.foto} alt="Foto do usuário logado" />
+                    <img src={Foto} alt="Foto do usuário logado" />
                     <div className={styles.infos}>
-                        <figcaption>{cadastro.dados.nome}</figcaption>
-                        <span>{cadastro.dados.cargo}</span>
+                        <figcaption>{cadastro.nome}</figcaption>
+                        <span>{cadastro.cargo}</span>
                     </div>
                 </figure>
                 

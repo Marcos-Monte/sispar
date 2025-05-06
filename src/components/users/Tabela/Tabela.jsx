@@ -1,20 +1,20 @@
 // Import Estilização
 import styles from './Tabela.module.scss';
 // Import Icones
-import IconeArquivo from '@/assets/icons/arquivo.png';
+// import IconeArquivo from '@/assets/icons/arquivo.png';
 import IconeExcluir from '@/assets/icons/lixeira.png';
 // Import Componentes
 import { Button } from '@/components/users/Buttons/Button.jsx';
 import { useContext } from 'react';
 // Import de Contextos
-import { CrudContext } from '../../../contexts/CrudContext';
-import { RenderContext } from '../../../contexts/RenderContext';
+// import { RenderContext } from '../../../contexts/RenderContext';
+import { CrudContext } from '@/contexts/CrudContext.jsx';
 
-export default function Tabela(){
+export default function Tabela(props){
     // Importando função que renderiza a abertura de um modal 
-    const {openModal} = useContext(RenderContext)
+    // const {openModal} = useContext(RenderContext)
     // Importa um array de registros para renderizar o conteudo na tela
-    const {registros} = useContext(CrudContext)
+    const {registros, excluirRegistro} = useContext(CrudContext)
 
     return(
         <table>
@@ -52,14 +52,14 @@ export default function Tabela(){
                             <Button
                                 tipo='container'
                                 cor='transparente'
-                                funcao={() => openModal('excluir', obj)}
+                                funcao={() => excluirRegistro(obj)}
                             >
                                 {<img src={IconeExcluir} alt="Ícone de uma lixeira" />}
                             </Button>
                         </td>
 
                         <td>
-                            <span>{obj.colab.toUpperCase()}</span>
+                            <span>{obj.colaborador.toUpperCase()}</span>
                         </td>
 
                         <td>
@@ -67,7 +67,7 @@ export default function Tabela(){
                         </td>
                         
                         <td>
-                            <span>{obj.prest}</span>
+                            <span>{obj.num_prestacao}</span>
                         </td>
 
                         <td>
@@ -75,23 +75,24 @@ export default function Tabela(){
                         </td>
 
                         <td>
-                            <span>{<img src={IconeArquivo} alt="Ícone em formado de um arquivo" />}</span>
+                            {/* <span>{<img src={IconeArquivo} alt="Ícone em formado de um arquivo" />}</span> */}
+                            <span>{obj.descricao}</span>
                         </td>
 
                         <td>
-                            <span>{obj.tipo.toUpperCase()}</span>
+                            <span>{obj.tipo_reembolso.toUpperCase()}</span>
                         </td>
 
                         <td>
-                            <span>{obj.ctrCusto.toUpperCase()}</span>
+                            <span>{obj.centro_custo.toUpperCase()}</span>
                         </td>
                         
                         <td>
-                            <span>{obj.ordInt}</span>
+                            <span>{obj.ordem_interna}</span>
                         </td>
                         
                         <td>
-                            <span>{obj.div}</span>
+                            <span>{obj.divisao}</span>
                         </td>
 
                         <td>
@@ -103,15 +104,15 @@ export default function Tabela(){
                         </td>
 
                         <td>
-                            <span>{obj.distKm}</span>
+                            <span>{obj.distancia_km}</span>
                         </td>
 
                         <td>
-                            <span>{obj.valKm}</span>
+                            <span>{obj.valor_km}</span>
                         </td>
                         
                         <td>
-                            <span>{obj.valFaturado}</span>
+                            <span>{obj.valor_faturado}</span>
                         </td>
 
                         <td>

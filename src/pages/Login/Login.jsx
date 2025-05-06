@@ -31,7 +31,15 @@ export default function Login(){
                 email: email,
                 senha: senha,
             })
-            console.log(response.data)
+
+            const usuario = {
+                id: response.data.items.id,
+                email: response.data.items.email,
+                nome: response.data.items.nome,
+                cargo: response.data.items.cargo,
+            }
+            
+            localStorage.setItem('user', JSON.stringify(usuario))
             // Se a requisição for bem sucedida enviar para a rota indicada
             navigate('/home')
             

@@ -20,24 +20,13 @@ import { controleCustos, tiposDespesa, tiposMoeda } from '@/data/opcoes.js';
 import { CrudContext } from '../../../contexts/CrudContext';
 import { RenderContext } from '../../../contexts/RenderContext';
 
-// Função para calcular total de valores
-function calcular(array, propriedade){
-    // Armazena a soma dos valores da propriedade indicada
-    const total = array.reduce(
-        (acumulador, registro) => acumulador + parseFloat(registro[propriedade]), 0
-    )
-    // Ternario
-    return total > 0? total.toFixed(2): 0.00;
-
-}
-
 export default function Reembolso(){
 
     // Lógica dos Modais é gerenciado pelo 'contexto' indicado
     const {openModal} = useContext(RenderContext)
 
     // Toda a lógica de CRUD da aplicação é responsabilidade do 'contexto' indicado
-    const {registros, dados, handleChange, handleSalvar, enviarSolicitacao} = useContext(CrudContext)
+    const {dados, handleChange, handleSalvar} = useContext(CrudContext)
 
     return(
         
@@ -272,7 +261,7 @@ export default function Reembolso(){
                     <p>Total Faturado</p>
 
                     <div className={styles.box}>
-                        {calcular(registros, 'valFaturado')}
+                        {dados.valFaturado}
                     </div>
 
                 </div>
@@ -280,7 +269,7 @@ export default function Reembolso(){
                 <div>
                     <p>Total Despesa</p>
                     <div className={styles.box}>
-                        {calcular(registros, 'despesa')}
+                        {dados.despesa}
                     </div>
                 </div>
 

@@ -3,9 +3,6 @@ import { createContext, useEffect, useState } from "react";
 
 import api from '../services/Api.jsx';
 
-// Lista de Registros -> Desnecessário ao utilizar o BackEnd
-//import solicitacoesReembolso from '@/data/registros.js';
-
 // Intancia o 'Contexto' com um Objeto Vazio como Padrão
 const CrudContext = createContext({})
 
@@ -13,39 +10,38 @@ function CrudProvider(props){
 
     // Gerencia o Estado do Array de Objetos importado para a aplicação (Esse 'registros' que irá ser renderizado na tela e não os valores do BD)
     const [registros, setRegistros] = useState([])
-    const [foiEnviado, setFoiEnviado] = useState(false)
+    const [dados, setDados] = useState({})
     
     useEffect(() => {
-        //setRegistros([...solicitacoesReembolso]);// Garante que ele seja atualizado corretamente
 
-        // Ideia de fazer a requisição para a API de forma assincrona aqui dentro, fazendo um Get em todos os dados persistidos no BD
+        buscarReembolsos()
+
     }, [])
 
-    useEffect(() => {
-        if(foiEnviado){
-            setRegistros({})
-            setFoiEnviado(false)
-        }
-    }, [foiEnviado]) // será iniciado apenas quando o estado 'foiEnviado' for alterado
-
      // Gerenciamento de Estado do Objeto onde os dados serão compilados
-    const [dados, setDados] = useState({
-        colab:'',
-        empresa: '',
-        prest: '',
-        descricao: '',
-        data: '',
-        tipo: 'Selec.',
-        ctrCusto: 'Selec.',
-        ordInt: '',
-        pep: '',
-        div: '',
-        distKm: '',
-        moeda: 'Selec.',
-        valKm: '',
-        despesa: '',
-        valFaturado: '',
-    })
+    // const [dados, setDados] = useState({
+    //     colab:'',
+    //     empresa: '',
+    //     prest: '',
+    //     descricao: '',
+    //     data: '',
+    //     tipo: 'Selec.',
+    //     ctrCusto: 'Selec.',
+    //     ordInt: '',
+    //     pep: '',
+    //     div: '',
+    //     distKm: '',
+    //     moeda: 'Selec.',
+    //     valKm: '',
+    //     despesa: '',
+    //     valFaturado: '',
+    // })
+
+    async function buscarReembolsos() {
+        const response = await api.get('/reembolso/reembolsos')
+        console.log(response.data)
+        setRegistros(response.data)
+    }
 
     function handleChange(event){
         // console.log(event.target.name, event.target.value);
@@ -57,38 +53,26 @@ function CrudProvider(props){
     }
 
     // Função de Salvamento (clique no Botão)
-    function handleSalvar(event){
-        console.log('Entrou')
+    async function handleSalvar(event){
         // Evita que o botão tenha o comportamento 'default'
         event.preventDefault();
 
-        // Validação dos campos
-        if (!dados.colab || !dados.empresa || !dados.prest || !dados.descricao || !dados.data) {
-            alert('Por favor, preencha todos os campos obrigatórios!');
-            return; // Impede o salvamento caso algum campo esteja vazio
+        try {
+             // Validação dos campos
+            if (!dados.colab || !dados.empresa || !dados.prest || !dados.descricao || !dados.data) {
+                alert('Por favor, preencha todos os campos obrigatórios!');
+                return; 
+            }
+
+            await api.post('/reembolso/solicitacao', dados)
+            alert("Reembolso cadastrado com sucesso!");
+            setDados({})
+            buscarReembolsos();
+
+        } catch (error) {
+            console.error('Não foi possível efetuar a requisição: ', error)
         }
 
-        // Armazenando novo Registro
-        const novoRegistro = {
-            id: Date.now(), // Exemplo de um id único baseado no timestamp
-            // Recebe todos os dados da Variavel de Estado 'dados'
-            ...dados,
-            // valFaturado: parseFloat(dados.valFaturado || 0), // Tratando propriedades especificas de 'dados'
-            // desapesa: parseFloat(dados.despesa || 0), // Tratando propriedades especificas de 'dados'
-        };
-
-        console.log('Criou')
-
-        // Atribuindo novo registro ao array de registros 'local'
-        setRegistros([...registros, novoRegistro]);
-
-        console.log('Registrou')
-        console.log(novoRegistro)
-
-        // Limpando Campos do Formulário
-        limparDados()
-
-        console.log('Limpou')
     }
 
     function limparDados(){
@@ -115,19 +99,20 @@ function CrudProvider(props){
         
     }
 
-    function excluirRegistro(item){
-        console.log('Registro Excluido: ', item)
-        
-        if (!item || !item.id) {
-            console.warn('Nenhum item selecionado para exclusão.');
-            return;
-        }
-        const novosRegistros = registros.filter(reg => reg.id !== item.id);
-        setRegistros(novosRegistros);
-        
+    async function excluirRegistro(item){
+        try {
+            if (!item || !item.id) {
+                console.warn('Nenhum item selecionado para exclusão.');
+                return;
+            }
 
-        // const registrosFiltrados = registros.filter(r => r.id !== item.id)
-        // setRegistros(registrosFiltrados)
+            await api.delete(`/reembolso/deletar/${item.id}`);
+            alert("Reembolso excluído!");
+            buscarReembolsos();
+        } catch (error) {
+            console.error('Não foi possível excluir a solicitação de reembolso: ', error)
+        }
+        
 
     }
 
@@ -153,12 +138,11 @@ function CrudProvider(props){
         <CrudContext.Provider value={{
             registros,
             dados,
+            setDados,
             handleChange,
             handleSalvar,
-            limparDados,
             excluirRegistro,
-            cancelarSolicitacao,
-            enviarSolicitacao,
+            buscarReembolsos,
         }}>
             {props.children}
         </CrudContext.Provider>

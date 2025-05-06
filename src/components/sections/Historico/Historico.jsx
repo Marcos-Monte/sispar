@@ -2,12 +2,19 @@
 import styles from './Historico.module.scss';
 // Import componentes
 import Caminho from '../../template/Caminho/Caminho';
+import Tabela from '../../users/Tabela/Tabela';
 
 // Import de Icones e Imagens
 import IconeHomeGray from '@/assets/icons/home.png';
 import IconeSeta from '@/assets/icons/seta.png';
 
+// import { CrudContext } from '@/contexts/CrudContext.jsx';
+// import { useContext } from 'react';
+
 export default function Historico(){
+
+    // const {registros} = useContext(CrudContext)
+
     return(
         <section className={styles.container}>
 
@@ -19,9 +26,7 @@ export default function Historico(){
                 <p>Histórico de Reembolsos</p>
             </Caminho>
 
-            <section className={styles.box}>
-                <h1>Histórico</h1> 
-            </section> 
+            <Tabela />
 
         </section>
     )
