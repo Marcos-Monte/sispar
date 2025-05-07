@@ -6,7 +6,7 @@ import styles from './Reembolso.module.scss';
 import Caminho from '../../template/Caminho/Caminho';
 import { Button } from '../../users/Buttons/Button';
 import { Input, InputData, Select, TextArea } from '../../users/Inputs/Input';
-// import Tabela from '../../users/Tabela/Tabela';
+import TabelaReembolso from '../../users/Tabela/TabelaReembolso';
 // Import Icones
 import IconeApagar from '@/assets/icons/apagar.png';
 import IconeCancelar from '@/assets/icons/cancelar.png';
@@ -254,7 +254,7 @@ export default function Reembolso(){
             </form>
             
             {/* Array de Registros renderizado diretamente no Componente Tabela */}
-            {/* <Tabela /> */}
+            <TabelaReembolso />
 
             {
                 solicitacoes.map((obj, index) => {

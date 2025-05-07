@@ -2,9 +2,7 @@
 import styles from './Tabela.module.scss';
 // Import Icones
 // import IconeArquivo from '@/assets/icons/arquivo.png';
-import IconeExcluir from '@/assets/icons/lixeira.png';
 // Import Componentes
-import { Button } from '@/components/users/Buttons/Button.jsx';
 import { useContext } from 'react';
 // Import de Contextos
 // import { RenderContext } from '../../../contexts/RenderContext';
@@ -14,7 +12,7 @@ export default function Tabela(){
     // Importando função que renderiza a abertura de um modal 
     // const {openModal} = useContext(RenderContext)
     // Importa um array de registros para renderizar o conteudo na tela
-    const {registros, excluirRegistro} = useContext(CrudContext)
+    const {registros} = useContext(CrudContext)
 
     return(
         <table>

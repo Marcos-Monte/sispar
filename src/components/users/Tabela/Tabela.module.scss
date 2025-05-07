@@ -64,5 +64,13 @@ table {
     td:first-child:hover{
         background-color: var(--accent);
     }
+    .editar:hover{
+        background-color: var(--secondary);
+    }
+}
+
+.iconeEditar {
+    width: 16px;
+    height: 19px;
 }
 

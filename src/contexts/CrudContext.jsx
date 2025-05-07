@@ -7,14 +7,35 @@ import api from '../services/Api.jsx';
 const CrudContext = createContext({})
 
 function CrudProvider(props){
+    // Assim que montar a aplicação, executar a função indicada
+    useEffect(() => {
+        buscarReembolsos()
+    }, [])
 
     useEffect(()=>{
-        localStorage.setItem('solicitacoes', JSON.stringify([]))
+        const item = localStorage.getItem('solicitacoes');
+
+        try {
+            const solicitacoesExistentes = item ? JSON.parse(item) : null;
+    
+            if (!Array.isArray(solicitacoesExistentes)) {
+                localStorage.setItem('solicitacoes', JSON.stringify([]));
+            }
+        } catch (e) {
+            console.warn("Erro ao fazer parse do localStorage 'solicitacoes'. Reinicializando...", e);
+            localStorage.setItem('solicitacoes', JSON.stringify([]));
+        }
+
     }, [])
 
     const cadastro = JSON.parse(localStorage.getItem('user'))
-    const solicitacoes = JSON.parse(localStorage.getItem('solicitacoes'));
-
+    let solicitacoes = []
+    try {
+        const item = localStorage.getItem('solicitacoes');
+        solicitacoes = item ? JSON.parse(item) : [];
+    } catch (e) {
+        console.warn("Erro ao fazer parse do localStorage 'solicitacoes'.", e);
+    }
     // Gerencia o Estado do Array de Objetos importado para a aplicação (Esse 'registros' que irá ser renderizado na tela e não os valores do BD)
     const [registros, setRegistros] = useState([])
     const [dados, setDados] = useState({
@@ -36,10 +57,6 @@ function CrudProvider(props){
         id_colaborador: cadastro.id,
     })
     
-    // Assim que montar a aplicação, executar a função indicada
-    useEffect(() => {
-        buscarReembolsos()
-    }, [])
 
     async function buscarReembolsos() {
         const response = await api.get('/reembolso/reembolsos')
@@ -101,14 +118,20 @@ function CrudProvider(props){
 
     async function excluirRegistro(item){
         try {
-            if (!item || !item.id) {
+            if (!item || !item.num_prestacao
+            ) {
                 console.warn('Nenhum item selecionado para exclusão.');
                 return;
             }
 
-            await api.delete(`/reembolso/deletar/${item.id}`);
+            const solicitacoesFiltradas = solicitacoes.filter(solicitacao => item.num_prestacao
+                !== solicitacao.num_prestacao
+            )
+
+            console.log('Aqui: ' , solicitacoesFiltradas)
             alert("Reembolso excluído!");
-            buscarReembolsos();
+            localStorage.setItem('solicitacoes', JSON.stringify(solicitacoesFiltradas));
+            set
         } catch (error) {
             console.error('Não foi possível excluir a solicitação de reembolso: ', error)
         }
@@ -143,6 +166,10 @@ function CrudProvider(props){
             alert(`Erro ao cadastrar reembolso: ${error.response.data?.erro}`);
         }
     }
+
+    function editarSolicitacao(obj){
+        setDados(obj)
+    }
     
     return (
         // Tag que envolve o componente em comum (Home)
@@ -163,6 +190,7 @@ function CrudProvider(props){
             cancelarSolicitacao,
 
             limparDados,
+            editarSolicitacao,
         }}>
             {props.children}
         </CrudContext.Provider>
