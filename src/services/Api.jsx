@@ -6,6 +6,9 @@ switch (location.hostname) {
     case "localhost" :
         baseURL = "http://localhost:5000";
         break;
+    case "https://sispar-iota.vercel.app/" :
+        baseURL = "https://sispar-backend.onrender.com/";
+        break;
     default:
         baseURL = "http://localhost:5000";
         break;
