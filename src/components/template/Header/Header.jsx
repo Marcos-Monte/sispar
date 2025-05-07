@@ -1,5 +1,6 @@
 // Import dependencias React
 import { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 // Import do arquivo de estilização do componente
 import styles from './Header.module.scss'
 // Import de Componentes
@@ -16,13 +17,25 @@ import IconeMenu from '@/assets/Header/imagem-fechar-header.png'
 import Foto from '@/assets/Header/image.png'
 
 // Import de Contexto
+import { CrudContext } from '@/contexts/CrudContext.jsx'
 import { RenderContext } from '@/contexts/RenderContext.jsx'
 
 // OBS: Função do Button, é uma função anônima que vai receber um 'setter' (via props) e armazena um valor 'string'.
 export default function Header(){
 
     // Importando Funções e Variáveis de Estado de um Componente de Contexto'. Veio de um Contexto
-    const {alterarRender, openHeader, statusHeader, cadastro} = useContext(RenderContext)
+    const {alterarRender, openHeader, statusHeader} = useContext(RenderContext)
+    const {cadastro} = useContext(CrudContext)
+
+    const navigate = useNavigate()
+
+    function logout(event){
+        event.preventDefault();
+        localStorage.removeItem('user');
+        localStorage.removeItem('solicitacoes');
+
+        navigate('/')
+    }
 
     return(
         // Condicional de abrir ou fechar o 'header' ativada por Funções e Variaveis de Estado do Componente de Contexto
@@ -111,7 +124,7 @@ export default function Header(){
             <Button 
                 tipo='icon'
                 cor='cinza'
-                rota='/'
+                funcao={logout}
             >
                 <img src={IconeSair} alt="Ícone de saída da aplicação, Log off" />
             </Button>

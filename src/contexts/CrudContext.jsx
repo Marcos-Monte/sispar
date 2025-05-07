@@ -8,39 +8,47 @@ const CrudContext = createContext({})
 
 function CrudProvider(props){
 
-    // Gerencia o Estado do Array de Objetos importado para a aplicação (Esse 'registros' que irá ser renderizado na tela e não os valores do BD)
-    const [registros, setRegistros] = useState([])
-    const [dados, setDados] = useState({})
-    
-    useEffect(() => {
-
-        buscarReembolsos()
-
+    useEffect(()=>{
+        localStorage.setItem('solicitacoes', JSON.stringify([]))
     }, [])
 
-     // Gerenciamento de Estado do Objeto onde os dados serão compilados
-    // const [dados, setDados] = useState({
-    //     colab:'',
-    //     empresa: '',
-    //     prest: '',
-    //     descricao: '',
-    //     data: '',
-    //     tipo: 'Selec.',
-    //     ctrCusto: 'Selec.',
-    //     ordInt: '',
-    //     pep: '',
-    //     div: '',
-    //     distKm: '',
-    //     moeda: 'Selec.',
-    //     valKm: '',
-    //     despesa: '',
-    //     valFaturado: '',
-    // })
+    const cadastro = JSON.parse(localStorage.getItem('user'))
+    const solicitacoes = JSON.parse(localStorage.getItem('solicitacoes'));
+
+    // Gerencia o Estado do Array de Objetos importado para a aplicação (Esse 'registros' que irá ser renderizado na tela e não os valores do BD)
+    const [registros, setRegistros] = useState([])
+    const [dados, setDados] = useState({
+        colaborador:'',
+        empresa: '',
+        num_prestacao: 0,
+        descricao: '',
+        data: '',
+        tipo_reembolso: 'Selec.',
+        centro_custo: 'Selec.',
+        ordem_interna: '',
+        divisao: '',
+        pep: '',
+        moeda: 'Selec.',
+        distancia_km: 0,
+        valor_km: 0,
+        valor_faturado: 0,
+        despesa: 0,
+        id_colaborador: cadastro.id,
+    })
+    
+    // Assim que montar a aplicação, executar a função indicada
+    useEffect(() => {
+        buscarReembolsos()
+    }, [])
 
     async function buscarReembolsos() {
         const response = await api.get('/reembolso/reembolsos')
-        console.log(response.data)
-        setRegistros(response.data)
+        // console.log(response.data.length)
+
+        if(response.data.length !== undefined){
+            setRegistros(response.data)
+        }
+        
     }
 
     function handleChange(event){
@@ -53,48 +61,40 @@ function CrudProvider(props){
     }
 
     // Função de Salvamento (clique no Botão)
-    async function handleSalvar(event){
-        // Evita que o botão tenha o comportamento 'default'
-        event.preventDefault();
+    async function handleSalvar(obj){
+        console.log(obj)
 
         try {
-             // Validação dos campos
-            if (!dados.colab || !dados.empresa || !dados.prest || !dados.descricao || !dados.data) {
-                alert('Por favor, preencha todos os campos obrigatórios!');
-                return; 
-            }
+            // const solicitacoes = JSON.parse(localStorage.getItem('solicitacoes'));
 
-            await api.post('/reembolso/solicitacao', dados)
-            alert("Reembolso cadastrado com sucesso!");
-            setDados({})
-            buscarReembolsos();
-
+            localStorage.setItem('solicitacoes', JSON.stringify([...solicitacoes, dados]))
+            limparDados()
         } catch (error) {
-            console.error('Não foi possível efetuar a requisição: ', error)
+            console.error('Não foi possível salvar a solicitação de reembolso: ', error)
         }
 
     }
 
     function limparDados(){
         // Limpando Campos do Formulário
-        console.log('limpar')
         setDados(prevState => ({
             ...prevState,
-            colab:'',
+            colaborador:'',
             empresa: '',
-            prest: '',
+            num_prestacao: 0,
             descricao: '',
             data: '',
-            tipo: 'Selec.',
-            ctrCusto: 'Selec.',
-            ordInt: '',
+            tipo_reembolso: 'Selec.',
+            centro_custo: 'Selec.',
+            ordem_interna: '',
+            divisao: '',
             pep: '',
-            div: '',
-            distKm: '',
             moeda: 'Selec.',
-            valKm: '',
-            despesa: '',
-            valFaturado: '',
+            distancia_km: 0,
+            valor_km: 0,
+            valor_faturado: 0,
+            despesa: 0,
+            id_colaborador: cadastro.id,
         }))
         
     }
@@ -117,32 +117,52 @@ function CrudProvider(props){
     }
 
     function cancelarSolicitacao(){
-        console.log('solicitação cancelada')
-        setRegistros([])
+        localStorage.setItem('solicitacoes', JSON.stringify([]))
     }
 
     async function enviarSolicitacao(){
-        try { // O que queremos 'tentar' fazer
-            const response = await api.post('/refunds/new', registros) // Dois argumentos: rota, objetoEnviado
-            console.log('Resposta da API: ', response)
-            alert('Reembolso solicitado com sucesso!')
-            setFoiEnviado(true)
+        // Evita que o botão tenha o comportamento 'default'
+        // event.preventDefault();
 
-        } catch (error) { // Se algo der errado no 'try' executar esse bloco
-            console.error('Não foi enviar os registros: ', error)
+        try {
+            //  // Validação dos campos
+            // if (!dados.colab || !dados.empresa || !dados.prest || !dados.descricao || !dados.data) {
+            //     alert('Por favor, preencha todos os campos obrigatórios!');
+            //     return; 
+            // }
+            // const solicitacoes = JSON.parse(localStorage.getItem('solicitacoes'));
+
+            await api.post('/reembolso/solicitacao', solicitacoes)
+            alert("Solicitações de reembolso cadastradas com sucesso!");
+            setDados({})
+            buscarReembolsos();
+            localStorage.setItem('solicitacoes', JSON.stringify([]))
+
+        } catch (error) {
+            console.error('Não foi possível efetuar a requisição: ', error.response.data.erro)
+            alert(`Erro ao cadastrar reembolso: ${error.response.data?.erro}`);
         }
     }
     
     return (
         // Tag que envolve o componente em comum (Home)
         <CrudContext.Provider value={{
+            cadastro,
+            solicitacoes,
+
             registros,
             dados,
+
             setDados,
             handleChange,
             handleSalvar,
             excluirRegistro,
             buscarReembolsos,
+
+            enviarSolicitacao,
+            cancelarSolicitacao,
+
+            limparDados,
         }}>
             {props.children}
         </CrudContext.Provider>

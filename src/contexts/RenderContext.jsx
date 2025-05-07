@@ -14,8 +14,6 @@ const RenderContext = createContext({})
 // Componente que irá envolver o Componente Principal ou o Em comum entre os elementos que precisam se comunicar na aplicação
 function RenderProvider(props){
 
-    const cadastro = JSON.parse(localStorage.getItem('user'))
-
     const location = useLocation(); // Obtém a URL atual da aplicação.
 
     // **Reseta o estado `componente` para `<Dashboard />` sempre que o usuário sair da HOME**
@@ -89,8 +87,6 @@ function RenderProvider(props){
     return(
         // O value é um 'objeto' por padrão que recebe os valores, funções e afins, necessários
         <RenderContext.Provider value={{
-            cadastro,
-            
             componente,
             alterarRender,
             statusHeader,

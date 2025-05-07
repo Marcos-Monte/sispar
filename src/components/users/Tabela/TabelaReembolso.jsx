@@ -20,6 +20,7 @@ export default function Tabela(){
         <table>
             <thead className={styles.cabecalho}>
                 <tr className={styles.linha}>
+                    <th></th>
                     <th>Colaborador(a)</th>
                     <th>Empresa</th>
                     <th>Nº Prest.</th>
@@ -35,18 +36,27 @@ export default function Tabela(){
                     <th>Val. Km</th>
                     <th>Val. Faturado</th>
                     <th>Despesa</th>
-                    <th>Status</th>
                 </tr>
             </thead>
 
             <tbody className={styles.corpo}>
 
             {   
-                
                 // Percorre o array 'registros' e adiciona cada registro na devida posição da tabela
                 registros.map((obj, index) => (
 
                     <tr className={styles.linha} key={index}>
+
+                        <td>
+                            {/* Passa o 'objeto / registro' que será excluído dos registros! */}
+                            <Button
+                                tipo='container'
+                                cor='transparente'
+                                funcao={() => excluirRegistro(obj)}
+                            >
+                                {<img src={IconeExcluir} alt="Ícone de uma lixeira" />}
+                            </Button>
+                        </td>
 
                         <td>
                             <span>{obj.colaborador.toUpperCase()}</span>
@@ -107,9 +117,6 @@ export default function Tabela(){
 
                         <td>
                             <span>{obj.despesa}</span>
-                        </td>
-                        <td>
-                            <span>{obj.status.toUpperCase()}</span>
                         </td>
 
                     </tr>

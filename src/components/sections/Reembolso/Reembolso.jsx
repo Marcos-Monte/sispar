@@ -6,7 +6,7 @@ import styles from './Reembolso.module.scss';
 import Caminho from '../../template/Caminho/Caminho';
 import { Button } from '../../users/Buttons/Button';
 import { Input, InputData, Select, TextArea } from '../../users/Inputs/Input';
-import Tabela from '../../users/Tabela/Tabela';
+// import Tabela from '../../users/Tabela/Tabela';
 // Import Icones
 import IconeApagar from '@/assets/icons/apagar.png';
 import IconeCancelar from '@/assets/icons/cancelar.png';
@@ -22,11 +22,13 @@ import { RenderContext } from '../../../contexts/RenderContext';
 
 export default function Reembolso(){
 
+    
+
     // Lógica dos Modais é gerenciado pelo 'contexto' indicado
     const {openModal} = useContext(RenderContext)
 
     // Toda a lógica de CRUD da aplicação é responsabilidade do 'contexto' indicado
-    const {dados, handleChange, handleSalvar} = useContext(CrudContext)
+    const {dados, handleChange, handleSalvar, limparDados, enviarSolicitacao, cancelarSolicitacao, solicitacoes} = useContext(CrudContext)
 
     return(
         
@@ -50,9 +52,9 @@ export default function Reembolso(){
                         <label>Nome Completo</label>
 
                         <Input 
-                            tipo='text'
-                            name='colab'
-                            value={dados.colab}
+                            type='text'
+                            name='colaborador'
+                            value={dados.colaborador}
                             onChange={handleChange}
                             required
                         />
@@ -64,7 +66,7 @@ export default function Reembolso(){
                         <label>Empresa</label>
 
                         <Input 
-                            tipo='text'
+                            type='text'
                             name='empresa'
                             value={dados.empresa}
                             onChange={handleChange}
@@ -78,9 +80,9 @@ export default function Reembolso(){
                         <label>Nº Prest.Contas</label>
 
                         <Input 
-                            tipo='text'
-                            name='prest'
-                            value={dados.prest}
+                            type='text'
+                            name='num_prestacao'
+                            value={dados.num_prestacao}
                             onChange={handleChange}
                             required
                         />
@@ -118,11 +120,11 @@ export default function Reembolso(){
                     </div>
 
                     <div className={styles.medium}>
-                        <label>Tipo de Despesa</label>
+                        <label>Tipo de Reembolso</label>
                         <Select
                             array={tiposDespesa}
-                            name='tipo'
-                            value={dados.tipo}
+                            name='tipo_reembolso'
+                            value={dados.tipo_reembolso}
                             onChange={handleChange}
                             required
                         />
@@ -132,20 +134,19 @@ export default function Reembolso(){
                         <label>Controle de Custo</label>
                         <Select
                             array={controleCustos}
-                            name='ctrCusto'
-                            value={dados.ctrCusto}
+                            name='centro_custo'
+                            value={dados.centro_custo}
                             onChange={handleChange}
                             required
                         />
                     </div>
 
-
                     <div className={styles.micro}>
                         <label>Ord. Int.</label>
                         <Input 
-                            tipo='text'
-                            name='ordInt'
-                            value={dados.ordInt}
+                            type='text'
+                            name='ordem_interna'
+                            value={dados.ordem_interna}
                             onChange={handleChange}
                             required
                         />
@@ -154,7 +155,7 @@ export default function Reembolso(){
                     <div className={styles.micro}>
                         <label>PEP</label>
                         <Input 
-                            tipo='text'
+                            type='text'
                             name='pep'
                             value={dados.pep}
                             onChange={handleChange}
@@ -165,9 +166,9 @@ export default function Reembolso(){
                     <div className={styles.micro}>
                         <label>Div.</label>
                         <Input 
-                            tipo='text'
-                            name='div'
-                            value={dados.div}
+                            type='text'
+                            name='divisao'
+                            value={dados.divisao}
                             onChange={handleChange}
                             required
                         />
@@ -176,9 +177,9 @@ export default function Reembolso(){
                     <div className={styles.micro}>
                         <label>Dist. / Km</label>
                         <Input 
-                            tipo='text'
-                            name='distKm'
-                            value={dados.distKm}
+                            type='text'
+                            name='distancia_km'
+                            value={dados.distancia_km}
                             onChange={handleChange}
                             required
                         />
@@ -198,9 +199,9 @@ export default function Reembolso(){
                     <div className={styles.micro}>
                         <label>Valor / Km</label>
                         <Input 
-                            tipo='text'
-                            name='valKm'
-                            value={dados.valKm}
+                            type='text'
+                            name='valor_km'
+                            value={dados.valor_km}
                             onChange={handleChange}
                             required
                         />
@@ -209,7 +210,7 @@ export default function Reembolso(){
                     <div className={styles.micro}>
                         <label>Valor Desp.</label>
                         <Input 
-                            tipo='text'
+                            type='text'
                             name='despesa'
                             value={dados.despesa}
                             onChange={handleChange}
@@ -220,9 +221,9 @@ export default function Reembolso(){
                     <div className={styles.micro}>
                         <label>Valor Fat.</label>
                         <Input 
-                            tipo='text'
-                            name='valFaturado'
-                            value={dados.valFaturado}
+                            type='text'
+                            name='valor_faturado'
+                            value={dados.valor_faturado}
                             onChange={handleChange}
                             required
                         />
@@ -233,7 +234,7 @@ export default function Reembolso(){
                             tipo='container'
                             cor='azulEscuro'
                             // type='submit'
-                            funcao={handleSalvar}
+                            funcao={() => handleSalvar(dados)}
                         >
                             <img src={IconeSalvar} alt="Ícone de somar" />
                             Salvar
@@ -242,7 +243,7 @@ export default function Reembolso(){
                         <Button 
                             tipo='icon'
                             cor='azulClaro'
-                            funcao={() => openModal('limpar')} // Abrir Modal
+                            funcao={() => limparDados()} // Abrir Modal
                         >
                             <img src={IconeApagar} alt="Ícone de apagar valores inseridos" />
                         </Button>
@@ -253,7 +254,15 @@ export default function Reembolso(){
             </form>
             
             {/* Array de Registros renderizado diretamente no Componente Tabela */}
-            <Tabela />
+            {/* <Tabela /> */}
+
+            {
+                solicitacoes.map((obj, index) => {
+                    <ul key={index}>
+                        <li>{obj.colaborador}</li>
+                    </ul>
+                })
+            }
 
             <section className={styles.controles}>
 
@@ -285,7 +294,7 @@ export default function Reembolso(){
                 <Button 
                     tipo='containerGrande'
                     cor='vinho'
-                    funcao={() => openModal('cancelar')} // Abrir Modal
+                    funcao={() => cancelarSolicitacao()} // Abrir Modal
                 >
                     <img src={IconeCancelar} alt="Ícone com um X" />
                     Cancelar Solicitação
