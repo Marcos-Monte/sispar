@@ -40,7 +40,7 @@ export default function Tabela(){
             <tbody className={styles.corpo}>
 
             {   
-                
+                registros.length === 0? <div className={styles.mensagemErro}><h2>Não há solicitações</h2></div>:
                 // Percorre o array 'registros' e adiciona cada registro na devida posição da tabela
                 registros.map((obj, index) => (
 

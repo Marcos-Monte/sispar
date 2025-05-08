@@ -74,3 +74,14 @@ table {
     height: 19px;
 }
 
+.mensagemErro{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h2 {
+        font-size: 2rem;
+    }
+}
+
