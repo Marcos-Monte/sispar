@@ -171,9 +171,9 @@ function CrudProvider(props){
         }
     }
 
-    function calcularFaturamento(nomeCampo) {
+    function calcularFaturamento(array, nomeCampo) {
         try {
-            const soma = solicitacoes.reduce((total, item) => {
+            const soma = array.reduce((total, item) => {
                 return total + (parseFloat(item[nomeCampo]) || 0);
             }, 0);
     
@@ -185,6 +185,29 @@ function CrudProvider(props){
         } catch (error) {
             console.error('Não foi possível executar o cálculo: ', error);
             return 'Erro';
+        }
+    }
+
+    function contadorStatus(nomeCampo){
+        
+        try {
+            let soma;
+            if(!nomeCampo){
+                soma = registros.length;
+            } else {
+                soma = registros.reduce((contador, item) => {
+                    console.log(item.status)
+                    if(item.status === nomeCampo){
+                        return contador + 1;
+                    }
+    
+                }, 0)
+            }
+            
+            return soma
+            
+        } catch (error) {
+            console.error('Não foi possível contabilizar os status: ', error)
         }
     }
     
@@ -209,6 +232,7 @@ function CrudProvider(props){
             limparDados,
             editarSolicitacao,
             calcularFaturamento,
+            contadorStatus,
         }}>
             {props.children}
         </CrudContext.Provider>

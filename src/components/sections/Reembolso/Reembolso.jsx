@@ -259,7 +259,7 @@ export default function Reembolso(){
                     <p>Total Faturado</p>
 
                     <div className={styles.box}>
-                        {calcularFaturamento('valor_faturado')}
+                        {calcularFaturamento(solicitacoes, 'valor_faturado')}
                     </div>
 
                 </div>
@@ -267,7 +267,7 @@ export default function Reembolso(){
                 <div>
                     <p>Total Despesa</p>
                     <div className={styles.box}>
-                        {calcularFaturamento('despesa')}
+                        {calcularFaturamento(solicitacoes, 'despesa')}
                     </div>
                 </div>
 

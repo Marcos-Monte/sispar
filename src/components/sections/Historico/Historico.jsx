@@ -8,12 +8,12 @@ import Tabela from '../../users/Tabela/Tabela';
 import IconeHomeGray from '@/assets/icons/home.png';
 import IconeSeta from '@/assets/icons/seta.png';
 
-// import { CrudContext } from '@/contexts/CrudContext.jsx';
-// import { useContext } from 'react';
+import { CrudContext } from '@/contexts/CrudContext.jsx';
+import { useContext } from 'react';
 
 export default function Historico(){
 
-    // const {registros} = useContext(CrudContext)
+    const {calcularFaturamento, registros} = useContext(CrudContext)
 
     return(
         <section className={styles.container}>
@@ -27,6 +27,26 @@ export default function Historico(){
             </Caminho>
 
             <Tabela />
+
+            <section className={styles.controles}>
+
+                <div>
+                    <p>Total Faturado</p>
+
+                    <div className={styles.box}>
+                        {calcularFaturamento(registros, 'valor_faturado')}
+                    </div>
+
+                </div>
+
+                <div>
+                    <p>Total Despesa</p>
+                    <div className={styles.box}>
+                        {calcularFaturamento(registros, 'despesa')}
+                    </div>
+                </div>
+
+            </section>
 
         </section>
     )
