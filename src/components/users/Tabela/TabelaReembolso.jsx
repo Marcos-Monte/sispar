@@ -59,14 +59,14 @@ export default function Tabela(){
                                 {<img src={IconeExcluir} alt="Ícone de uma lixeira" />}
                             </Button>
                         </td>
-                        <td class={styles.editar}>
+                        <td className={styles.editar}>
                             {/* Passa o 'objeto / registro' que será excluído dos registros! */}
                             <Button
                                 tipo='container'
                                 cor='transparente'
                                 funcao={() => editarSolicitacao(obj)}
                             >
-                                {<img src={IconeEditar} alt="Ícone de um lápis" class={styles.iconeEditar}/>}
+                                {<img src={IconeEditar} alt="Ícone de um lápis" className={styles.iconeEditar}/>}
                             </Button>
                         </td>
 

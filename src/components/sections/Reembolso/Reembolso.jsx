@@ -21,14 +21,11 @@ import { CrudContext } from '../../../contexts/CrudContext';
 import { RenderContext } from '../../../contexts/RenderContext';
 
 export default function Reembolso(){
-
-    
-
     // Lógica dos Modais é gerenciado pelo 'contexto' indicado
     const {openModal} = useContext(RenderContext)
 
     // Toda a lógica de CRUD da aplicação é responsabilidade do 'contexto' indicado
-    const {dados, handleChange, handleSalvar, limparDados, enviarSolicitacao, cancelarSolicitacao, solicitacoes} = useContext(CrudContext)
+    const {dados, handleChange, handleSalvar, limparDados, enviarSolicitacao, cancelarSolicitacao, solicitacoes, calcularFaturamento} = useContext(CrudContext)
 
     return(
         
@@ -256,21 +253,13 @@ export default function Reembolso(){
             {/* Array de Registros renderizado diretamente no Componente Tabela */}
             <TabelaReembolso />
 
-            {
-                solicitacoes.map((obj, index) => {
-                    <ul key={index}>
-                        <li>{obj.colaborador}</li>
-                    </ul>
-                })
-            }
-
             <section className={styles.controles}>
 
                 <div>
                     <p>Total Faturado</p>
 
                     <div className={styles.box}>
-                        {dados.valFaturado}
+                        {calcularFaturamento('valor_faturado')}
                     </div>
 
                 </div>
@@ -278,7 +267,7 @@ export default function Reembolso(){
                 <div>
                     <p>Total Despesa</p>
                     <div className={styles.box}>
-                        {dados.despesa}
+                        {calcularFaturamento('despesa')}
                     </div>
                 </div>
 

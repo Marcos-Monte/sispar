@@ -8,11 +8,8 @@ const CrudContext = createContext({})
 
 function CrudProvider(props){
     // Assim que montar a aplicação, executar a função indicada
-    useEffect(() => {
-        buscarReembolsos()
-    }, [])
-
     useEffect(()=>{
+        buscarReembolsos()
         const item = localStorage.getItem('solicitacoes');
 
         try {
@@ -60,7 +57,6 @@ function CrudProvider(props){
 
     async function buscarReembolsos() {
         const response = await api.get('/reembolso/reembolsos')
-        // console.log(response.data.length)
 
         if(response.data.length !== undefined){
             setRegistros(response.data)
@@ -79,12 +75,14 @@ function CrudProvider(props){
 
     // Função de Salvamento (clique no Botão)
     async function handleSalvar(obj){
-        console.log(obj)
 
         try {
-            // const solicitacoes = JSON.parse(localStorage.getItem('solicitacoes'));
-
-            localStorage.setItem('solicitacoes', JSON.stringify([...solicitacoes, dados]))
+              // Validação dos campos
+            if (!dados.colaborador || !dados.empresa || !dados.num_prestacao || !dados.data || !dados.tipo_reembolso || !dados.centro_custo || !dados.moeda || !dados.valor_faturado) {
+                alert('Por favor, preencha todos os campos obrigatórios!');
+                return; 
+            }
+            localStorage.setItem('solicitacoes', JSON.stringify([...solicitacoes, obj]))
             limparDados()
         } catch (error) {
             console.error('Não foi possível salvar a solicitação de reembolso: ', error)
@@ -116,22 +114,18 @@ function CrudProvider(props){
         
     }
 
-    async function excluirRegistro(item){
+    async function excluirRegistro(obj){
         try {
-            if (!item || !item.num_prestacao
-            ) {
+            if (!obj || !obj.num_prestacao) {
                 console.warn('Nenhum item selecionado para exclusão.');
                 return;
             }
 
-            const solicitacoesFiltradas = solicitacoes.filter(solicitacao => item.num_prestacao
-                !== solicitacao.num_prestacao
+            const solicitacoesFiltradas = solicitacoes.filter(item => obj.num_prestacao
+                !== item.num_prestacao
             )
-
-            console.log('Aqui: ' , solicitacoesFiltradas)
             alert("Reembolso excluído!");
             localStorage.setItem('solicitacoes', JSON.stringify(solicitacoesFiltradas));
-            set
         } catch (error) {
             console.error('Não foi possível excluir a solicitação de reembolso: ', error)
         }
@@ -141,19 +135,14 @@ function CrudProvider(props){
 
     function cancelarSolicitacao(){
         localStorage.setItem('solicitacoes', JSON.stringify([]))
+        limparDados()
     }
 
     async function enviarSolicitacao(){
         // Evita que o botão tenha o comportamento 'default'
-        // event.preventDefault();
+        event.preventDefault();
 
         try {
-            //  // Validação dos campos
-            // if (!dados.colab || !dados.empresa || !dados.prest || !dados.descricao || !dados.data) {
-            //     alert('Por favor, preencha todos os campos obrigatórios!');
-            //     return; 
-            // }
-            // const solicitacoes = JSON.parse(localStorage.getItem('solicitacoes'));
 
             await api.post('/reembolso/solicitacao', solicitacoes)
             alert("Solicitações de reembolso cadastradas com sucesso!");
@@ -168,7 +157,35 @@ function CrudProvider(props){
     }
 
     function editarSolicitacao(obj){
-        setDados(obj)
+        try {
+
+            const solicitacoesFiltradas = solicitacoes.filter(
+                (item) => item.num_prestacao !== obj.num_prestacao
+            )
+
+            setDados(obj)
+
+            localStorage.setItem('solicitacoes', JSON.stringify(solicitacoesFiltradas));
+        } catch (error) {
+            console.error('Não foi possível iniciar edição desse registro: ', error)
+        }
+    }
+
+    function calcularFaturamento(nomeCampo) {
+        try {
+            const soma = solicitacoes.reduce((total, item) => {
+                return total + (parseFloat(item[nomeCampo]) || 0);
+            }, 0);
+    
+            return new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            }).format(soma);
+
+        } catch (error) {
+            console.error('Não foi possível executar o cálculo: ', error);
+            return 'Erro';
+        }
     }
     
     return (
@@ -191,6 +208,7 @@ function CrudProvider(props){
 
             limparDados,
             editarSolicitacao,
+            calcularFaturamento,
         }}>
             {props.children}
         </CrudContext.Provider>
