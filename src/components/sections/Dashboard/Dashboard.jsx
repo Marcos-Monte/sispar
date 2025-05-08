@@ -60,12 +60,14 @@ export default function Dashboard(){
 
                 </section>
 
-                <CardIndicadores 
+                {/* <CardIndicadores 
                     solicitados='182'
                     analise='74'
                     aprovados='195'
                     rejeitados='41'
-                />
+                /> */}
+
+                <CardIndicadores />
 
                 <div className={styles.boxSistema}>
                     <img src={IconeAtualizado} alt="Ícone de uma nuvem com o símbolo de 'correto', indicando que o sistema está atualizado" />

@@ -1,3 +1,6 @@
+import { useContext } from 'react';
+import { CrudContext } from '../../../contexts/CrudContext';
+
 import styles from './Card.module.scss';
 
 import IconeAnalise from '@/assets/Dashboard/Cards/n-analises.png';
@@ -14,7 +17,10 @@ export function Card(props){
     )
 }
 
-export function CardIndicadores(props){
+export function CardIndicadores(){
+
+    const {contadorStatus} = useContext(CrudContext)
+
     return(
         <section className={styles.container}>
 
@@ -23,7 +29,7 @@ export function CardIndicadores(props){
                     <img src={IconeSolicitados} alt="Ícone de seta aportando pra esquerda" />
                 </div>
 
-                <span>{props.solicitados}</span>
+                <span>{contadorStatus()}</span>
 
                 <p>Solicitados</p>
             </div>
@@ -33,7 +39,7 @@ export function CardIndicadores(props){
                     <img src={IconeAnalise} alt="Ícone de um relogio" />
                 </div>
                 
-                <span>{props.analise}</span>
+                <span>{contadorStatus('analisando')}</span>
 
                 <p>Em análise</p>
             </div>
@@ -43,7 +49,7 @@ export function CardIndicadores(props){
                     <img src={IconeAprovados} alt="Ícone de sinal de 'certo'" />
                 </div>
                 
-                <span>{props.aprovados}</span>
+                <span>{contadorStatus('aprovado')}</span>
 
                 <p>Aprovados</p>
             </div>
@@ -53,7 +59,7 @@ export function CardIndicadores(props){
                     <img src={IconeRejeitados} alt="Ícone com um X" />
                 </div>
                 
-                <span>{props.rejeitados}</span>
+                <span>{contadorStatus('rejeitado')}</span>
 
                 <p>Rejeitados</p>
             </div>

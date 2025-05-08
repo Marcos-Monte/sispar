@@ -2,6 +2,7 @@
 import styles from './Tabela.module.scss';
 // Import Icones
 // import IconeArquivo from '@/assets/icons/arquivo.png';
+import IconeEditar from '@/assets/icons/lapis.png';
 import IconeExcluir from '@/assets/icons/lixeira.png';
 // Import Componentes
 import { Button } from '@/components/users/Buttons/Button.jsx';
@@ -14,12 +15,13 @@ export default function Tabela(){
     // Importando função que renderiza a abertura de um modal 
     // const {openModal} = useContext(RenderContext)
     // Importa um array de registros para renderizar o conteudo na tela
-    const {registros, excluirRegistro} = useContext(CrudContext)
+    const {solicitacoes, excluirRegistro, editarSolicitacao} = useContext(CrudContext)
 
     return(
         <table>
             <thead className={styles.cabecalho}>
                 <tr className={styles.linha}>
+                    <th></th>
                     <th></th>
                     <th>Colaborador(a)</th>
                     <th>Empresa</th>
@@ -43,7 +45,7 @@ export default function Tabela(){
 
             {   
                 // Percorre o array 'registros' e adiciona cada registro na devida posição da tabela
-                registros.map((obj, index) => (
+                solicitacoes.map((obj, index) => (
 
                     <tr className={styles.linha} key={index}>
 
@@ -55,6 +57,16 @@ export default function Tabela(){
                                 funcao={() => excluirRegistro(obj)}
                             >
                                 {<img src={IconeExcluir} alt="Ícone de uma lixeira" />}
+                            </Button>
+                        </td>
+                        <td className={styles.editar}>
+                            {/* Passa o 'objeto / registro' que será excluído dos registros! */}
+                            <Button
+                                tipo='container'
+                                cor='transparente'
+                                funcao={() => editarSolicitacao(obj)}
+                            >
+                                {<img src={IconeEditar} alt="Ícone de um lápis" className={styles.iconeEditar}/>}
                             </Button>
                         </td>
 

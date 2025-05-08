@@ -6,7 +6,7 @@ import styles from './Reembolso.module.scss';
 import Caminho from '../../template/Caminho/Caminho';
 import { Button } from '../../users/Buttons/Button';
 import { Input, InputData, Select, TextArea } from '../../users/Inputs/Input';
-// import Tabela from '../../users/Tabela/Tabela';
+import TabelaReembolso from '../../users/Tabela/TabelaReembolso';
 // Import Icones
 import IconeApagar from '@/assets/icons/apagar.png';
 import IconeCancelar from '@/assets/icons/cancelar.png';
@@ -21,14 +21,11 @@ import { CrudContext } from '../../../contexts/CrudContext';
 import { RenderContext } from '../../../contexts/RenderContext';
 
 export default function Reembolso(){
-
-    
-
     // Lógica dos Modais é gerenciado pelo 'contexto' indicado
     const {openModal} = useContext(RenderContext)
 
     // Toda a lógica de CRUD da aplicação é responsabilidade do 'contexto' indicado
-    const {dados, handleChange, handleSalvar, limparDados, enviarSolicitacao, cancelarSolicitacao, solicitacoes} = useContext(CrudContext)
+    const {dados, handleChange, handleSalvar, limparDados, enviarSolicitacao, cancelarSolicitacao, solicitacoes, calcularFaturamento} = useContext(CrudContext)
 
     return(
         
@@ -254,15 +251,7 @@ export default function Reembolso(){
             </form>
             
             {/* Array de Registros renderizado diretamente no Componente Tabela */}
-            {/* <Tabela /> */}
-
-            {
-                solicitacoes.map((obj, index) => {
-                    <ul key={index}>
-                        <li>{obj.colaborador}</li>
-                    </ul>
-                })
-            }
+            <TabelaReembolso />
 
             <section className={styles.controles}>
 
@@ -270,7 +259,7 @@ export default function Reembolso(){
                     <p>Total Faturado</p>
 
                     <div className={styles.box}>
-                        {dados.valFaturado}
+                        {calcularFaturamento(solicitacoes, 'valor_faturado')}
                     </div>
 
                 </div>
@@ -278,7 +267,7 @@ export default function Reembolso(){
                 <div>
                     <p>Total Despesa</p>
                     <div className={styles.box}>
-                        {dados.despesa}
+                        {calcularFaturamento(solicitacoes, 'despesa')}
                     </div>
                 </div>
 

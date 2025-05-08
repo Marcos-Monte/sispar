@@ -64,5 +64,24 @@ table {
     td:first-child:hover{
         background-color: var(--accent);
     }
+    .editar:hover{
+        background-color: var(--secondary);
+    }
+}
+
+.iconeEditar {
+    width: 16px;
+    height: 19px;
+}
+
+.mensagemErro{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h2 {
+        font-size: 2rem;
+    }
 }
 
