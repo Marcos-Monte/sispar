@@ -11,10 +11,8 @@ import IconeHome from '@/assets/Header/botao-home.png'
 import IconePesquisa from '@/assets/Header/botao-pesquisa.png'
 import IconeReembolso from '@/assets/Header/botao-reembolso.png'
 import IconeSair from '@/assets/Header/botao-sair.png'
+import FotoDefault from '@/assets/Header/image.png'
 import IconeMenu from '@/assets/Header/imagem-fechar-header.png'
-
-// Import de Dados Cadastrais
-import Foto from '@/assets/Header/image.png'
 
 // Import de Contexto
 import { CrudContext } from '@/contexts/CrudContext.jsx'
@@ -40,7 +38,7 @@ export default function Header(){
     return(
         // Condicional de abrir ou fechar o 'header' ativada por Funções e Variaveis de Estado do Componente de Contexto
         <header className={`${styles.container} ${styles[statusHeader]}`}>
-            {}
+
             {/* Botão que recebe 'rota' será enviado para outra página. Não recebe 'função'*/}
             <Button
                 tipo='icon'
@@ -54,7 +52,7 @@ export default function Header(){
             <nav>
                 {/* Imagem ilutrativa que irá receber a foto do usuário cadastrado */}
                 <figure>
-                    <img src={Foto} alt="Foto do usuário logado" />
+                    <img src={cadastro.foto ? `${cadastro.foto}`: FotoDefault} alt="Foto do usuário logado" />
                     <div className={styles.infos}>
                         <figcaption>{cadastro.nome}</figcaption>
                         <span>{cadastro.cargo}</span>
