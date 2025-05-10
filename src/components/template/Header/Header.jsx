@@ -22,7 +22,7 @@ import { RenderContext } from '@/contexts/RenderContext.jsx'
 // OBS: Função do Button, é uma função anônima que vai receber um 'setter' (via props) e armazena um valor 'string'.
 export default function Header(){
 
-    const { abrirModal } = useContext(CrudContext)
+    const navigate = useNavigate()
 
     const handleLogout = () => {
         abrirModal('logout', () => logout())
@@ -30,27 +30,30 @@ export default function Header(){
 
     // Importando Funções e Variáveis de Estado de um Componente de Contexto'. Veio de um Contexto
     const {alterarRender, openHeader, statusHeader} = useContext(RenderContext)
-    const {cadastro} = useContext(CrudContext)
+    const {cadastro, abrirModal } = useContext(CrudContext)
 
-    const navigate = useNavigate()
+    function handleAbrirHeader() {
+        openHeader(); // função que alterna o estado
+        showAlert("Menu lateral alterado com sucesso!", "info");
+    }
+
+
 
     function logout(){
         localStorage.removeItem('user');
         localStorage.removeItem('solicitacoes');
-
         navigate('/')
     }
 
     return(
         // Condicional de abrir ou fechar o 'header' ativada por Funções e Variaveis de Estado do Componente de Contexto
         <header className={`${styles.container} ${styles[statusHeader]}`}>
-
             {/* Botão que recebe 'rota' será enviado para outra página. Não recebe 'função'*/}
             <Button
                 tipo='icon'
                 cor='azul'
                 // rota='/'
-                funcao={openHeader}
+                funcao={handleAbrirHeader}
             >
                 <img src={IconeMenu} alt="Ícone do Menu, abrir e fechar a navegação" />
             </Button>

@@ -59,6 +59,10 @@ function CrudProvider(props){
     } catch (e) {
         console.warn("Erro ao fazer parse do localStorage 'solicitacoes'.", e);
     }
+
+    function isOpen(){
+        setIsAlertOpen(!isAlertOpen)
+    }
     
     async function buscarReembolsos() {
         const response = await api.get('/reembolso/reembolsos')
@@ -205,19 +209,21 @@ function CrudProvider(props){
             if(!nomeCampo){
                 soma = registros.length;
             } else {
+                // console.log("registros:", registros);
                 soma = registros.reduce((contador, item) => {
-                    console.log(item.status)
-                    if(item.status === nomeCampo){
-                        return contador + 1;
-                    }
-    
-                }, 0)
+                    const statusItem = item.status?.trim().toLowerCase();
+                    const statusFiltro = nomeCampo.trim().toLowerCase();
+                    return statusItem === statusFiltro ? contador + 1 : contador;
+                }, 0);
             }
+
+            console.log(soma)
             
-            return soma
+            return soma || 0;
             
         } catch (error) {
             console.error('Não foi possível contabilizar os status: ', error)
+            return 0;
         }
     }
 

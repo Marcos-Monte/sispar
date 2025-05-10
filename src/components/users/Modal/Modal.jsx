@@ -12,7 +12,7 @@ export function Modal({ isOpen, onClose, onConfirm, children }) {
             <div className={styles.modalContent}>
                 <div className={styles.modalHeader}>
                     <img src={Logo} alt="" />
-                    <i class="bi bi-x-circle" onClick={onClose}></i>
+                    <i className="bi bi-x-circle" onClick={onClose}></i>
                 </div>
 
                 <div className={styles.modalBody}>

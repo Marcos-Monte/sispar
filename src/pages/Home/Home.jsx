@@ -15,6 +15,7 @@ function HomeInterno() {
 
     return (
         <div className={styles.container}>
+            
             <Modal isOpen={isModalOpen} onClose={fecharModal} onConfirm={onModalConfirm}>
                 {modalType === 'logout' && (
                     <>
