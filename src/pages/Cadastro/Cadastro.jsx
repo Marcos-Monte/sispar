@@ -175,14 +175,23 @@ export default function Cadastro(){
                             [event.target.name]: event.target.value
                         })}
                     />
-                    <Button 
-                        tipo='container'
-                        texto="Criar conta"
-                        cor="azulClaro"
-                        funcao={() => submitCadastro()}
-                    >
-                        Criar conta
-                    </Button>
+                    <div className={styles.botoes}>
+                        <Button 
+                            tipo='container'
+                            cor="cinza"
+                            rota="/"
+                        >
+                            Voltar
+                        </Button>
+                        <Button 
+                            tipo='container'
+                            texto="Criar conta"
+                            cor="azulClaro"
+                            funcao={() => submitCadastro()}
+                        >
+                            Criar conta
+                        </Button>
+                    </div>
                 </form>
             </section>
         </>
