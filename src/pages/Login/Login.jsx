@@ -50,7 +50,9 @@ export default function Login(){
                 email: dados.email,
                 nome: dados.nome,
                 cargo: dados.cargo,
-                foto: dados.foto ? `${API_URL}${dados.foto}`: '',
+                foto: dados.foto && dados.foto.trim() !== '' 
+                    ? `${API_URL}${dados.foto.replace('Value: ', '').trim()}` // Retirando Bug que envia 'Value: ' no DOM
+                    : '',
             }
 
             console.log(API_URL)
