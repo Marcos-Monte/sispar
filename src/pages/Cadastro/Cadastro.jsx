@@ -49,6 +49,16 @@ export default function Cadastro(){
         event.preventDefault()
 
         try {
+
+            if(dadosCadastrais.email !== dadosCadastrais.emailConfirm){
+                alert('E-mail e Confirmação de E-mail devem ser iguais.')
+                return
+            }
+
+            if(dadosCadastrais.senha !== dadosCadastrais.senhaConfirm){
+                alert('Senha e Confirmação de Senha devem ser iguais.')
+                return
+            }
             const salario = getSalario(tiposCargos, dadosCadastrais.cargo)
 
             const dados = {
@@ -65,7 +75,14 @@ export default function Cadastro(){
         } catch (error) {
             console.error('Não foi possível cadastrar o colaborador: ', error);
             const mensagem = error?.response?.data?.erro || 'Erro desconhecido ao cadastrar colaborador.'
-            alert(mensagem)
+            if(mensagem.includes('E-mail') && mensagem.includes('já cadastrado')){
+                localStorage.setItem('emailJaCadastrado', dadosCadastrais.email)
+                alert(`${mensagem}\n\nRedirecionando para tela de login. Caso tenha esquecido sua senha, clique em "Esqueci minha senha".`);
+                navigate('/')
+            } else {
+                alert(mensagem)
+            }
+            
         } 
     }
 

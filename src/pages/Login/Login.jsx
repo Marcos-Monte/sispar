@@ -9,11 +9,19 @@ import { Button } from '@/components/users/Buttons/Button';
 import { Input } from '@/components/users/Inputs/Input';
 
 // Conexão do Front com o Back
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../services/Api';
 
 export default function Login(){
+
+    useEffect(() => {
+        const emailJaCadastrado = localStorage.getItem('emailJaCadastrado')
+        if(emailJaCadastrado){
+            setEmail(emailJaCadastrado)
+            localStorage.removeItem('emailJaCadastrado')
+        }
+    }, [])
 
     // Iniciando os estados
     const [email, setEmail] = useState('');
