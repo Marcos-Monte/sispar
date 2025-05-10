@@ -14,6 +14,8 @@ export default function Cadastro(){
 
     const navigate = useNavigate();
 
+    const [mostrarSenha, setMostrarSenha] = useState(true)
+
     const [dadosCadastrais, setDadosCadastrais] = useState({
         nome: '',
         email: '',
@@ -66,19 +68,24 @@ export default function Cadastro(){
                 salario: salario,
                 status: 'ativo'
             }
+
             await api.post('/colaborador/cadastrar', dados)
             alert('Colaborador cadastrado com sucesso!')
             setTimeout(()=> {
                 limparCampos()
                 navigate('/')
             }, 2000)
+
         } catch (error) {
             console.error('Não foi possível cadastrar o colaborador: ', error);
             const mensagem = error?.response?.data?.erro || 'Erro desconhecido ao cadastrar colaborador.'
+
             if(mensagem.includes('E-mail') && mensagem.includes('já cadastrado')){
                 localStorage.setItem('emailJaCadastrado', dadosCadastrais.email)
+
                 alert(`${mensagem}\n\nRedirecionando para tela de login. Caso tenha esquecido sua senha, clique em "Esqueci minha senha".`);
                 navigate('/')
+
             } else {
                 alert(mensagem)
             }
@@ -124,28 +131,41 @@ export default function Cadastro(){
                         })}
                         autocomplete="current-email"
                     />
-                    <Input 
-                        placeholder="Digite sua senha de preferencia."
-                        type="password"
-                        value={dadosCadastrais.senha}
-                        name="senha"
-                        onChange={event => setDadosCadastrais({
-                            ...dadosCadastrais,
-                            [event.target.name]: event.target.value
-                        })}
-                        autoComplete="new-password"
-                    />
-                    <Input 
-                        placeholder="Confime sua senha."
-                        type="password"
-                        value={dadosCadastrais.senhaConfirm}
-                        name="senhaConfirm"
-                        onChange={event => setDadosCadastrais({
-                            ...dadosCadastrais,
-                            [event.target.name]: event.target.value
-                        })}
-                        autoComplete="new-password"
-                    />
+
+                    <div className={styles.senha}>
+                        <Input 
+                            placeholder="Digite sua senha de preferencia."
+                            type={mostrarSenha? 'text': 'password'}
+                            value={dadosCadastrais.senha}
+                            name="senha"
+                            onChange={event => setDadosCadastrais({
+                                ...dadosCadastrais,
+                                [event.target.name]: event.target.value
+                            })}
+                            autoComplete="new-password"
+                        />
+                        <button type="button" onClick={() => setMostrarSenha(!mostrarSenha)}>
+                            {mostrarSenha ? <i class="bi bi-eye-slash"></i> : <i class="bi bi-eye"></i>}
+                        </button>
+                    </div>
+
+                    <div className={styles.senha}>
+                        <Input 
+                            placeholder="Confime sua senha."
+                            type={mostrarSenha? 'text': 'password'}
+                            value={dadosCadastrais.senhaConfirm}
+                            name="senhaConfirm"
+                            onChange={event => setDadosCadastrais({
+                                ...dadosCadastrais,
+                                [event.target.name]: event.target.value
+                            })}
+                            autoComplete="new-password"
+                        />
+                        <button type="button" onClick={() => setMostrarSenha(!mostrarSenha)}>
+                            {mostrarSenha ? <i class="bi bi-eye-slash"></i> : <i class="bi bi-eye"></i>}
+                        </button>
+                    </div>
+
                     <Select
                         value={dadosCadastrais.cargo}
                         array={getCargos(tiposCargos)}

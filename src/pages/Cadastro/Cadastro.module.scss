@@ -20,3 +20,19 @@
     border: .8px solid var(--text-secondary);
     background-color: #fff;
 }
+
+.senha {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    button {
+        position: absolute;
+        right: 0;
+        height: 100%;
+        width: 10%;
+        min-width: 20px;
+    }
+}
