@@ -9,11 +9,22 @@ import { Button } from '@/components/users/Buttons/Button';
 import { Input } from '@/components/users/Inputs/Input';
 
 // Conexão do Front com o Back
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../services/Api';
 
+
 export default function Login(){
+
+    useEffect(() => {
+        const emailJaCadastrado = localStorage.getItem('emailJaCadastrado')
+        if(emailJaCadastrado){
+            setEmail(emailJaCadastrado)
+            localStorage.removeItem('emailJaCadastrado')
+        }
+    }, [])
+
+    const API_URL = import.meta.env.VITE_API_URL
 
     // Iniciando os estados
     const [email, setEmail] = useState('');
@@ -32,12 +43,17 @@ export default function Login(){
                 senha: senha,
             })
 
+            const dados = response.data.items
+
             const usuario = {
-                id: response.data.items.id,
-                email: response.data.items.email,
-                nome: response.data.items.nome,
-                cargo: response.data.items.cargo,
+                id: dados.id,
+                email: dados.email,
+                nome: dados.nome,
+                cargo: dados.cargo,
+                foto: dados.foto ? `${API_URL}${dados.foto}`: '',
             }
+
+            console.log(API_URL)
             
             localStorage.setItem('user', JSON.stringify(usuario))
             // Se a requisição for bem sucedida enviar para a rota indicada

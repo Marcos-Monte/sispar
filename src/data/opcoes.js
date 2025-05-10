@@ -8,4 +8,16 @@ const controleCustos = [
 
 const tiposMoeda = ['brl', 'ars', 'usd']
 
-export { controleCustos, tiposDespesa, tiposMoeda };
+const tiposCargos = [
+    { cargo: 'dev front-end', salario: 4500.50},
+    { cargo: 'dev back-end', salario: 4800.50},
+    { cargo: 'qa', salario: 2800.50},
+    { cargo: 'dev fullstack', salario: 6800.50},
+    { cargo: 'tech leader', salario: 6800.50},
+    { cargo: 'devops', salario: 5800.50},
+    { cargo: 'product owner', salario: 3800.50},
+    { cargo: 'analista de dados', salario: 3800.50},
+]
+
+export { controleCustos, tiposCargos, tiposDespesa, tiposMoeda };
+
