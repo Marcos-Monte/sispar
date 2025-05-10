@@ -4,54 +4,56 @@ import { useContext } from 'react';
 import styles from './Home.module.scss';
 // Import de Componentes
 import Header from '@/components/template/Header/Header.jsx';
+import { Modal } from '@/components/users/Modal/Modal.jsx';
 // Import de Contexto
-import { CrudProvider } from '../../contexts/CrudContext.jsx';
+import { CrudContext, CrudProvider } from '../../contexts/CrudContext.jsx';
 import { RenderContext } from '../../contexts/RenderContext.jsx';
 
-import { ModalCancelar, ModalExcluir, ModalLimpar } from '../../components/users/Modal/Modal.jsx';
+function HomeInterno() {
+    const { componente } = useContext(RenderContext);
+    const { isModalOpen, fecharModal, onModalConfirm, modalType } = useContext(CrudContext);
 
-export default function Home(){
-    
-    // Importando Variavel de Estado de um Componente de Contexto'. Veio de um Contexto
-    const {componente} = useContext(RenderContext)
-
-    return(
-        // Envolvendo componente pelo Contexto de 'CrudContext'
-        <CrudProvider>
-            <div className={styles.container}>
+    return (
+        <div className={styles.container}>
+            <Modal isOpen={isModalOpen} onClose={fecharModal} onConfirm={onModalConfirm}>
+                {modalType === 'logout' && (
+                    <>
+                        <h2>Fazer Logout</h2>
+                        <p>Tem certeza de que deseja sair da aplicação?</p>
+                    </>
+                )}
+                {modalType === 'excluir' && (
+                    <>
+                        <h2>Confirmar Exclusão</h2>
+                        <p>Deseja realmente excluir este item?</p>
+                    </>
+                )}
                 
-                <ModalCancelar 
-                    openModal='false'
-                />
-                <ModalExcluir 
-                    openModal='false'
-                />
-                <ModalLimpar 
-                    openModal='false'
-                />
-
-                <Header />
-
-                <main>
-
-                    {/* Variavel de Estado, Renderizada no Componente de Contexto */}
-                    {
-                        componente
-                    }
-                </main>
+                {modalType === 'enviar' && (
+                    <>
+                        <h2>Confirmar Envio de Solicitações</h2>
+                        <p>Deseja realmente enviar essas solicitações para análise? </p>
+                    </>
+                )}
+                {modalType === 'cancelar' && (
+                    <>
+                        <h2>Confirmar Exclusão</h2>
+                        <p>Deseja realmente as solicitações de reembolso?</p>
+                    </>
+                )}
                 
+            </Modal>
 
-            </div>
-        </CrudProvider>
-
-    )
+            <Header />
+            <main>{componente}</main>
+        </div>
+    );
 }
 
-// Lógica de Gerenciamento de Estado (Antiga):
-// Home -> Passa via 'props' o 'setter' que recebe o valor da variável 'componente'
-// Header e Dashboard-> Recebem o 'setter' e repassa ele via 'props' para os componentes 'Button e Card', dentro de uma estrutura de função anônima: props={() => setter('valor')}
-// Button e Card -> Recebem de 'Header e Dashboard' via 'props' a função anônima e atribui a um evento de 'click'
-
-// Logica de Gerenciamento de Estado (Atual):
-// Componente de Contexto envolve o APP da aplicação
-// A partir dele, podemos importar todas as Funções e Variaveis de Estado do seu Contexto
+export default function Home(){
+    return (
+        <CrudProvider>
+            <HomeInterno />
+        </CrudProvider>
+    )
+}

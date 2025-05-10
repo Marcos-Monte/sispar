@@ -18,8 +18,15 @@ import IconeMenu from '@/assets/Header/imagem-fechar-header.png'
 import { CrudContext } from '@/contexts/CrudContext.jsx'
 import { RenderContext } from '@/contexts/RenderContext.jsx'
 
+
 // OBS: Função do Button, é uma função anônima que vai receber um 'setter' (via props) e armazena um valor 'string'.
 export default function Header(){
+
+    const { abrirModal } = useContext(CrudContext)
+
+    const handleLogout = () => {
+        abrirModal('logout', () => logout())
+    }
 
     // Importando Funções e Variáveis de Estado de um Componente de Contexto'. Veio de um Contexto
     const {alterarRender, openHeader, statusHeader} = useContext(RenderContext)
@@ -27,8 +34,7 @@ export default function Header(){
 
     const navigate = useNavigate()
 
-    function logout(event){
-        event.preventDefault();
+    function logout(){
         localStorage.removeItem('user');
         localStorage.removeItem('solicitacoes');
 
@@ -122,7 +128,7 @@ export default function Header(){
             <Button 
                 tipo='icon'
                 cor='cinza'
-                funcao={logout}
+                funcao={() => handleLogout()}
             >
                 <img src={IconeSair} alt="Ícone de saída da aplicação, Log off" />
             </Button>

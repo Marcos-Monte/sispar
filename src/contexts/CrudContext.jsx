@@ -7,34 +7,10 @@ import api from '../services/Api.jsx';
 const CrudContext = createContext({})
 
 function CrudProvider(props){
-    // Assim que montar a aplicação, executar a função indicada
-    useEffect(()=>{
-        buscarReembolsos()
-        const item = localStorage.getItem('solicitacoes');
 
-        try {
-            const solicitacoesExistentes = item ? JSON.parse(item) : null;
-    
-            if (!Array.isArray(solicitacoesExistentes)) {
-                localStorage.setItem('solicitacoes', JSON.stringify([]));
-            }
-        } catch (e) {
-            console.warn("Erro ao fazer parse do localStorage 'solicitacoes'. Reinicializando...", e);
-            localStorage.setItem('solicitacoes', JSON.stringify([]));
-        }
-
-    }, [])
-
-    const cadastro = JSON.parse(localStorage.getItem('user'))
-    let solicitacoes = []
-    try {
-        const item = localStorage.getItem('solicitacoes');
-        solicitacoes = item ? JSON.parse(item) : [];
-    } catch (e) {
-        console.warn("Erro ao fazer parse do localStorage 'solicitacoes'.", e);
-    }
     // Gerencia o Estado do Array de Objetos importado para a aplicação (Esse 'registros' que irá ser renderizado na tela e não os valores do BD)
     const [registros, setRegistros] = useState([])
+    const cadastro = JSON.parse(localStorage.getItem('user'))
     const [dados, setDados] = useState({
         colaborador:'',
         empresa: '',
@@ -53,8 +29,37 @@ function CrudProvider(props){
         despesa: 0,
         id_colaborador: cadastro.id,
     })
-    
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalType, setModalType] = useState(null)
+    const [onModalConfirm, setOnModalConfirm] = useState(() => () => {})
 
+    let solicitacoes = []
+
+    // Assim que montar a aplicação, executar a função indicada
+    useEffect(()=>{
+        buscarReembolsos()
+        const item = localStorage.getItem('solicitacoes');
+
+        try {
+            const solicitacoesExistentes = item ? JSON.parse(item) : null;
+    
+            if (!Array.isArray(solicitacoesExistentes)) {
+                localStorage.setItem('solicitacoes', JSON.stringify([]));
+            }
+        } catch (e) {
+            console.warn("Erro ao fazer parse do localStorage 'solicitacoes'. Reinicializando...", e);
+            localStorage.setItem('solicitacoes', JSON.stringify([]));
+        }
+
+    }, [])
+
+    try {
+        const item = localStorage.getItem('solicitacoes');
+        solicitacoes = item ? JSON.parse(item) : [];
+    } catch (e) {
+        console.warn("Erro ao fazer parse do localStorage 'solicitacoes'.", e);
+    }
+    
     async function buscarReembolsos() {
         const response = await api.get('/reembolso/reembolsos')
 
@@ -210,6 +215,18 @@ function CrudProvider(props){
             console.error('Não foi possível contabilizar os status: ', error)
         }
     }
+
+    function abrirModal(tipo, confirmacao) {
+        setModalType(tipo)
+        setOnModalConfirm(() => confirmacao)
+        setIsModalOpen(true)
+    }
+
+    function fecharModal() {
+        setIsModalOpen(false)
+        setModalType(null)
+        setOnModalConfirm(() => () => {})
+    }
     
     return (
         // Tag que envolve o componente em comum (Home)
@@ -233,6 +250,12 @@ function CrudProvider(props){
             editarSolicitacao,
             calcularFaturamento,
             contadorStatus,
+
+            isModalOpen,
+            fecharModal,
+            abrirModal,
+            modalType,
+            onModalConfirm,
         }}>
             {props.children}
         </CrudContext.Provider>
