@@ -16,6 +16,8 @@ export default function Cadastro(){
 
     const [mostrarSenha, setMostrarSenha] = useState(true)
 
+    const [imagemSelecionada, setImagemSelecionada] = useState(null)
+
     const [dadosCadastrais, setDadosCadastrais] = useState({
         nome: '',
         email: '',
@@ -23,6 +25,7 @@ export default function Cadastro(){
         senha: '',
         senhaConfirm: '',
         cargo: 'Selec.',
+        foto: '',
     })
 
     function limparCampos(){
@@ -33,6 +36,7 @@ export default function Cadastro(){
             senha: '',
             senhaConfirm: '',
             cargo: 'Selec.',
+            foto: '',
         })
     }
 
@@ -45,6 +49,11 @@ export default function Cadastro(){
             item.cargo.toLowerCase() === cargo.toLowerCase()
         )
         return resultado ? resultado.salario : null
+    }
+
+    function uploadImagem(event){
+        const file = event.target.files[0];
+        setImagemSelecionada(file)
     }
 
     async function submitCadastro(){
@@ -63,10 +72,24 @@ export default function Cadastro(){
             }
             const salario = getSalario(tiposCargos, dadosCadastrais.cargo)
 
+            let urlFoto = '';
+            
+            if(imagemSelecionada){
+                const formData = new FormData();
+                formData.append('foto', imagemSelecionada);
+
+                const response = await api.post('/colaborador/upload-foto', formData, {
+                    headers: {'Content-Type': 'multipart/form-data'}
+                })
+
+                urlFoto = response.data.url
+            }
+
             const dados = {
                 ...dadosCadastrais,
                 salario: salario,
-                status: 'ativo'
+                status: 'ativo',
+                foto: urlFoto
             }
 
             await api.post('/colaborador/cadastrar', dados)
@@ -93,6 +116,7 @@ export default function Cadastro(){
         } 
     }
 
+    
     return(
         <>
             <section className={styles.container}>
@@ -175,6 +199,8 @@ export default function Cadastro(){
                             [event.target.name]: event.target.value
                         })}
                     />
+
+                    <input type="file" accept='image/*' onChange={uploadImagem}/>
                     <div className={styles.botoes}>
                         <Button 
                             tipo='container'

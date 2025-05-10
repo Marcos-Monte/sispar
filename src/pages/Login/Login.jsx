@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../services/Api';
 
+
 export default function Login(){
 
     useEffect(() => {
@@ -22,6 +23,8 @@ export default function Login(){
             localStorage.removeItem('emailJaCadastrado')
         }
     }, [])
+
+    const API_URL = import.meta.env.VITE_API_URL
 
     // Iniciando os estados
     const [email, setEmail] = useState('');
@@ -45,7 +48,10 @@ export default function Login(){
                 email: response.data.items.email,
                 nome: response.data.items.nome,
                 cargo: response.data.items.cargo,
+                foto: `${API_URL}${response.data.items.foto}`,
             }
+
+            console.log(API_URL)
             
             localStorage.setItem('user', JSON.stringify(usuario))
             // Se a requisição for bem sucedida enviar para a rota indicada
