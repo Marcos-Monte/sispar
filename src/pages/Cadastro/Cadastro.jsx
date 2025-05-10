@@ -116,7 +116,6 @@ export default function Cadastro(){
         } 
     }
 
-    
     return(
         <>
             <section className={styles.container}>
@@ -200,7 +199,13 @@ export default function Cadastro(){
                         })}
                     />
 
-                    <input type="file" accept='image/*' onChange={uploadImagem}/>
+                    <div className={styles.imageBox} >
+                        <label htmlFor="upload" className={styles.labelUpload}>
+                            <i class="bi bi-camera"></i> Clique para enviar imagem
+                        </label>
+                        <input id="upload" type="file" accept='image/*' onChange={uploadImagem}/>
+                    </div>
+
                     <div className={styles.botoes}>
                         <Button 
                             tipo='container'

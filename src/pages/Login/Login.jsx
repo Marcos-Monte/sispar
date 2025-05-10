@@ -43,12 +43,14 @@ export default function Login(){
                 senha: senha,
             })
 
+            const dados = response.data.items
+
             const usuario = {
-                id: response.data.items.id,
-                email: response.data.items.email,
-                nome: response.data.items.nome,
-                cargo: response.data.items.cargo,
-                foto: `${API_URL}${response.data.items.foto}`,
+                id: dados.id,
+                email: dados.email,
+                nome: dados.nome,
+                cargo: dados.cargo,
+                foto: dados.foto ? `${API_URL}${dados.foto}`: '',
             }
 
             console.log(API_URL)
