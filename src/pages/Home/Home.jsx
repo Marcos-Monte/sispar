@@ -28,6 +28,14 @@ function HomeInterno() {
                         <p>Deseja realmente excluir este item?</p>
                     </>
                 )}
+
+                {modalType === 'editar' && (
+                    <>
+                        <h2>Aviso: </h2>
+                        <p>Ao confirmar a edição o item será retirado da lista de solicitações de reembolsso. Para que retorne, basta salvar novamente.</p>
+                        <p>Deseja editar este item?</p>
+                    </>
+                )}
                 
                 {modalType === 'enviar' && (
                     <>
@@ -38,7 +46,7 @@ function HomeInterno() {
                 {modalType === 'cancelar' && (
                     <>
                         <h2>Confirmar Exclusão</h2>
-                        <p>Deseja realmente as solicitações de reembolso?</p>
+                        <p>Deseja realmente as cancelar o envio das solicitações de reembolso?</p>
                     </>
                 )}
                 

@@ -15,7 +15,15 @@ export default function Tabela(){
     // Importando função que renderiza a abertura de um modal 
     // const {openModal} = useContext(RenderContext)
     // Importa um array de registros para renderizar o conteudo na tela
-    const {solicitacoes, excluirRegistro, editarSolicitacao} = useContext(CrudContext)
+    const {solicitacoes, excluirRegistro, editarSolicitacao, abrirModal} = useContext(CrudContext)
+
+    function handleEditar(obj){
+        abrirModal('editar', () => editarSolicitacao(obj))
+    }
+    
+    function handleExcluir(obj){
+        abrirModal('excluir', () => excluirRegistro(obj))
+    }
 
     return(
         <table>
@@ -54,7 +62,7 @@ export default function Tabela(){
                             <Button
                                 tipo='container'
                                 cor='transparente'
-                                funcao={() => excluirRegistro(obj)}
+                                funcao={() => handleExcluir(obj)}
                             >
                                 {<img src={IconeExcluir} alt="Ícone de uma lixeira" />}
                             </Button>
@@ -64,7 +72,7 @@ export default function Tabela(){
                             <Button
                                 tipo='container'
                                 cor='transparente'
-                                funcao={() => editarSolicitacao(obj)}
+                                funcao={() => handleEditar(obj)}
                             >
                                 {<img src={IconeEditar} alt="Ícone de um lápis" className={styles.iconeEditar}/>}
                             </Button>

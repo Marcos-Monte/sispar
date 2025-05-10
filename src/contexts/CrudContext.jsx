@@ -133,14 +133,15 @@ function CrudProvider(props){
             localStorage.setItem('solicitacoes', JSON.stringify(solicitacoesFiltradas));
         } catch (error) {
             console.error('Não foi possível excluir a solicitação de reembolso: ', error)
+        } finally {
+            setIsModalOpen(false)
         }
-        
-
     }
 
     function cancelarSolicitacao(){
         localStorage.setItem('solicitacoes', JSON.stringify([]))
         limparDados()
+        setIsModalOpen(false)
     }
 
     async function enviarSolicitacao(){
@@ -158,6 +159,8 @@ function CrudProvider(props){
         } catch (error) {
             console.error('Não foi possível efetuar a requisição: ', error.response.data.erro)
             alert(`Erro ao cadastrar reembolso: ${error.response.data?.erro}`);
+        } finally {
+            setIsModalOpen(false)
         }
     }
 
@@ -173,6 +176,8 @@ function CrudProvider(props){
             localStorage.setItem('solicitacoes', JSON.stringify(solicitacoesFiltradas));
         } catch (error) {
             console.error('Não foi possível iniciar edição desse registro: ', error)
+        } finally {
+            setIsModalOpen(false)
         }
     }
 

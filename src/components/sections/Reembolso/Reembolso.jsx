@@ -18,14 +18,19 @@ import IconeSeta from '@/assets/icons/seta.png';
 import { controleCustos, tiposDespesa, tiposMoeda } from '@/data/opcoes.js';
 // import solicitacoesReembolso from '@/data/registros.js';
 import { CrudContext } from '../../../contexts/CrudContext';
-import { RenderContext } from '../../../contexts/RenderContext';
 
 export default function Reembolso(){
-    // Lógica dos Modais é gerenciado pelo 'contexto' indicado
-    const {openModal} = useContext(RenderContext)
 
     // Toda a lógica de CRUD da aplicação é responsabilidade do 'contexto' indicado
-    const {dados, handleChange, handleSalvar, limparDados, enviarSolicitacao, cancelarSolicitacao, solicitacoes, calcularFaturamento} = useContext(CrudContext)
+    const {dados, handleChange, handleSalvar, limparDados, enviarSolicitacao, cancelarSolicitacao, solicitacoes, calcularFaturamento, abrirModal} = useContext(CrudContext)
+
+    function handleEnviarSolicitacoes(){
+        abrirModal('enviar', () => enviarSolicitacao())
+    }
+
+    function handleCancelarSolicitacoes(){
+        abrirModal('cancelar', () => cancelarSolicitacao())
+    }
 
     return(
         
@@ -274,7 +279,7 @@ export default function Reembolso(){
                 <Button 
                     tipo='containerGrande'
                     cor='azulEscuro'
-                    funcao={() => enviarSolicitacao()}
+                    funcao={handleEnviarSolicitacoes}
                 >
                     <img src={IconeEnviar} alt="Ícone com o símbolo de 'certo'" />
                     Enviar para Análise
@@ -283,7 +288,7 @@ export default function Reembolso(){
                 <Button 
                     tipo='containerGrande'
                     cor='vinho'
-                    funcao={() => cancelarSolicitacao()} // Abrir Modal
+                    funcao={handleCancelarSolicitacoes} // Abrir Modal
                 >
                     <img src={IconeCancelar} alt="Ícone com um X" />
                     Cancelar Solicitação

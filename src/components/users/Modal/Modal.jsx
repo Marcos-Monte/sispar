@@ -12,7 +12,7 @@ export function Modal({ isOpen, onClose, onConfirm, children }) {
             <div className={styles.modalContent}>
                 <div className={styles.modalHeader}>
                     <img src={Logo} alt="" />
-                    <i class="bi bi-x-circle"><button onClick={onClose}></button></i>
+                    <i class="bi bi-x-circle" onClick={onClose}></i>
                 </div>
 
                 <div className={styles.modalBody}>
@@ -35,7 +35,7 @@ export function Modal({ isOpen, onClose, onConfirm, children }) {
                         // rota='/'
                         funcao={onConfirm}
                     >
-                        Canfirmar
+                        Confirmar
                     </Button>
                 </div>
             </div>
