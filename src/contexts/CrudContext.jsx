@@ -93,9 +93,15 @@ function CrudProvider(props) {
     async function handleSalvar(obj) {
         try {
             // Validação de campos obrigatórios
-            if (!dados.colaborador || !dados.empresa || !dados.num_prestacao || !dados.data || !dados.tipo_reembolso || !dados.centro_custo || !dados.moeda || !dados.valor_faturado) {
+            if (!obj.colaborador || !obj.empresa || !obj.tipo_reembolso || !obj.centro_custo || !obj.moeda || !obj.valor_faturado || !obj.divisao || !obj.ordem_interna) {
                 alert('Por favor, preencha todos os campos obrigatórios!');
                 return;
+            }
+
+            if(!obj.data) {
+                const data = new Date();
+                console.log(data)
+                obj.data = data
             }
 
             localStorage.setItem('solicitacoes', JSON.stringify([...solicitacoes, obj]));
