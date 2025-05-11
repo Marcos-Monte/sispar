@@ -18,19 +18,19 @@ export default function Tabela(){
         <table>
             <thead className={styles.cabecalho}>
                 <tr className={styles.linha}>
-                    <th>Colaborador(a)</th>
-                    <th>Empresa</th>
                     <th>Nº Prest.</th>
+                    <th className={styles.teste}>Colaborador(a)</th>
+                    <th>Empresa</th>
                     <th>Data</th>
-                    <th>Motivo</th>
+                    {/* <th>Motivo</th> */}
                     <th>Tipo Reemb.</th>
                     <th>Ctr. Custo</th>
-                    <th>Ord. Int.</th>
-                    <th>Div.</th>
+                    {/* <th>Ord. Int.</th> */}
+                    {/* <th>Div.</th> */}
                     <th>PEP</th>
                     <th>Moeda</th>
-                    <th>Dist. Km</th>
-                    <th>Val. Km</th>
+                    {/* <th>Dist. Km</th> */}
+                    {/* <th>Val. Km</th> */}
                     <th>Val. Faturado</th>
                     <th>Despesa</th>
                     <th>Status</th>
@@ -45,6 +45,9 @@ export default function Tabela(){
                 registros.map((obj, index) => (
 
                     <tr className={styles.linha} key={index}>
+                        <td>
+                            <span>{obj.num_prestacao}</span>
+                        </td>
 
                         <td>
                             <span>{obj.colaborador.toUpperCase()}</span>
@@ -54,18 +57,15 @@ export default function Tabela(){
                             <span>{obj.empresa.toUpperCase()}</span>
                         </td>
                         
-                        <td>
-                            <span>{obj.num_prestacao}</span>
-                        </td>
+                        
 
                         <td>
                             <span>{obj.data}</span>
                         </td>
 
-                        <td>
-                            {/* <span>{<img src={IconeArquivo} alt="Ícone em formado de um arquivo" />}</span> */}
+                        {/* <td>
                             <span>{obj.descricao}</span>
-                        </td>
+                        </td> */}
 
                         <td>
                             <span>{obj.tipo_reembolso.toUpperCase()}</span>
@@ -75,13 +75,13 @@ export default function Tabela(){
                             <span>{obj.centro_custo.toUpperCase()}</span>
                         </td>
                         
-                        <td>
+                        {/* <td>
                             <span>{obj.ordem_interna}</span>
-                        </td>
+                        </td> */}
                         
-                        <td>
+                        {/* <td>
                             <span>{obj.divisao}</span>
-                        </td>
+                        </td> */}
 
                         <td>
                             <span>{obj.pep}</span>
@@ -91,13 +91,13 @@ export default function Tabela(){
                             <span>{obj.moeda.toUpperCase()}</span>
                         </td>
 
-                        <td>
+                        {/* <td>
                             <span>{obj.distancia_km}</span>
-                        </td>
+                        </td> */}
 
-                        <td>
+                        {/* <td>
                             <span>{obj.valor_km}</span>
-                        </td>
+                        </td> */}
                         
                         <td>
                             <span>{obj.valor_faturado}</span>

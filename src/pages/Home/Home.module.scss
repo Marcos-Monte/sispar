@@ -5,7 +5,8 @@
     justify-content: space-between;
     align-items: center;
     position: relative;
-    
+
+    // MAIN é o conteúdo principal da aplicação (dashboard, etc)
     main {
         width: 100%;
         height: 100%;
@@ -13,19 +14,23 @@
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
-        padding: 0 0 0 95px ;
+        padding: 0 0 0 95px;
+
+        // Corrigido: estava com z-index: -1, o que impedia cliques
         position: absolute;
         right: 0;
-        z-index: -1;
+        z-index: 0;
     }
 }
 
 @media (max-width: 800px) {
     .container {
         flex-direction: column;
+
         main {
+            // No mobile, main volta ao fluxo normal
             position: relative !important;
-            padding: .5rem;
+            padding: 0.5rem;
         }
     }
 }
