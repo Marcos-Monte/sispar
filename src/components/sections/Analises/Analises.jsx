@@ -12,7 +12,9 @@ export default function Analises(){
     return(
         <section className={styles.container}>
 
-            <Caminho>
+            <Caminho
+                estilo="hidden"
+            >
                 <img src={IconeHomeGray} alt="Ícone no formato de casa na cor cinza" />
                 <img src={IconeSeta} alt="Ícone do símbolo 'maior que'" />
                 <p>Reembolsos</p>

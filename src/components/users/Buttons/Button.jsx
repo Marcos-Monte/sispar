@@ -11,7 +11,7 @@ function Button(props){
         <Link className={styles.link} to={props.rota}>
             {/* Evento de Click (pode ou não acontecer).  */}
             <button 
-                className={`${styles[props.tipo]} ${styles[props.cor]}`}
+                className={`${styles[props.tipo]} ${styles[props.cor]} ${styles[props.hidden]}`}
                 onClick={props.funcao}
             >
                 {props.children}
