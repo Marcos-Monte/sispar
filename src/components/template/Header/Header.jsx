@@ -1,48 +1,40 @@
 // Import dependencias React
-import { useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 // Import do arquivo de estilização do componente
-import styles from './Header.module.scss'
+import styles from './Header.module.scss';
 // Import de Componentes
-import { Button } from '@/components/users/Buttons/Button.jsx'
+import { Button } from '@/components/users/Buttons/Button.jsx';
 // Import de Imagens / Icones 
-import IconeHistorico from '@/assets/Header/botao-historico.png'
-import IconeHome from '@/assets/Header/botao-home.png'
-import IconePesquisa from '@/assets/Header/botao-pesquisa.png'
-import IconeReembolso from '@/assets/Header/botao-reembolso.png'
-import IconeSair from '@/assets/Header/botao-sair.png'
-import FotoDefault from '@/assets/Header/image.png'
-import IconeMenu from '@/assets/Header/imagem-fechar-header.png'
+import IconeHistorico from '@/assets/Header/botao-historico.png';
+import IconeHome from '@/assets/Header/botao-home.png';
+import IconePesquisa from '@/assets/Header/botao-pesquisa.png';
+import IconeReembolso from '@/assets/Header/botao-reembolso.png';
+import IconeSair from '@/assets/Header/botao-sair.png';
+import FotoDefault from '@/assets/Header/image.png';
+import IconeMenu from '@/assets/Header/imagem-fechar-header.png';
 
 // Import de Contexto
-import { CrudContext } from '@/contexts/CrudContext.jsx'
-import { RenderContext } from '@/contexts/RenderContext.jsx'
+import { CrudContext } from '@/contexts/CrudContext.jsx';
+import { RenderContext } from '@/contexts/RenderContext.jsx';
 
 
 // OBS: Função do Button, é uma função anônima que vai receber um 'setter' (via props) e armazena um valor 'string'.
 export default function Header(){
 
-    const navigate = useNavigate()
-
-    const handleLogout = () => {
-        abrirModal('logout', () => logout())
-    }
+    const navigate = useNavigate();
 
     // Importando Funções e Variáveis de Estado de um Componente de Contexto'. Veio de um Contexto
     const {alterarRender, openHeader, statusHeader} = useContext(RenderContext)
     const {cadastro, abrirModal } = useContext(CrudContext)
 
     function handleAbrirHeader() {
-        openHeader(); // função que alterna o estado
-        showAlert("Menu lateral alterado com sucesso!", "info");
+        openHeader();
     }
-
-
 
     function logout(){
         localStorage.removeItem('user');
         localStorage.removeItem('solicitacoes');
-        navigate('/')
     }
 
     return(
@@ -131,7 +123,8 @@ export default function Header(){
             <Button 
                 tipo='icon'
                 cor='cinza'
-                funcao={() => handleLogout()}
+                funcao={() => logout()}
+                rota="/"
             >
                 <img src={IconeSair} alt="Ícone de saída da aplicação, Log off" />
             </Button>
