@@ -128,25 +128,27 @@ export default function Header(){
                 </nav>
 
                 {/* Botão que recebe 'rota' será enviado para outra página. Não recebe 'função'*/}
-                <Button 
-                    tipo='icon'
-                    cor='cinza'
-                    hidden='hidden'
-                    funcao={() => logout()}
-                    rota="/"
-                >
-                    <img src={IconeSair} alt="Ícone de saída da aplicação, Log off" />
-                </Button>
+                <div>
+                        <Button 
+                        tipo='icon'
+                        cor='cinza'
+                        hidden='hidden'
+                        funcao={() => logout()}
+                        rota="/"
+                    >
+                        <img src={IconeSair} alt="Ícone de saída da aplicação, Log off" />
+                    </Button>
                 
-                <Button 
-                    tipo='icon'
-                    cor='azul'
-                    funcao={handleMobileMenu}
-                    hidden='mobileHidden'
-                > 
-                    <i className="bi bi-three-dots-vertical"></i>
-                </Button>
+                    <Button 
+                        tipo='icon'
+                        cor='azul'
+                        funcao={handleMobileMenu}
+                        hidden='mobileHidden'
+                    > 
+                        <i className="bi bi-three-dots-vertical"></i>
+                    </Button>
                 
+                </div>
                 
             </header>
 
