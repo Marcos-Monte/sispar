@@ -12,6 +12,7 @@
         background-image: url('@/assets/Login/imagemLogin.png');
         background-repeat: no-repeat;
         background-size: cover;
+        background-position: center;
 
     }
 
@@ -86,4 +87,42 @@
         }
         
     }
+    
 }
+
+
+
+@media (max-width: 1500px){
+
+    .imagemCapa, .login {
+        width: 50% !important;
+    }
+    
+}
+
+@media (max-width: 968px){
+    .imagemCapa{
+        display: none;
+    }
+
+    .login {
+        width: 100% !important;
+        gap: 2rem;
+    }
+
+    form, .box {
+        div{
+            width: 80% !important;
+            padding: 0 .3rem;
+        }
+    }
+}
+
+@media (max-width: 420px){
+    form, .box {
+        div{
+            width: 100% !important;
+        }
+    }
+}
+
