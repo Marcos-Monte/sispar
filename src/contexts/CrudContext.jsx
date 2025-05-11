@@ -137,12 +137,18 @@ function CrudProvider(props) {
     // Exclui uma solicitação do localStorage
     async function excluirRegistro(obj) {
         try {
-            if (!obj || !obj.num_prestacao) {
+            if (!obj) {
                 console.warn('Nenhuma solicitação válida selecionada para exclusão.');
                 return;
             }
 
-            const solicitacoesFiltradas = solicitacoes.filter(item => item.num_prestacao !== obj.num_prestacao);
+            const index = solicitacoes.findIndex(item => item === obj);
+
+            if(index === -1){
+                console.warn('Objeto não encontrado na lista.')
+            }
+
+            const solicitacoesFiltradas = solicitacoes.filter((_, i) => i !== index);
             alert("Reembolso excluído!");
             localStorage.setItem('solicitacoes', JSON.stringify(solicitacoesFiltradas));
         } catch (error) {
@@ -181,7 +187,18 @@ function CrudProvider(props) {
     // Edita uma solicitação existente, removendo-a da lista e preenchendo o formulário com os dados
     function editarSolicitacao(obj) {
         try {
-            const solicitacoesFiltradas = solicitacoes.filter(item => item.num_prestacao !== obj.num_prestacao);
+            if (!obj) {
+                console.warn('Nenhuma solicitação válida selecionada para edição.');
+                return;
+            }
+
+            const index = solicitacoes.findIndex(item => item === obj);
+
+            if(index === 1){
+                console.log('Solicitação não encontrada na lista. Atualize o navegador!')
+            }
+
+            const solicitacoesFiltradas = solicitacoes.filter((_, i) => i !== index);
             setDados(obj);
             localStorage.setItem('solicitacoes', JSON.stringify(solicitacoesFiltradas));
         } catch (error) {
