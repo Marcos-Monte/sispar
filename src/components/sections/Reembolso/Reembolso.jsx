@@ -51,7 +51,7 @@ export default function Reembolso(){
 
                 <div className={styles.boxIdentificacao}>
 
-                    <div className={styles.medium}>
+                    <div className={styles.large}>
 
                         <label>Nome Completo</label>
 
@@ -65,7 +65,7 @@ export default function Reembolso(){
 
                     </div>
 
-                    <div className={styles.small}>
+                    <div className={styles.medium}>
 
                         <label>Empresa</label>
 
@@ -79,7 +79,7 @@ export default function Reembolso(){
 
                     </div>
 
-                    <div className={styles.small}>
+                    {/* <div className={styles.small}>
 
                         <label>Nº Prest.Contas</label>
 
@@ -91,7 +91,7 @@ export default function Reembolso(){
                             required
                         />
 
-                    </div>
+                    </div> */}
 
                     <div className={styles.total}>
 
@@ -112,7 +112,7 @@ export default function Reembolso(){
 
                 <div className={styles.boxDados}>
 
-                    <div className={styles.intermediario}>
+                    <div className={styles.small}>
                         <label>Data</label>
                         <InputData 
                             type='date'
@@ -145,6 +145,17 @@ export default function Reembolso(){
                         />
                     </div>
 
+                    <div className={styles.small}>
+                        <label>Moeda</label>
+                        <Select
+                            array={tiposMoeda}
+                            name='moeda'
+                            value={dados.moeda}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+
                     <div className={styles.micro}>
                         <label>Ord. Int.</label>
                         <Input 
@@ -156,7 +167,7 @@ export default function Reembolso(){
                         />
                     </div>
 
-                    <div className={styles.micro}>
+                    {/* <div className={styles.micro}>
                         <label>PEP</label>
                         <Input 
                             type='text'
@@ -165,7 +176,7 @@ export default function Reembolso(){
                             onChange={handleChange}
                             required
                         />
-                    </div>
+                    </div> */}
 
                     <div className={styles.micro}>
                         <label>Div.</label>
@@ -189,16 +200,7 @@ export default function Reembolso(){
                         />
                     </div>
 
-                    <div className={styles.small}>
-                        <label>Moeda</label>
-                        <Select
-                            array={tiposMoeda}
-                            name='moeda'
-                            value={dados.moeda}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
+                    
 
                     <div className={styles.micro}>
                         <label>Valor / Km</label>
