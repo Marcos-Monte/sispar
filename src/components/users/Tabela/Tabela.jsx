@@ -18,22 +18,22 @@ export default function Tabela(){
         <table>
             <thead className={styles.cabecalho}>
                 <tr className={styles.linha}>
-                    <th>Nº Prest.</th>
-                    <th className={styles.teste}>Colaborador(a)</th>
-                    <th>Empresa</th>
-                    <th>Data</th>
-                    {/* <th>Motivo</th> */}
-                    <th>Tipo Reemb.</th>
-                    <th>Ctr. Custo</th>
-                    {/* <th>Ord. Int.</th> */}
-                    {/* <th>Div.</th> */}
-                    <th>PEP</th>
-                    <th>Moeda</th>
-                    {/* <th>Dist. Km</th> */}
-                    {/* <th>Val. Km</th> */}
-                    <th>Val. Faturado</th>
-                    <th>Despesa</th>
-                    <th>Status</th>
+                    <th className={styles.overflow}>Nº Prest.</th>
+                    <th className={styles.overflow}>Colaborador(a)</th>
+                    <th className={styles.overflow}>Empresa</th>
+                    <th className={styles.overflow}>Data</th>
+                    {/* <th className={styles.overflow}>Motivo</th> */}
+                    <th className={styles.overflow}>Tipo Reemb.</th>
+                    <th className={styles.overflow}>Ctr. Custo</th>
+                    {/* <th className={styles.overflow}>Ord. Int.</th> */}
+                    {/* <th className={styles.overflow}>Div.</th> */}
+                    <th className={styles.overflow}>PEP</th>
+                    <th className={styles.overflow}>Moeda</th>
+                    {/* <th className={styles.overflow}>Dist. Km</th> */}
+                    {/* <th className={styles.overflow}>Val. Km</th> */}
+                    <th className={styles.overflow}>Val. Faturado</th>
+                    <th className={styles.overflow}>Despesa</th>
+                    <th className={styles.overflow}>Status</th>
                 </tr>
             </thead>
 

@@ -49,7 +49,7 @@ table {
         
     }
 
-    td span, .teste{
+    td span, .overflow{
         white-space: nowrap;  /* Impede que o texto quebre para a próxima linha */
         overflow: hidden;     /* Oculta o conteúdo que ultrapassa a célula */
         text-overflow:ellipsis; /* Adiciona as reticências (...) */
