@@ -101,7 +101,7 @@ function CrudProvider(props) {
             if(!obj.data) {
                 const data = new Date();
                 console.log(data)
-                obj.data = data
+                obj.data = data.toISOString().replace('Z', '');
             }
 
             localStorage.setItem('solicitacoes', JSON.stringify([...solicitacoes, obj]));
