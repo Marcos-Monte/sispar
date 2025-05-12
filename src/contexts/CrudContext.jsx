@@ -91,11 +91,14 @@ function CrudProvider(props) {
 
     // Salva uma nova solicitação no localStorage
     async function handleSalvar(obj) {
+        const obrigatorios = ['colaborador', 'empresa', 'tipo_reembolso', 'centro_custo', 'moeda', 'valor_faturado', 'divisao', 'ordem_interna'];
+
         try {
-            // Validação de campos obrigatórios
-            if (!obj.colaborador || !obj.empresa || !obj.tipo_reembolso || !obj.centro_custo || !obj.moeda || !obj.valor_faturado || !obj.divisao || !obj.ordem_interna) {
-                alert('Por favor, preencha todos os campos obrigatórios!');
-                return;
+            for (let campo of obrigatorios) {
+                if (!obj[campo]) {
+                    alert(`Por favor, preencha o campo obrigatório: ${campo.replace('_', ' ')}`);
+                    return;
+                }
             }
 
             if(!obj.data) {

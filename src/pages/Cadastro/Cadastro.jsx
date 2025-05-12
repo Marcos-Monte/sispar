@@ -206,6 +206,16 @@ export default function Cadastro(){
                         </label>
                         <input id="upload" type="file" accept='image/*' onChange={uploadImagem}/>
                     </div>
+                    {
+                        imagemSelecionada && (
+                            <img 
+                                src={URL.createObjectURL(imagemSelecionada)} 
+                                alt="Prévia da imagem"
+                                className={styles.previewImagem} // ou aplique inline: style={{ width: '100px', marginTop: '1rem' }}
+                            />
+                        )
+                    }
+
 
                     <div className={styles.botoes}>
                         <Button 
