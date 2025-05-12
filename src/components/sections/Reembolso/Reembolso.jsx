@@ -53,7 +53,7 @@ export default function Reembolso(){
 
                     <div className={styles.large}>
 
-                        <label>Nome Completo</label>
+                        <label>Nome Completo<p className={styles.asteristico}>*</p></label>
 
                         <Input 
                             type='text'
@@ -67,7 +67,7 @@ export default function Reembolso(){
 
                     <div className={styles.medium}>
 
-                        <label>Empresa</label>
+                        <label>Empresa<p className={styles.asteristico}>*</p></label>
 
                         <Input 
                             type='text'
@@ -124,7 +124,7 @@ export default function Reembolso(){
                     </div>
 
                     <div className={styles.medium}>
-                        <label>Tipo de Reembolso</label>
+                        <label>Tipo de Reembolso<p className={styles.asteristico}>*</p></label>
                         <Select
                             array={tiposDespesa}
                             name='tipo_reembolso'
@@ -135,7 +135,7 @@ export default function Reembolso(){
                     </div>
 
                     <div className={styles.medium}>
-                        <label>Controle de Custo</label>
+                        <label>Controle de Custo<p className={styles.asteristico}>*</p></label>
                         <Select
                             array={controleCustos}
                             name='centro_custo'
@@ -146,7 +146,7 @@ export default function Reembolso(){
                     </div>
 
                     <div className={styles.small}>
-                        <label>Moeda</label>
+                        <label>Moeda<p className={styles.asteristico}>*</p></label>
                         <Select
                             array={tiposMoeda}
                             name='moeda'
@@ -157,7 +157,7 @@ export default function Reembolso(){
                     </div>
 
                     <div className={styles.micro}>
-                        <label>Ord. Int.</label>
+                        <label>Ord. Int.<p className={styles.asteristico}>*</p></label>
                         <Input 
                             type='text'
                             name='ordem_interna'
@@ -179,7 +179,7 @@ export default function Reembolso(){
                     </div> */}
 
                     <div className={styles.micro}>
-                        <label>Div.</label>
+                        <label>Div.<p className={styles.asteristico}>*</p></label>
                         <Input 
                             type='text'
                             name='divisao'
@@ -225,7 +225,7 @@ export default function Reembolso(){
                     </div>
 
                     <div className={styles.micro}>
-                        <label>Valor Fat.</label>
+                        <label>Valor Fat.<p className={styles.asteristico}>*</p></label>
                         <Input 
                             type='text'
                             name='valor_faturado'
