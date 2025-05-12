@@ -10,6 +10,7 @@ import { tiposCargos } from '../../data/opcoes'
 
 import api from '../../services/Api'
 
+
 export default function Cadastro(){
 
     const navigate = useNavigate();
@@ -168,7 +169,7 @@ export default function Cadastro(){
                             autoComplete="new-password"
                         />
                         <button type="button" onClick={() => setMostrarSenha(!mostrarSenha)}>
-                            {mostrarSenha ? <i class="bi bi-eye-slash"></i> : <i class="bi bi-eye"></i>}
+                            {mostrarSenha ? <i className="bi bi-eye"></i>: <i className="bi bi-eye-slash"></i>}
                         </button>
                     </div>
 
@@ -185,7 +186,7 @@ export default function Cadastro(){
                             autoComplete="new-password"
                         />
                         <button type="button" onClick={() => setMostrarSenha(!mostrarSenha)}>
-                            {mostrarSenha ? <i class="bi bi-eye-slash"></i> : <i class="bi bi-eye"></i>}
+                            {mostrarSenha ? <i className="bi bi-eye"></i>: <i className="bi bi-eye-slash"></i>}
                         </button>
                     </div>
 
@@ -201,7 +202,7 @@ export default function Cadastro(){
 
                     <div className={styles.imageBox} >
                         <label htmlFor="upload" className={styles.labelUpload}>
-                            <i class="bi bi-camera"></i> Clique para enviar imagem
+                            <i className="bi bi-camera"></i> Clique para enviar imagem
                         </label>
                         <input id="upload" type="file" accept='image/*' onChange={uploadImagem}/>
                     </div>

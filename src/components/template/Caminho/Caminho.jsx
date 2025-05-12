@@ -3,7 +3,7 @@ import styles from './Caminho.module.scss'
 
 export default function Caminho(props){
     return(
-        <section className={styles.container}>
+        <section className={`${styles.container} ${styles[props.estilo]}`}>
 
             {props.children}
 

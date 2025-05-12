@@ -87,7 +87,7 @@
     border: .8px solid var(--surface);
     border-radius: 6px;
     position: relative;
-    padding: 0 1rem;
+    // padding: 0 1rem;
 
     input {
         appearance: none;
@@ -112,6 +112,16 @@
         background-color: var(--primary-dark);
     }
 
+}
+
+
+@media (max-width: 800px){
+    .botao {
+        max-width: 50px;
+    }
+    .containerData, .containerSelect {
+        width: 100% !important;
+    }
 }
 
 

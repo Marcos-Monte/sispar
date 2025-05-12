@@ -1,6 +1,8 @@
 .cardIndividual{
-    width: 290px;
-    height: 209px;
+    // min-width: 250px !important;
+    // width: 25% !important;
+    flex: 1;
+    height: 209px !important;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -8,6 +10,7 @@
     gap: 1rem;
     border-radius: 6px;
     border: .8px solid var(--surface);
+    // background-color: blue;
 }
 
 .cardIndividual:hover {
@@ -58,6 +61,22 @@
     
     .rejeitado {
         background-color: var(--accent);
+    }
+}
+
+@media (max-width: 800px){
+    .cardIndividual{
+        flex: none;
+    }
+
+    .container {
+        flex-wrap: wrap;
+    }
+
+    .card {
+        width: 70% !important;
+        justify-content: space-evenly !important;
+        padding: .5rem 0;
     }
 }
 

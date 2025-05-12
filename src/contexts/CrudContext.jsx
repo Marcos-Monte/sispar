@@ -1,42 +1,21 @@
-// Import de Dependencia de Context
+// Importação de dependências React e serviços
 import { createContext, useEffect, useState } from "react";
-
 import api from '../services/Api.jsx';
+import { getApiError } from "../services/utils.jsx";
 
-// Intancia o 'Contexto' com um Objeto Vazio como Padrão
-const CrudContext = createContext({})
+// Criação do contexto com valor inicial vazio
+const CrudContext = createContext({});
 
-function CrudProvider(props){
-    // Assim que montar a aplicação, executar a função indicada
-    useEffect(()=>{
-        buscarReembolsos()
-        const item = localStorage.getItem('solicitacoes');
+function CrudProvider(props) {
+    // Usuário logado recuperado do localStorage
+    const cadastro = JSON.parse(localStorage.getItem('user'));
 
-        try {
-            const solicitacoesExistentes = item ? JSON.parse(item) : null;
-    
-            if (!Array.isArray(solicitacoesExistentes)) {
-                localStorage.setItem('solicitacoes', JSON.stringify([]));
-            }
-        } catch (e) {
-            console.warn("Erro ao fazer parse do localStorage 'solicitacoes'. Reinicializando...", e);
-            localStorage.setItem('solicitacoes', JSON.stringify([]));
-        }
+    // Estado principal para renderização de registros da API
+    const [registros, setRegistros] = useState([]);
 
-    }, [])
-
-    const cadastro = JSON.parse(localStorage.getItem('user'))
-    let solicitacoes = []
-    try {
-        const item = localStorage.getItem('solicitacoes');
-        solicitacoes = item ? JSON.parse(item) : [];
-    } catch (e) {
-        console.warn("Erro ao fazer parse do localStorage 'solicitacoes'.", e);
-    }
-    // Gerencia o Estado do Array de Objetos importado para a aplicação (Esse 'registros' que irá ser renderizado na tela e não os valores do BD)
-    const [registros, setRegistros] = useState([])
+    // Estado para armazenar os dados do formulário
     const [dados, setDados] = useState({
-        colaborador:'',
+        colaborador: '',
         empresa: '',
         num_prestacao: 0,
         descricao: '',
@@ -52,49 +31,91 @@ function CrudProvider(props){
         valor_faturado: 0,
         despesa: 0,
         id_colaborador: cadastro.id,
-    })
-    
+    });
 
-    async function buscarReembolsos() {
-        const response = await api.get('/reembolso/reembolsos')
+    // Estados relacionados ao controle de modais
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalType, setModalType] = useState(null);
+    const [onModalConfirm, setOnModalConfirm] = useState(() => () => {});
 
-        if(response.data.length !== undefined){
-            setRegistros(response.data)
-        }
-        
-    }
+    // Array que armazena temporariamente as solicitações de reembolso
+    let solicitacoes = [];
 
-    function handleChange(event){
-        // console.log(event.target.name, event.target.value);
-        // Settando as propriedades dentro da variavel 'dados'. Recebe 'chave':'valor'
-        setDados({
-            ...dados, [event.target.name]: event.target.value
-        })
-        
-    }
+    // useEffect para buscar reembolsos ao carregar a aplicação
+    useEffect(() => {
+        buscarReembolsos();
 
-    // Função de Salvamento (clique no Botão)
-    async function handleSalvar(obj){
-
+        const item = localStorage.getItem('solicitacoes');
         try {
-              // Validação dos campos
-            if (!dados.colaborador || !dados.empresa || !dados.num_prestacao || !dados.data || !dados.tipo_reembolso || !dados.centro_custo || !dados.moeda || !dados.valor_faturado) {
-                alert('Por favor, preencha todos os campos obrigatórios!');
-                return; 
-            }
-            localStorage.setItem('solicitacoes', JSON.stringify([...solicitacoes, obj]))
-            limparDados()
-        } catch (error) {
-            console.error('Não foi possível salvar a solicitação de reembolso: ', error)
-        }
+            const solicitacoesExistentes = item ? JSON.parse(item) : null;
 
+            if (!Array.isArray(solicitacoesExistentes)) {
+                localStorage.setItem('solicitacoes', JSON.stringify([]));
+            }
+        } catch (e) {
+            console.warn("Erro ao interpretar 'solicitacoes' no localStorage. Reinicializando...", e);
+            localStorage.setItem('solicitacoes', JSON.stringify([]));
+        }
+    }, []);
+
+    // Recupera solicitações armazenadas localmente
+    try {
+        const item = localStorage.getItem('solicitacoes');
+        solicitacoes = item ? JSON.parse(item) : [];
+    } catch (e) {
+        console.warn("Erro ao carregar 'solicitacoes' do localStorage.", e);
     }
 
-    function limparDados(){
-        // Limpando Campos do Formulário
+    // Busca os registros de reembolso da API
+    async function buscarReembolsos() {
+        try {
+            const response = await api.get('/reembolso/reembolsos');
+
+            if (response.data.length !== undefined) {
+                setRegistros(response.data);
+            }
+        } catch (error) {
+            const erro = getApiError(error);
+            console.error('Erro ao buscar reembolsos:', erro || error);
+            alert(erro || error);
+        }
+    }
+
+    // Atualiza estado 'dados' com o valor digitado no formulário
+    function handleChange(event) {
+        setDados({
+            ...dados,
+            [event.target.name]: event.target.value,
+        });
+    }
+
+    // Salva uma nova solicitação no localStorage
+    async function handleSalvar(obj) {
+        try {
+            // Validação de campos obrigatórios
+            if (!obj.colaborador || !obj.empresa || !obj.tipo_reembolso || !obj.centro_custo || !obj.moeda || !obj.valor_faturado || !obj.divisao || !obj.ordem_interna) {
+                alert('Por favor, preencha todos os campos obrigatórios!');
+                return;
+            }
+
+            if(!obj.data) {
+                const data = new Date();
+                console.log(data)
+                obj.data = data.toISOString().replace('Z', '');
+            }
+
+            localStorage.setItem('solicitacoes', JSON.stringify([...solicitacoes, obj]));
+            limparDados();
+        } catch (error) {
+            console.error('Erro ao salvar a solicitação:', error);
+        }
+    }
+
+    // Reseta os campos do formulário para o estado inicial
+    function limparDados() {
         setDados(prevState => ({
             ...prevState,
-            colaborador:'',
+            colaborador: '',
             empresa: '',
             num_prestacao: 0,
             descricao: '',
@@ -110,109 +131,135 @@ function CrudProvider(props){
             valor_faturado: 0,
             despesa: 0,
             id_colaborador: cadastro.id,
-        }))
-        
+        }));
     }
 
-    async function excluirRegistro(obj){
+    // Exclui uma solicitação do localStorage
+    async function excluirRegistro(obj) {
         try {
-            if (!obj || !obj.num_prestacao) {
-                console.warn('Nenhum item selecionado para exclusão.');
+            if (!obj) {
+                console.warn('Nenhuma solicitação válida selecionada para exclusão.');
                 return;
             }
 
-            const solicitacoesFiltradas = solicitacoes.filter(item => obj.num_prestacao
-                !== item.num_prestacao
-            )
+            const index = solicitacoes.findIndex(item => item === obj);
+
+            if(index === -1){
+                console.warn('Objeto não encontrado na lista.')
+            }
+
+            const solicitacoesFiltradas = solicitacoes.filter((_, i) => i !== index);
             alert("Reembolso excluído!");
             localStorage.setItem('solicitacoes', JSON.stringify(solicitacoesFiltradas));
         } catch (error) {
-            console.error('Não foi possível excluir a solicitação de reembolso: ', error)
+            console.error('Erro ao excluir a solicitação:', error);
+        } finally {
+            setIsModalOpen(false);
         }
-        
-
     }
 
-    function cancelarSolicitacao(){
-        localStorage.setItem('solicitacoes', JSON.stringify([]))
-        limparDados()
+    // Cancela todas as solicitações e limpa o formulário
+    function cancelarSolicitacao() {
+        localStorage.setItem('solicitacoes', JSON.stringify([]));
+        limparDados();
+        setIsModalOpen(false);
     }
 
-    async function enviarSolicitacao(){
-        // Evita que o botão tenha o comportamento 'default'
+    // Envia as solicitações de reembolso para a API
+    async function enviarSolicitacao() {
         event.preventDefault();
 
         try {
-
-            await api.post('/reembolso/solicitacao', solicitacoes)
-            alert("Solicitações de reembolso cadastradas com sucesso!");
-            setDados({})
+            await api.post('/reembolso/solicitacao', solicitacoes);
+            alert("Solicitações enviadas com sucesso!");
+            setDados({});
             buscarReembolsos();
-            localStorage.setItem('solicitacoes', JSON.stringify([]))
-
+            localStorage.setItem('solicitacoes', JSON.stringify([]));
         } catch (error) {
-            console.error('Não foi possível efetuar a requisição: ', error.response.data.erro)
-            alert(`Erro ao cadastrar reembolso: ${error.response.data?.erro}`);
+            const erro = getApiError(error);
+            console.error('Erro ao enviar as solicitações:', erro || error);
+            alert(erro || error);
+        } finally {
+            setIsModalOpen(false);
         }
     }
 
-    function editarSolicitacao(obj){
+    // Edita uma solicitação existente, removendo-a da lista e preenchendo o formulário com os dados
+    function editarSolicitacao(obj) {
         try {
+            if (!obj) {
+                console.warn('Nenhuma solicitação válida selecionada para edição.');
+                return;
+            }
 
-            const solicitacoesFiltradas = solicitacoes.filter(
-                (item) => item.num_prestacao !== obj.num_prestacao
-            )
+            const index = solicitacoes.findIndex(item => item === obj);
 
-            setDados(obj)
+            if(index === 1){
+                console.log('Solicitação não encontrada na lista. Atualize o navegador!')
+            }
 
+            const solicitacoesFiltradas = solicitacoes.filter((_, i) => i !== index);
+            setDados(obj);
             localStorage.setItem('solicitacoes', JSON.stringify(solicitacoesFiltradas));
         } catch (error) {
-            console.error('Não foi possível iniciar edição desse registro: ', error)
+            console.error('Erro ao editar a solicitação:', error);
+        } finally {
+            setIsModalOpen(false);
         }
     }
 
+    // Soma os valores de um campo específico e formata como moeda
     function calcularFaturamento(array, nomeCampo) {
         try {
-            const soma = array.reduce((total, item) => {
-                return total + (parseFloat(item[nomeCampo]) || 0);
-            }, 0);
-    
+            const soma = array.reduce((total, item) => total + (parseFloat(item[nomeCampo]) || 0), 0);
+
             return new Intl.NumberFormat('pt-BR', {
                 style: 'currency',
                 currency: 'BRL'
             }).format(soma);
-
         } catch (error) {
-            console.error('Não foi possível executar o cálculo: ', error);
+            console.error('Erro no cálculo de faturamento:', error);
             return 'Erro';
         }
     }
 
-    function contadorStatus(nomeCampo){
-        
+    // Conta quantos registros possuem um determinado status
+    function contadorStatus(nomeCampo) {
         try {
             let soma;
-            if(!nomeCampo){
+            if (!nomeCampo) {
                 soma = registros.length;
             } else {
                 soma = registros.reduce((contador, item) => {
-                    console.log(item.status)
-                    if(item.status === nomeCampo){
-                        return contador + 1;
-                    }
-    
-                }, 0)
+                    const statusItem = item.status?.trim().toLowerCase();
+                    const statusFiltro = nomeCampo.trim().toLowerCase();
+                    return statusItem === statusFiltro ? contador + 1 : contador;
+                }, 0);
             }
-            
-            return soma
-            
+
+            return soma || 0;
         } catch (error) {
-            console.error('Não foi possível contabilizar os status: ', error)
+            console.error('Erro ao contar status:', error);
+            return 0;
         }
     }
-    
+
+    // Abre o modal e define o tipo e a função de confirmação
+    function abrirModal(tipo, confirmacao) {
+        setModalType(tipo);
+        setOnModalConfirm(() => confirmacao);
+        setIsModalOpen(true);
+    }
+
+    // Fecha o modal e limpa os estados relacionados
+    function fecharModal() {
+        setIsModalOpen(false);
+        setModalType(null);
+        setOnModalConfirm(() => () => {});
+    }
+
+    // Retorno do Provider com todos os dados e funções disponíveis
     return (
-        // Tag que envolve o componente em comum (Home)
         <CrudContext.Provider value={{
             cadastro,
             solicitacoes,
@@ -233,11 +280,16 @@ function CrudProvider(props){
             editarSolicitacao,
             calcularFaturamento,
             contadorStatus,
+
+            isModalOpen,
+            fecharModal,
+            abrirModal,
+            modalType,
+            onModalConfirm,
         }}>
             {props.children}
         </CrudContext.Provider>
-    )
-
+    );
 }
 
 export { CrudContext, CrudProvider };

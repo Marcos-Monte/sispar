@@ -9,13 +9,13 @@
     // border: solid black
 }
 
-.box{
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
+// .box{
+//     flex: 1;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+// }
 
 .controles {
     width: 100%;
@@ -40,4 +40,11 @@
 
 .box:hover{
     border: .8px solid var(--text-secondary);
+}
+
+@media (max-width: 800px){
+    .container {
+        height: 100vh;
+        padding: 2rem .5rem;
+    }
 }

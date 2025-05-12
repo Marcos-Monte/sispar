@@ -37,7 +37,7 @@
 }
 
 .boxIdentificacao {
-    width: 45%;
+    width: 35%;
     padding-right: 1rem;
 }
 
@@ -61,19 +61,23 @@
 }
 
 .micro {
-    width: 72px;
+    width: 7%;
 }
 
 .small {
-    width: 130px;
+    width: 15%;
 }
 
-.intermediario {
-    width: 200px
-}
+// .intermediario {
+//     width: 200px
+// }
 
 .medium {
-    width: 370px
+    width: 35%
+}
+
+.large {
+    width: 60%;
 }
 
 .total {
@@ -111,4 +115,37 @@
 
 .box:hover{
     border: .8px solid var(--text-secondary);
+}
+
+@media  (max-width: 800px){
+    form {
+        flex-direction: column;
+        gap: 2rem;
+        width: 100% !important;
+
+        div {
+            width: 100% !important;
+        }
+    }
+    .boxDados, .boxIdentificacao{
+        width: 100% !important;
+
+        .large, .medium, .total, .small, {
+            width: 100% !important;
+
+            input, select {
+                width: 100% !important;
+            }
+        }
+
+        .micro {
+            width: 80px !important;
+        }
+
+    }
+
+    .controles {
+        flex-direction: column;
+        align-items: flex-end !important;
+    }
 }

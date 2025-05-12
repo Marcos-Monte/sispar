@@ -1,132 +1,44 @@
-import { useContext } from 'react';
-import styles from './Modal.module.scss';
+import styles from './Modal.module.scss'; // se quiser aplicar estilos próprios
 
-import { Button } from '../Buttons/Button';
+import { Button } from '@/components/users/Buttons/Button.jsx';
+import Logo from '../../../assets/Login/logo-ws.png';
 
-import Modal from 'react-modal';
+export function Modal({ isOpen, onClose, onConfirm, children }) {
+    if (!isOpen) return null;
 
-import { CrudContext } from '../../../contexts/CrudContext.jsx';
-import { RenderContext } from '../../../contexts/RenderContext.jsx';
+    return (
+        <div className={styles.modalOverlay}>
 
-Modal.setAppElement('#root');
-// Adicionar condição de não permitir clicar fora dos botões quando abrir o modal
-function ModalLimpar(){
+            <div className={styles.modalContent}>
+                <div className={styles.modalHeader}>
+                    <img src={Logo} alt="" />
+                    <i className="bi bi-x-circle" onClick={onClose}></i>
+                </div>
 
-    const {limparIsOpen, closeModal} = useContext(RenderContext)
-    const {limparDados} = useContext(CrudContext)
+                <div className={styles.modalBody}>
+                    {children} {/* Aqui entra conteúdo dinâmico */}
+                </div>
 
-    function limpar(){
-        limparDados()
+                <div className={styles.modalFooter}>
 
-        setTimeout(() => {
-            closeModal('limpar')
-        }, 100)
-    }
-
-    return(
-        <Modal
-            isOpen={limparIsOpen} // Verificar se o modal está visível ou não
-            onRequestClose={closeModal} // Requisição de fechar o modal
-            contentLabel='Exemplo'
-            overlayClassName={styles.modalOverlay} // Estilizar o Background do Modal
-            className={styles.modalContent} // Estilizar o container do modal
-            shouldCloseOnOverlayClick={false} // Impede o fechamento ao clicar fora
-        >
-            <p>Deseja realmente limpar os campos preenchidos acima?</p>
-
-            <div className={styles.boxButtons}>
-                <Button funcao={() => closeModal('limpar')} tipo='container' cor='azul'>
-                    Continuar Editando
-                </Button>
-
-                <Button funcao={limpar} tipo='container' cor='vinho'>
-                    Sim, limpar
-                </Button>
+                    <Button
+                        tipo='container'
+                        cor='cinza'
+                        // rota='/'
+                        funcao={onClose}
+                    >
+                        Cancelar
+                    </Button>
+                    <Button
+                        tipo='container'
+                        cor='azul'
+                        // rota='/'
+                        funcao={onConfirm}
+                    >
+                        Confirmar
+                    </Button>
+                </div>
             </div>
-            
-        </Modal>
-    )
+        </div>
+    );
 }
-
-function ModalCancelar(){
-
-    const {cancelarIsOpen, closeModal} = useContext(RenderContext)
-    const {cancelarSolicitacao} = useContext(CrudContext)
-
-    function cancelar(){
-        cancelarSolicitacao()
-
-        setTimeout(() => {
-            closeModal('cancelar')
-        }, 100)
-    }
-
-    return(
-        <Modal
-            isOpen={cancelarIsOpen} // Verificar se o modal está visível ou não
-            onRequestClose={closeModal} // Requisição de fechar o modal
-            contentLabel='Exemplo'
-            overlayClassName={styles.modalOverlay} // Estilizar o Background do Modal
-            className={styles.modalContent} // Estilizar o container do modal
-            shouldCloseOnOverlayClick={false} // Impede o fechamento ao clicar fora
-        >
-            <p>Tem certeza que deseja cancelar a solicitação?</p>
-
-            <div className={styles.boxButtons}>
-                <Button funcao={() => closeModal('cancelar')} tipo='container' cor='azul'>
-                    Continuar Editando
-                </Button>
-
-                <Button funcao={cancelar} tipo='container' cor='vinho'>
-                    Sim, cancelar
-                </Button>
-            </div>
-            
-        </Modal>
-    )
-}
-
-function ModalExcluir(){
-
-    const {excluirIsOpen, closeModal, itemSelecionado} = useContext(RenderContext)
-    const {excluirRegistro} = useContext(CrudContext)
-
-    // Passando o item que será excluído (itemSelecionado)
-    function excluir(){
-        excluirRegistro(itemSelecionado)
-
-        setTimeout(() => {
-            closeModal('excluir')
-        }, 100)
-    }
-
-    return(
-        <Modal
-            isOpen={excluirIsOpen} // Verificar se o modal está visível ou não
-            onRequestClose={closeModal} // Requisição de fechar o modal
-            contentLabel='Exemplo'
-            overlayClassName={styles.modalOverlay} // Estilizar o Background do Modal
-            className={styles.modalContent} // Estilizar o container do modal
-            shouldCloseOnOverlayClick={false} // Impede o fechamento ao clicar fora
-        >
-            <p>Deseja realmente excluir os dados dessa linha?</p>
-
-            <div className={styles.boxButtons}>
-                <Button funcao={() => closeModal('excluir')} tipo='container' cor='azul'>
-                    Continuar Editando
-                </Button>
-
-                <Button funcao={excluir} tipo='container' cor='vinho'>
-                    Sim, excluir
-                </Button>
-            </div>
-            
-        </Modal>
-    )
-}
-
-
-
-
-export { ModalCancelar, ModalExcluir, ModalLimpar };
-

@@ -18,20 +18,27 @@ import IconeSeta from '@/assets/icons/seta.png';
 import { controleCustos, tiposDespesa, tiposMoeda } from '@/data/opcoes.js';
 // import solicitacoesReembolso from '@/data/registros.js';
 import { CrudContext } from '../../../contexts/CrudContext';
-import { RenderContext } from '../../../contexts/RenderContext';
 
 export default function Reembolso(){
-    // Lógica dos Modais é gerenciado pelo 'contexto' indicado
-    const {openModal} = useContext(RenderContext)
 
     // Toda a lógica de CRUD da aplicação é responsabilidade do 'contexto' indicado
-    const {dados, handleChange, handleSalvar, limparDados, enviarSolicitacao, cancelarSolicitacao, solicitacoes, calcularFaturamento} = useContext(CrudContext)
+    const {dados, handleChange, handleSalvar, limparDados, enviarSolicitacao, cancelarSolicitacao, solicitacoes, calcularFaturamento, abrirModal} = useContext(CrudContext)
+
+    function handleEnviarSolicitacoes(){
+        abrirModal('enviar', () => enviarSolicitacao())
+    }
+
+    function handleCancelarSolicitacoes(){
+        abrirModal('cancelar', () => cancelarSolicitacao())
+    }
 
     return(
         
         <section className={styles.container}>
 
-            <Caminho>
+            <Caminho
+                estilo="hidden"
+            >
                 <img src={IconeHomeGray} alt="Ícone no formato de casa na cor cinza" />
                 <img src={IconeSeta} alt="Ícone do símbolo 'maior que'" />
                 <p>Reembolsos</p>
@@ -44,7 +51,7 @@ export default function Reembolso(){
 
                 <div className={styles.boxIdentificacao}>
 
-                    <div className={styles.medium}>
+                    <div className={styles.large}>
 
                         <label>Nome Completo</label>
 
@@ -58,7 +65,7 @@ export default function Reembolso(){
 
                     </div>
 
-                    <div className={styles.small}>
+                    <div className={styles.medium}>
 
                         <label>Empresa</label>
 
@@ -72,7 +79,7 @@ export default function Reembolso(){
 
                     </div>
 
-                    <div className={styles.small}>
+                    {/* <div className={styles.small}>
 
                         <label>Nº Prest.Contas</label>
 
@@ -84,7 +91,7 @@ export default function Reembolso(){
                             required
                         />
 
-                    </div>
+                    </div> */}
 
                     <div className={styles.total}>
 
@@ -105,7 +112,7 @@ export default function Reembolso(){
 
                 <div className={styles.boxDados}>
 
-                    <div className={styles.intermediario}>
+                    <div className={styles.small}>
                         <label>Data</label>
                         <InputData 
                             type='date'
@@ -138,6 +145,17 @@ export default function Reembolso(){
                         />
                     </div>
 
+                    <div className={styles.small}>
+                        <label>Moeda</label>
+                        <Select
+                            array={tiposMoeda}
+                            name='moeda'
+                            value={dados.moeda}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+
                     <div className={styles.micro}>
                         <label>Ord. Int.</label>
                         <Input 
@@ -149,7 +167,7 @@ export default function Reembolso(){
                         />
                     </div>
 
-                    <div className={styles.micro}>
+                    {/* <div className={styles.micro}>
                         <label>PEP</label>
                         <Input 
                             type='text'
@@ -158,7 +176,7 @@ export default function Reembolso(){
                             onChange={handleChange}
                             required
                         />
-                    </div>
+                    </div> */}
 
                     <div className={styles.micro}>
                         <label>Div.</label>
@@ -182,16 +200,7 @@ export default function Reembolso(){
                         />
                     </div>
 
-                    <div className={styles.small}>
-                        <label>Moeda</label>
-                        <Select
-                            array={tiposMoeda}
-                            name='moeda'
-                            value={dados.moeda}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
+                    
 
                     <div className={styles.micro}>
                         <label>Valor / Km</label>
@@ -274,7 +283,7 @@ export default function Reembolso(){
                 <Button 
                     tipo='containerGrande'
                     cor='azulEscuro'
-                    funcao={() => enviarSolicitacao()}
+                    funcao={handleEnviarSolicitacoes}
                 >
                     <img src={IconeEnviar} alt="Ícone com o símbolo de 'certo'" />
                     Enviar para Análise
@@ -283,7 +292,7 @@ export default function Reembolso(){
                 <Button 
                     tipo='containerGrande'
                     cor='vinho'
-                    funcao={() => cancelarSolicitacao()} // Abrir Modal
+                    funcao={handleCancelarSolicitacoes} // Abrir Modal
                 >
                     <img src={IconeCancelar} alt="Ícone com um X" />
                     Cancelar Solicitação

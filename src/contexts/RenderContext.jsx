@@ -53,36 +53,20 @@ function RenderProvider(props){
                 setComponente(<Dashboard />); // Garante um fallback
         }
 
+        closeHeader('fechado')
+
     }
 
     // Função que será utilizada no Header para alternar entre versão 'aberto e fechado'
     function openHeader(){
-        return statusHeader === 'aberto'? setStatusHeader('fechado'): setStatusHeader('aberto')
+        return statusHeader === 'fechado' ? setStatusHeader('aberto') : setStatusHeader('fechado')
     }
 
-    // Funções que atribuem a 'abertura' e 'fechamento' do Modal
-    function openModal(modal, item=null){
-        // console.log('abriu')
-        if(modal === 'cancelar'){
-            setCancelarIsOpen(true)
-        } else if (modal === 'limpar'){
-            setLimparIsOpen(true)
-        } else if(modal === 'excluir') {
-            setItemSelecionado(item); // <- AQUI armazenamos o item
-            setExcluirIsOpen(true)
-        }
+    // Função que será utilizada no Header para alternar entre versão 'aberto e fechado'
+    function closeHeader(){
+        setStatusHeader('fechado')
     }
-    
-    function closeModal(modal){
-        // console.log('fechou')
-        if(modal === 'cancelar'){
-            setCancelarIsOpen(false)
-        } else if (modal === 'limpar'){
-            setLimparIsOpen(false)
-        } else if(modal === 'excluir'){
-            setExcluirIsOpen(false)
-        }
-    }
+
 
     return(
         // O value é um 'objeto' por padrão que recebe os valores, funções e afins, necessários
@@ -96,8 +80,6 @@ function RenderProvider(props){
             limparIsOpen,
             cancelarIsOpen,
             excluirIsOpen,
-            openModal,
-            closeModal,
 
             itemSelecionado, // Item que será excluído
         }}>

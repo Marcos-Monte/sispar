@@ -10,9 +10,11 @@ import { Input } from '@/components/users/Inputs/Input';
 
 // Conexão do Front com o Back
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import api from '../../services/Api';
 
+import { getApiError } from '../../services/utils.jsx';
+
+import { useNavigate } from 'react-router-dom';
 
 export default function Login(){
 
@@ -24,13 +26,12 @@ export default function Login(){
         }
     }, [])
 
+    const navigate = useNavigate();
     const API_URL = import.meta.env.VITE_API_URL
-
+    
     // Iniciando os estados
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
-
-    const navigate = useNavigate();
 
     const fazerLogin = async (event) => {
         // Prevenir os comportamentos padrão
@@ -50,19 +51,20 @@ export default function Login(){
                 email: dados.email,
                 nome: dados.nome,
                 cargo: dados.cargo,
-                foto: dados.foto ? `${API_URL}${dados.foto}`: '',
+                foto: dados.foto && dados.foto.trim() !== '' 
+                    ? `${API_URL}${dados.foto.replace('Value: ', '').trim()}` // Retirando Bug que envia 'Value: ' no DOM
+                    : '',
             }
-
-            console.log(API_URL)
             
             localStorage.setItem('user', JSON.stringify(usuario))
             // Se a requisição for bem sucedida enviar para a rota indicada
             navigate('/home')
             
         } catch (error) {
-
-            console.error('Não foi possível fazer o Login: ', error?.response?.data || error?.message || error);
-            alert('Não foi possível fazer o Login')
+            const erro = getApiError(error)
+            console.log('erro: ', erro)
+            console.error('Não foi possível fazer o Login: ', erro || error?.message || error);
+            alert(erro)
 
         }
 
@@ -77,69 +79,64 @@ export default function Login(){
 
             <section className={styles.login}>
 
-                {/* <article> */}
+                <div className={styles.descricao}>
 
-                    <div className={styles.descricao}>
+                    <img 
+                        src={Logo} 
+                        alt="Logo da Wilson Sons" 
+                    />
 
-                        <img 
-                            src={Logo} 
-                            alt="Logo da Wilson Sons" 
+                    <h2>Boas Vindas ao</h2>
+                    <h2>Novo Portal SISPAR</h2>
+                    <p>Sistema de Emissão de Boletos e Parcelamento</p>
+
+                </div>
+
+                <form>
+
+                    <div>
+                        <Input 
+                            placeholder='Email'
+                            type='email'
+                            value = {email}
+                            onChange={(event) => setEmail(event.target.value)}
+                            autocomplete="current-email"
                         />
-
-                        <h2>Boas Vindas ao</h2>
-                        <h2>Novo Portal SISPAR</h2>
-                        <p>Sistema de Emissão de Boletos e Parcelamento</p>
+                        <Input 
+                            placeholder='Senha'
+                            type='password'
+                            value ={senha}
+                            onChange={(event) => setSenha(event.target.value)}
+                            autocomplete="current-password"
+                        />
+                        {/* Envia para pagina de recuperação de senha */}
+                        <Link className={styles.link} to="/novasenha">Esqueci minha senha</Link>
 
                     </div>
 
-                    <form>
+                    <div className={styles.box}>
 
-                        <div>
-                            <Input 
-                                placeholder='Email'
-                                type='email'
-                                value = {email}
-                                onChange={(event) => setEmail(event.target.value)}
-                                autocomplete="current-email"
-                            />
-                            <Input 
-                                placeholder='Senha'
-                                type='password'
-                                value ={senha}
-                                onChange={(event) => setSenha(event.target.value)}
-                                autocomplete="current-password"
-                            />
-                            {/* Envia para pagina de recuperação de senha */}
-                            <Link className={styles.link} to="/novasenha">Esqueci minha senha</Link>
+                        <Button 
+                            tipo='container'
+                            texto="Entrar"
+                            cor="azulEscuro"
+                            funcao={fazerLogin}
+                        >
+                            Entrar
+                        </Button>
 
-                        </div>
+                        <Button 
+                            tipo='container'
+                            texto="Criar conta"
+                            cor="azulClaro"
+                            rota="/cadastro"
+                        >
+                            Criar conta
+                        </Button>
 
-                        <div className={styles.box}>
+                    </div>
 
-                            <Button 
-                                tipo='container'
-                                texto="Entrar"
-                                cor="azulEscuro"
-                                funcao={fazerLogin}
-                            >
-                                {/* rota="/home" */}
-                                Entrar
-                            </Button>
-
-                            <Button 
-                                tipo='container'
-                                texto="Criar conta"
-                                cor="azulClaro"
-                                rota="/cadastro"
-                            >
-                                Criar conta
-                            </Button>
-
-                        </div>
-
-                    </form>
-
-                {/* </article> */}
+                </form>
 
             </section>
             
