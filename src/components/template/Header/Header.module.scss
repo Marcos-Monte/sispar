@@ -82,6 +82,7 @@
     .infos {
         visibility: visible;
         opacity: 1;
+        text-transform: capitalize;
     }
 }
 
@@ -102,7 +103,7 @@
 }
 
 .mobileMenuVisible {
-    max-height: 500px;
+    max-height: 1000px;
     opacity: 1;
     transition: all 0.3s ease-in-out;
     box-shadow: 5px 5px 30px 5px var(--surface);
@@ -124,6 +125,14 @@
         padding: 0.5rem 1rem;
         font-weight: bold;
         cursor: pointer;
+
+        a {
+            color: red;
+
+            &:hover{
+                color: var(--accent)
+            }
+        }
     }
 }
 
