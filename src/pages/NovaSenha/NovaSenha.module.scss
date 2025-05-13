@@ -4,7 +4,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--background);
+    background-image: url('@/assets/Login/imagemLogin.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 0 .2rem;
 }
 
 .form {
@@ -46,33 +50,31 @@
     gap: .5rem;
 }
 
-.imageBox {
-    width: 100%;
-    min-height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px dashed #aaa;
-    padding: 20px;
-    border-radius: 8px;
-    cursor: pointer;
+.box {
+    width: 100% !important;
     position: relative;
-    transition: border-color 0.3s;
 
-    &:hover {
-        color: var(--secondary);
-    }
-
-    label {
-        cursor: pointer;
-        text-align: center;
-    }
-
-    input{
-        display: none;
-    }
+    // input {
+    //     width: 100% !important;
+    // }
 }
 
-.previewImagem {
-    width: 60px;
+.mask {
+    margin-bottom: 1rem;
+
+    input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, .2); /* Fundo vermelho semi-transparente */
+        z-index: 1000; /* Fica acima do card */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        pointer-events: none; /* Impede interações no card abaixo */
+
+        
+    }
 }

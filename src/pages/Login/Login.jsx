@@ -87,13 +87,7 @@ export default function Login(){
 
             setColaborador(response.data.colaborador)
 
-            const local = localStorage.getItem('colaborador')
-
-            if(local) {
-                localStorage.removeItem('colaborador')
-            }
-
-            localStorage.setItem('colaborador', JSON.stringify(colaborador))
+            localStorage.setItem('colaborador', JSON.stringify(response.data.colaborador))
             setTimeout(() => navigate('/novasenha'), 3000)
 
         } catch (error) {
@@ -143,7 +137,8 @@ export default function Login(){
                             autocomplete="current-password"
                         />
                         {/* Envia para pagina de recuperação de senha */}
-                        <span className={styles.link} onClick={handleSenha}>Esqueci minha senha</span>
+                        
+                        <span className={styles.link} onClick={handleSenha}><p>Esqueceu a senha? Digite seu e-mail e </p>clique aqui!</span>
 
                     </div>
 

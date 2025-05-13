@@ -1,6 +1,5 @@
 // Import dependencias React
 import { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 // Import do arquivo de estilização do componente
 import styles from './Header.module.scss';
 // Import de Componentes
@@ -8,7 +7,6 @@ import { Button } from '@/components/users/Buttons/Button.jsx';
 // Import de Imagens / Icones 
 import IconeHistorico from '@/assets/Header/botao-historico.png';
 import IconeHome from '@/assets/Header/botao-home.png';
-import IconePesquisa from '@/assets/Header/botao-pesquisa.png';
 import IconeReembolso from '@/assets/Header/botao-reembolso.png';
 import IconeSair from '@/assets/Header/botao-sair.png';
 import FotoDefault from '@/assets/Header/image.png';
@@ -22,7 +20,7 @@ import { RenderContext } from '@/contexts/RenderContext.jsx';
 // OBS: Função do Button, é uma função anônima que vai receber um 'setter' (via props) e armazena um valor 'string'.
 export default function Header(){
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     // Importando Funções e Variáveis de Estado de um Componente de Contexto'. Veio de um Contexto
     const {alterarRender, openHeader, statusHeader} = useContext(RenderContext)
@@ -97,8 +95,7 @@ export default function Header(){
                             <p className={styles.infos}>Reembolsos</p>
                         </div>
 
-                        <div>
-                            {/* Botão que recebe 'função', tem evento de 'click' que renderiza um novo componente central na 'pagina atual'. Não recebe 'Rota'*/}
+                        {/* <div>
                             <Button 
                                 tipo='icon'
                                 cor='azul'
@@ -108,7 +105,7 @@ export default function Header(){
                             </Button>
 
                             <p className={styles.infos}>Análises</p>
-                        </div>
+                        </div> */}
 
                         <div>
                             {/* Botão que recebe 'função', tem evento de 'click' que renderiza um novo componente central na 'pagina atual'. Não recebe 'Rota'*/}
@@ -166,12 +163,12 @@ export default function Header(){
                     }}>
                         Reembolsos
                     </li>
-                    <li onClick={() => {
+                    {/* <li onClick={() => {
                         alterarRender('Analises') 
                         handleMobileMenu()
                     }}>
                         Analises
-                    </li>
+                    </li> */}
                     <li onClick={() => {
                         alterarRender('Historico') 
                         handleMobileMenu()

@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { Input } from '../../components/users/Inputs/Input'
 
 import { Button } from '../../components/users/Buttons/Button'
+import api from '../../services/Api'
 
 
 
@@ -14,28 +15,38 @@ export default function Cadastro(){
     const navigate = useNavigate();
     const local = JSON.parse(localStorage.getItem('colaborador'))
 
-    const [colaborador, setColaborador] = useState(local)
+    const [email, setEmail] = useState(local.email)
+    const [senha, setSenha] = useState('')
+    const [senhaConfirm, setSenhaConfirm] = useState('')
 
-    async function submitCadastro(){
+    const [mostrarSenha, setMostrarSenha] = useState(false)
+
+    async function updateColaborador(event){
         event.preventDefault()
 
         try {
+            if(senha !== senhaConfirm){
+                alert('As senhas devem ser iguais!');
+                return;
+            }
 
-            console.log('Aqui')
+            const colaborador = {
+                email: email,
+                senha: senha
+            }
+
+            await api.put(`/colaborador/atualizar/${email}`, colaborador);
+            localStorage.setItem('emailJaCadastrado', colaborador.email)
+            alert('Senha atualizada com sucesso!')
+            setTimeout(()=>{
+                localStorage.removeItem('colaborador')
+                navigate('/')
+            }, 2000)
 
         } catch (error) {
-            console.error('Não foi possível cadastrar o colaborador: ', error);
-            const mensagem = error?.response?.data?.erro || 'Erro desconhecido ao cadastrar colaborador.'
-
-            if(mensagem.includes('E-mail') && mensagem.includes('já cadastrado')){
-                localStorage.setItem('emailJaCadastrado', dadosCadastrais.email)
-
-                alert(`${mensagem}\n\nRedirecionando para tela de login. Caso tenha esquecido sua senha, clique em "Esqueci minha senha".`);
-                navigate('/')
-
-            } else {
-                alert(mensagem)
-            }
+            console.error('Não foi possível atualizar a senha: ', error);
+            const mensagem = error?.response?.data?.erro || 'Erro desconhecido ao atualizar colaborador.'
+            alert(mensagem)
             
         } 
     }
@@ -45,30 +56,49 @@ export default function Cadastro(){
             <section className={styles.container}>
                 <form className={styles.form}>
                     <img src={Logo} alt="Logo da WS." />
-                    <h3>Faça seu cadastro</h3>
-                    <Input 
-                        value={colaborador.email}
-                        type="text"
-                        name="email"
-                        disabled
-                    />
+                    <h3>Cadastre uma senha!</h3>
+                    <div className={`${styles.box} ${styles.mask}`}>
 
-                    <div className={styles.senha}>
                         <Input 
-                            placeholder="Digite sua senha de preferencia."
-                            value={colaborador.senha}
-                            name="senha"
-                            autoComplete="new-password"
+                            value={email}
+                            type="text"
+                            name="email"
+                            readOnly
                         />
                     </div>
 
-                    <div className={styles.senha}>
-                        <Input 
-                            placeholder="Confime sua senha."
-                            value={colaborador.senhaConfirm}
-                            name="senhaConfirm"
-                            autoComplete="new-password"
-                        />
+                    <div className={styles.box}>
+                        <label>Nova Senha</label>
+                        <div className={styles.senha}>
+                            <Input 
+                                placeholder="Digite sua senha de preferencia."
+                                type={mostrarSenha? 'text': 'password'}
+                                value={senha}
+                                name="senha"
+                                onChange={(e) => setSenha(e.target.value)}
+                                autoComplete="new-password"
+                            />
+                            <button type="button" onClick={() => setMostrarSenha(!mostrarSenha)}>
+                                {mostrarSenha ? <i className="bi bi-eye"></i>: <i className="bi bi-eye-slash"></i>}
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className={styles.box}>
+                        <label>Confirme a Nova Senha</label>
+                        <div className={styles.senha}>
+                            <Input 
+                                placeholder="Confime sua senha."
+                                type={mostrarSenha? 'text': 'password'}
+                                value={senhaConfirm}
+                                name="senhaConfirm"
+                                onChange={(e) => setSenhaConfirm(e.target.value)}
+                                autoComplete="new-password"
+                            />
+                            <button type="button" onClick={() => setMostrarSenha(!mostrarSenha)}>
+                                {mostrarSenha ? <i className="bi bi-eye"></i>: <i className="bi bi-eye-slash"></i>}
+                            </button>
+                        </div>
                     </div>
 
                     <div className={styles.botoes}>
@@ -83,9 +113,9 @@ export default function Cadastro(){
                             tipo='container'
                             texto="Criar conta"
                             cor="azulClaro"
-                            funcao={() => submitCadastro()}
+                            funcao={(event) => updateColaborador(event)}
                         >
-                            Criar conta
+                            Confirmar
                         </Button>
                     </div>
                 </form>

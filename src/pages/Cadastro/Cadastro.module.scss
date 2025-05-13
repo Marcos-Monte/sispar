@@ -4,7 +4,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--background);
+    background-image: url('@/assets/Login/imagemLogin.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 0 .2rem;
 }
 
 .form {
