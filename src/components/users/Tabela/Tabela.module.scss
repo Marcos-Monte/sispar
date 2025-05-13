@@ -61,7 +61,7 @@ table {
         border-right: none;
     }
 
-    td:first-child:hover{
+    .deleteStyle:hover{
         background-color: var(--accent);
     }
     .editar:hover{

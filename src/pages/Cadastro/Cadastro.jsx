@@ -15,7 +15,7 @@ export default function Cadastro(){
 
     const navigate = useNavigate();
 
-    const [mostrarSenha, setMostrarSenha] = useState(true)
+    const [mostrarSenha, setMostrarSenha] = useState(false)
 
     const [imagemSelecionada, setImagemSelecionada] = useState(null)
 

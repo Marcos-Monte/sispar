@@ -17,7 +17,6 @@ function CrudProvider(props) {
     const [dados, setDados] = useState({
         colaborador: '',
         empresa: '',
-        num_prestacao: 0,
         descricao: '',
         data: '',
         tipo_reembolso: 'Selec.',
@@ -26,10 +25,10 @@ function CrudProvider(props) {
         divisao: '',
         pep: '',
         moeda: 'Selec.',
-        distancia_km: 0,
-        valor_km: 0,
-        valor_faturado: 0,
-        despesa: 0,
+        distancia_km: '',
+        valor_km: '',
+        valor_faturado: '',
+        despesa: '',
         id_colaborador: cadastro.id,
     });
 
@@ -120,7 +119,6 @@ function CrudProvider(props) {
             ...prevState,
             colaborador: '',
             empresa: '',
-            num_prestacao: 0,
             descricao: '',
             data: '',
             tipo_reembolso: 'Selec.',
@@ -129,10 +127,10 @@ function CrudProvider(props) {
             divisao: '',
             pep: '',
             moeda: 'Selec.',
-            distancia_km: 0,
-            valor_km: 0,
-            valor_faturado: 0,
-            despesa: 0,
+            distancia_km: '',
+            valor_km: '',
+            valor_faturado: '',
+            despesa: '',
             id_colaborador: cadastro.id,
         }));
     }

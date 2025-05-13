@@ -57,7 +57,7 @@ export default function Tabela(){
 
                     <tr className={styles.linha} key={index}>
 
-                        <td>
+                        <td className={styles.deleteStyle}>
                             {/* Passa o 'objeto / registro' que será excluído dos registros! */}
                             <Button
                                 tipo='container'

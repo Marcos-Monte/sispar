@@ -4,6 +4,8 @@ import styles from './Input.module.scss';
 import calendario from '@/assets/icons/calendario.png';
 import setaBaixo from '@/assets/icons/setaBaixo.png';
 
+import { NumericFormat } from 'react-number-format';
+
 // Input recebe o seu 'tipo' via props. Exemplo: text, email, password, etc...
 function Input(props){
     return(
@@ -16,6 +18,29 @@ function Input(props){
             onChange={props.onChange}
         />
     )
+}
+
+function InputMonetario({ name, value, onChange, placeholder, required = false }) {
+    return (
+        <NumericFormat
+            value={value}
+            placeholder={placeholder}
+            thousandSeparator="."
+            decimalSeparator=","
+            prefix="R$ "
+            name={name}
+            required={required}
+            className={styles.container}
+            onValueChange={(values) => {
+                onChange({
+                    target: {
+                        name,
+                        value: values.floatValue || '', // retorna como número
+                    }
+                });
+            }}
+        />
+    );
 }
 
 // Input recebe o seu 'tipo' via props. Exemplo: text, email, password, etc...
@@ -77,5 +102,5 @@ function TextArea(props){
 }
 
 
-export { Input, InputData, Select, TextArea };
+export { Input, InputData, InputMonetario, Select, TextArea };
 

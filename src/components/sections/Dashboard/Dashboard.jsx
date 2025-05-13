@@ -4,7 +4,6 @@ import styles from './Dashboard.module.scss';
 import Caminho from '../../template/Caminho/Caminho.jsx';
 import { Card, CardIndicadores } from '../../users/Card/Card.jsx';
 // Import de Icones e Imagens
-import IconeAnalises from '@/assets/Dashboard/analises.png';
 import IconeHistorico from '@/assets/Dashboard/historico.png';
 import IconeReembolso from '@/assets/Dashboard/reembolso.png';
 import IconeAtualizado from '@/assets/Dashboard/sistema-atualizado.png';
@@ -47,12 +46,12 @@ export default function Dashboard(){
                         funcao={() => alterarRender('Reembolso')}
 
                     />
-                    <Card 
+                    {/* <Card 
                         imagem={IconeAnalises}
                         texto='Verificar Analises'
                         // Função recebe outra função do Componente de Contexto
                         funcao={() => alterarRender('Analises')}
-                    />
+                    /> */}
                     <Card 
                         imagem={IconeHistorico}
                         texto='Histórico'
