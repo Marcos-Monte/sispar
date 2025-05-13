@@ -38,9 +38,9 @@ export default function Tabela(){
                     <th className={styles.overflow}>Motivo</th>
                     <th className={styles.overflow}>Tipo Reemb.</th>
                     <th className={styles.overflow}>Ctr. Custo</th>
-                    {/* <th className={styles.overflow}>Ord. Int.</th>
-                    <th className={styles.overflow}>Div.</th> */}
-                    <th className={styles.overflow}>PEP</th>
+                    <th className={styles.overflow}>Ord. Int.</th>
+                    <th className={styles.overflow}>Div.</th>
+                    {/* <th className={styles.overflow}>PEP</th> */}
                     <th className={styles.overflow}>Moeda</th>
                     <th className={styles.overflow}>Dist. Km</th>
                     <th className={styles.overflow}>Val. Km</th>
