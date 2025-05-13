@@ -107,17 +107,17 @@ export default function Tabela(){
                             <span>{obj.centro_custo.toUpperCase()}</span>
                         </td>
                         
-                        {/* <td>
-                            <span>{obj.ordem_interna}</span>
-                        </td> */}
-                        
-                        {/* <td>
-                            <span>{obj.divisao}</span>
-                        </td> */}
-
                         <td>
-                            <span>{obj.pep}</span>
+                            <span>{obj.ordem_interna}</span>
                         </td>
+                        
+                        <td>
+                            <span>{obj.divisao}</span>
+                        </td>
+
+                        {/* <td>
+                            <span>{obj.pep}</span>
+                        </td> */}
 
                         <td>
                             <span>{obj.moeda.toUpperCase()}</span>
