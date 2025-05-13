@@ -87,8 +87,14 @@ export default function Login(){
 
             setColaborador(response.data.colaborador)
 
+            const local = localStorage.getItem('colaborador')
+
+            if(local) {
+                localStorage.removeItem('colaborador')
+            }
+
             localStorage.setItem('colaborador', JSON.stringify(colaborador))
-            navigate('/novasenha')
+            setTimeout(() => navigate('/novasenha'), 3000)
 
         } catch (error) {
             const erro = getApiError(error)
