@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 // Import de Módulo de Estilização
 import styles from './Login.module.scss';
 // Import de Imagens
@@ -32,6 +31,8 @@ export default function Login(){
     // Iniciando os estados
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
+
+    const [colaborador, setColaborador]= useState({})
 
     const fazerLogin = async (event) => {
         // Prevenir os comportamentos padrão
@@ -75,6 +76,27 @@ export default function Login(){
 
     }
 
+    const handleSenha = async () => {
+        try {
+            if(!email){
+                alert('Preencha o campo de e-mail para recuperação de senha');
+                return;
+            }
+
+            const response = await api.get(`/colaborador/buscar/${email}`);
+
+            setColaborador(response.data.colaborador)
+
+            localStorage.setItem('colaborador', JSON.stringify(colaborador))
+            navigate('/novasenha')
+
+        } catch (error) {
+            const erro = getApiError(error)
+            console.log('Não foi possível solicitar nova senha: ',  erro || error?.message || error)
+            alert(erro)
+        }
+    }
+
     return(
         <main className={styles.container}>
 
@@ -115,7 +137,7 @@ export default function Login(){
                             autocomplete="current-password"
                         />
                         {/* Envia para pagina de recuperação de senha */}
-                        <Link className={styles.link} to="/novasenha">Esqueci minha senha</Link>
+                        <span className={styles.link} onClick={handleSenha}>Esqueci minha senha</span>
 
                     </div>
 
