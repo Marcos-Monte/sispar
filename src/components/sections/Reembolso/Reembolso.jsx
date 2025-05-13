@@ -5,7 +5,7 @@ import styles from './Reembolso.module.scss';
 // Import Componentes
 import Caminho from '../../template/Caminho/Caminho';
 import { Button } from '../../users/Buttons/Button';
-import { Input, InputData, Select, TextArea } from '../../users/Inputs/Input';
+import { Input, InputData, InputMonetario, Select, TextArea } from '../../users/Inputs/Input';
 import TabelaReembolso from '../../users/Tabela/TabelaReembolso';
 // Import Icones
 import IconeApagar from '@/assets/icons/apagar.png';
@@ -61,6 +61,7 @@ export default function Reembolso(){
                             value={dados.colaborador}
                             onChange={handleChange}
                             required
+                            placeholder="Informe o Nome do Colaborador"
                         />
 
                     </div>
@@ -75,6 +76,7 @@ export default function Reembolso(){
                             value={dados.empresa}
                             onChange={handleChange}
                             required
+                            placeholder="Informe a Empresa"
                         />
 
                     </div>
@@ -102,6 +104,7 @@ export default function Reembolso(){
                             name='descricao'
                             value={dados.descricao}
                             onChange={handleChange}
+                            placeholder="Descreva o motivo..."
                         ></TextArea>
 
                     </div>
@@ -123,7 +126,7 @@ export default function Reembolso(){
                         />
                     </div>
 
-                    <div className={styles.medium}>
+                    <div className={styles.small}>
                         <label>Tipo de Reembolso<p className={styles.asteristico}>*</p></label>
                         <Select
                             array={tiposDespesa}
@@ -164,6 +167,7 @@ export default function Reembolso(){
                             value={dados.ordem_interna}
                             onChange={handleChange}
                             required
+                            placeholder="###"
                         />
                     </div>
 
@@ -186,53 +190,57 @@ export default function Reembolso(){
                             value={dados.divisao}
                             onChange={handleChange}
                             required
+                            placeholder="###"
                         />
                     </div>
 
-                    <div className={styles.micro}>
+                    <div className={styles.small}>
                         <label>Dist. / Km</label>
                         <Input 
                             type='text'
                             name='distancia_km'
                             value={dados.distancia_km}
                             onChange={handleChange}
+                            placeholder="Distancia / Km"
                             required
                         />
                     </div>
 
                     
 
-                    <div className={styles.micro}>
+                    <div className={styles.small}>
                         <label>Valor / Km</label>
-                        <Input 
+                        <InputMonetario
                             type='text'
                             name='valor_km'
                             value={dados.valor_km}
                             onChange={handleChange}
                             required
+                            placeholder="Valor"
                         />
                     </div>
 
-                    <div className={styles.micro}>
+                    <div className={styles.small}>
                         <label>Valor Desp.</label>
-                        <Input 
-                            type='text'
+                        <InputMonetario
                             name='despesa'
                             value={dados.despesa}
                             onChange={handleChange}
                             required
+                            placeholder="Adiantamento"
                         />
                     </div>
 
-                    <div className={styles.micro}>
+                    <div className={styles.small}>
                         <label>Valor Fat.<p className={styles.asteristico}>*</p></label>
-                        <Input 
-                            type='text'
-                            name='valor_faturado'
+
+                        <InputMonetario
+                            name="valor_faturado"
                             value={dados.valor_faturado}
                             onChange={handleChange}
-                            required
+                            placeholder="Faturamento"
                         />
+
                     </div>
 
                     <div className={styles.botoes}>

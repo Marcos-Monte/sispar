@@ -61,7 +61,7 @@ export default function Header(){
                 <nav>
                     {/* Imagem ilutrativa que irá receber a foto do usuário cadastrado */}
                     <figure>
-                        <img src={cadastro.foto ? cadastro.foto: FotoDefault} alt="Foto do usuário logado" onClick={() => handleAbrirHeader()}/>
+                        <img src={FotoDefault} alt="Foto do usuário logado" onClick={() => handleAbrirHeader()}/>
                         <div className={styles.infos}>
                             <figcaption>{cadastro.nome}</figcaption>
                             <span>{cadastro.cargo}</span>
