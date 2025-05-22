@@ -10,6 +10,8 @@ import { tiposCargos } from '../../data/opcoes'
 
 import api from '../../services/Api'
 
+import { toast } from 'react-toastify'
+
 
 export default function Cadastro(){
 
@@ -63,12 +65,12 @@ export default function Cadastro(){
         try {
 
             if(dadosCadastrais.email !== dadosCadastrais.emailConfirm){
-                alert('E-mail e Confirmação de E-mail devem ser iguais.')
+                toast.warn('E-mail e Confirmação de E-mail devem ser iguais.')
                 return
             }
 
             if(dadosCadastrais.senha !== dadosCadastrais.senhaConfirm){
-                alert('Senha e Confirmação de Senha devem ser iguais.')
+                toast.warn('Senha e Confirmação de Senha devem ser iguais.')
                 return
             }
             const salario = getSalario(tiposCargos, dadosCadastrais.cargo)
@@ -94,7 +96,7 @@ export default function Cadastro(){
             }
 
             await api.post('/colaborador/cadastrar', dados)
-            alert('Colaborador cadastrado com sucesso!')
+            toast.success('Colaborador cadastrado com sucesso!')
             setTimeout(()=> {
                 limparCampos()
                 navigate('/')
@@ -107,11 +109,11 @@ export default function Cadastro(){
             if(mensagem.includes('E-mail') && mensagem.includes('já cadastrado')){
                 localStorage.setItem('emailJaCadastrado', dadosCadastrais.email)
 
-                alert(`${mensagem}\n\nRedirecionando para tela de login. Caso tenha esquecido sua senha, clique em "Esqueci minha senha".`);
+                toast.warn(`${mensagem}\n\nRedirecionando para tela de login. Caso tenha esquecido sua senha, clique em "Esqueci minha senha".`);
                 navigate('/')
 
             } else {
-                alert(mensagem)
+                toast.error(mensagem)
             }
             
         } 

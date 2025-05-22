@@ -2,6 +2,8 @@ import { BrowserRouter } from "react-router-dom";
 import { RenderProvider } from "./contexts/RenderContext.jsx";
 import Rotas from "./rotas/Rotas.jsx";
 
+import { ToastContainer } from 'react-toastify';
+
 import './global.scss';
 
 // Componente Principal
@@ -14,6 +16,11 @@ function App() {
       <RenderProvider>
         {/* Atribui as Rotas da Aplicação */}
         <Rotas />
+        <ToastContainer 
+            position="top-right"
+            autoClose={3000}
+            theme="colored"
+        />
       </RenderProvider>
     </BrowserRouter>
   )

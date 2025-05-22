@@ -3,21 +3,35 @@ import { Link } from 'react-router-dom'
 // Import de arquivo de Estilização
 import styles from './Button.module.scss'
 
-// OBS: A tag LINK garante que a navegação entre as 'rotas das paginas' na aplicação, sejam feitas via SPA
-// OBS: Button recebe via props: Tipo do Botão, Cor de Fundo do Botão, Rota do Botão (não obrigatorio), Função iniciada com o evento Click (não obrigatorio) e no Children, pode receber qualquer tipo de valor e até mesmo estruturas inteiras html. Por enquanto, veremos apenas 'textos' e 'imagens'
-function Button(props){
+function Button({tipo, cor, rota,funcao, typeButton = 'button', hidden, children}){
+    const estilos = `${styles[tipo]} ${styles[cor]} ${styles[hidden]}`
+
+    // Se tiver Rota
+    if(rota){
+        return (
+        
+            <Link className={styles.link} to={rota}>
+                <button 
+                    className={estilos}
+                    type={typeButton}
+                >
+                    {children}
+                </button>
+            </Link>
+        )
+    } 
+        
     return (
-        // Tag Link recebe a rota para onde o Botão vai levar via 'props' (Botão pode ou não receber a Rota)
-        <Link className={styles.link} to={props.rota}>
-            {/* Evento de Click (pode ou não acontecer).  */}
+        
             <button 
-                className={`${styles[props.tipo]} ${styles[props.cor]} ${styles[props.hidden]}`}
-                onClick={props.funcao}
+                className={estilos}
+                onClick={funcao}
+                type={typeButton}
             >
-                {props.children}
+                {children}
             </button>
-        </Link>
-    )
+        )
+    
 }
 
 
