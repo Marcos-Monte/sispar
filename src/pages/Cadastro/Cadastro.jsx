@@ -76,26 +76,55 @@ export default function Cadastro(){
             const salario = getSalario(tiposCargos, dadosCadastrais.cargo)
 
             let urlFoto = '';
-            
-            if(imagemSelecionada){
-                const formData = new FormData();
-                formData.append('foto', imagemSelecionada);
-
-                const response = await api.post('/colaborador/upload-foto', formData, {
-                    headers: {'Content-Type': 'multipart/form-data'}
-                })
-
-                urlFoto = response.data.url
-            }
 
             const dados = {
                 ...dadosCadastrais,
                 salario: salario,
                 status: 'ativo',
-                foto: urlFoto
+                foto: ''
             }
 
             await api.post('/colaborador/cadastrar', dados)
+
+            // Se o retorno acima for que o 'email' já tem cadastro, daqui pra baixo não roda
+            if (imagemSelecionada) {
+                const reader = new FileReader()
+                
+                // Envolver a leitura da imagem num "await"
+                urlFoto = await new Promise((resolve, reject) => {
+                    reader.onloadend = async () => {
+                        const base64 = reader.result.split(',')[1] // remove o "data:image/...;base64,"
+                        
+                        try {
+                            const formData = new FormData()
+                            formData.append('key', '7fc48a8ea7ef5066715d359bae365c8c')
+                            formData.append('image', base64)
+
+                            const uploadResponse = await fetch('https://api.imgbb.com/1/upload', {
+                                method: 'POST',
+                                body: formData
+                            })
+
+                            const uploadData = await uploadResponse.json()
+                            resolve(uploadData.data.url) // Pega o link direto da imagem
+
+                        } catch (err) {
+                            console.error("Erro ao subir imagem:", err)
+                            reject(err)
+                        }
+                    }
+
+                    reader.readAsDataURL(imagemSelecionada)
+                })
+
+                // faz um PUT adicionando a URL da foto armazenada no IMGBB
+                await api.put(`/colaborador/atualizar/${dados.email}`, {
+                    ...dados,
+                    foto: urlFoto
+                })
+            }
+            
+
             toast.success('Colaborador cadastrado com sucesso!')
             setTimeout(()=> {
                 limparCampos()
