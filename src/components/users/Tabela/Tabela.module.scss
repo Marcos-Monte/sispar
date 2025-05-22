@@ -7,6 +7,7 @@ table {
     border-collapse: collapse; /* Garante que as bordas fiquem alinhadas */
     display: flex;
     flex-direction: column;
+    overflow: auto;
 }
 
 .cabecalho {
