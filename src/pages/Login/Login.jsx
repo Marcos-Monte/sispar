@@ -49,19 +49,12 @@ export default function Login(){
 
             const dados = response.data.items
 
-            const rawFoto = typeof dados.foto === 'string' ? dados.foto : '';
-            const cleanedFoto = rawFoto.startsWith('Value: ') 
-                ? rawFoto.replace('Value: ', '').trim() 
-                : rawFoto.trim();
-
             const usuario = {
                 id: dados.id,
                 email: dados.email,
                 nome: dados.nome,
                 cargo: dados.cargo,
-                foto: dados.foto && dados.foto.trim() !== '' 
-                    ? `${API_URL}${cleanedFoto}` // Retirando Bug que envia 'Value: ' no DOM
-                    : '',
+                foto: dados.foto 
             }
             
             localStorage.setItem('user', JSON.stringify(usuario))
