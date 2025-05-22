@@ -1,16 +1,8 @@
 // Import Estilização
 import styles from './Tabela.module.scss';
-// Import Icones
-// import IconeArquivo from '@/assets/icons/arquivo.png';
-// Import Componentes
-// Import de Contextos
-// import { RenderContext } from '../../../contexts/RenderContext';
+
 
 export default function Tabela({registros}){
-    // Importando função que renderiza a abertura de um modal 
-    // const {openModal} = useContext(RenderContext)
-    // Importa um array de registros para renderizar o conteudo na tela
-    // const {registros} = useContext(CrudContext)
 
     return(
         <table>
