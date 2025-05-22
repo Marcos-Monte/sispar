@@ -8,7 +8,7 @@ import { Input } from '../../components/users/Inputs/Input'
 import { Button } from '../../components/users/Buttons/Button'
 import api from '../../services/Api'
 
-
+import { toast } from 'react-toastify'
 
 export default function Cadastro(){
 
@@ -26,7 +26,7 @@ export default function Cadastro(){
 
         try {
             if(senha !== senhaConfirm){
-                alert('As senhas devem ser iguais!');
+                toast.warn('As senhas devem ser iguais!');
                 return;
             }
 
@@ -37,7 +37,7 @@ export default function Cadastro(){
 
             await api.put(`/colaborador/atualizar/${email}`, colaborador);
             localStorage.setItem('emailJaCadastrado', colaborador.email)
-            alert('Senha atualizada com sucesso!')
+            toast.success('Senha atualizada com sucesso!')
             setTimeout(()=>{
                 localStorage.removeItem('colaborador')
                 navigate('/')
@@ -46,7 +46,7 @@ export default function Cadastro(){
         } catch (error) {
             console.error('Não foi possível atualizar a senha: ', error);
             const mensagem = error?.response?.data?.erro || 'Erro desconhecido ao atualizar colaborador.'
-            alert(mensagem)
+            toast.error(mensagem)
             
         } 
     }

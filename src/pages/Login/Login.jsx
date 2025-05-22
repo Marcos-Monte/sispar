@@ -15,6 +15,8 @@ import { getApiError } from '../../services/utils.jsx';
 
 import { useNavigate } from 'react-router-dom';
 
+import { toast } from 'react-toastify';
+
 export default function Login(){
 
     useEffect(() => {
@@ -70,7 +72,7 @@ export default function Login(){
             const erro = getApiError(error)
             console.log('erro: ', erro)
             console.error('Não foi possível fazer o Login: ', erro || error?.message || error);
-            alert(erro)
+            toast.error(erro)
 
         }
 
@@ -79,7 +81,7 @@ export default function Login(){
     const handleSenha = async () => {
         try {
             if(!email){
-                alert('Preencha o campo de e-mail para recuperação de senha');
+                toast.warn('Preencha o campo de e-mail para recuperação de senha');
                 return;
             }
 
@@ -93,7 +95,7 @@ export default function Login(){
         } catch (error) {
             const erro = getApiError(error)
             console.log('Não foi possível solicitar nova senha: ',  erro || error?.message || error)
-            alert(erro)
+            toast.error(erro)
         }
     }
 
@@ -119,7 +121,7 @@ export default function Login(){
 
                 </div>
 
-                <form>
+                <form onSubmit={fazerLogin}>
 
                     <div>
                         <Input 
@@ -148,7 +150,7 @@ export default function Login(){
                             tipo='container'
                             texto="Entrar"
                             cor="azulEscuro"
-                            funcao={fazerLogin}
+                            typeButton="submit"
                         >
                             Entrar
                         </Button>

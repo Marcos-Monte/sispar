@@ -3,6 +3,8 @@ import { createContext, useEffect, useState } from "react";
 import api from '../services/Api.jsx';
 import { getApiError } from "../services/utils.jsx";
 
+import { toast } from "react-toastify";
+
 // Criação do contexto com valor inicial vazio
 const CrudContext = createContext({});
 
@@ -76,7 +78,7 @@ function CrudProvider(props) {
         } catch (error) {
             const erro = getApiError(error);
             console.error('Erro ao buscar reembolsos:', erro || error);
-            alert(erro || error);
+            toast.error(erro || error);
         }
     }
 
@@ -95,7 +97,7 @@ function CrudProvider(props) {
         try {
             for (let campo of obrigatorios) {
                 if (!obj[campo]) {
-                    alert(`Por favor, preencha o campo obrigatório: ${campo.replace('_', ' ')}`);
+                    toast.warn(`Por favor, preencha o campo obrigatório: ${campo.replace('_', ' ')}`);
                     return;
                 }
             }
@@ -150,7 +152,7 @@ function CrudProvider(props) {
             }
 
             const solicitacoesFiltradas = solicitacoes.filter((_, i) => i !== index);
-            alert("Reembolso excluído!");
+            toast.success("Reembolso excluído!");
             localStorage.setItem('solicitacoes', JSON.stringify(solicitacoesFiltradas));
         } catch (error) {
             console.error('Erro ao excluir a solicitação:', error);
@@ -172,14 +174,14 @@ function CrudProvider(props) {
 
         try {
             await api.post('/reembolso/solicitacao', solicitacoes);
-            alert("Solicitações enviadas com sucesso!");
+            toast.success("Solicitações enviadas com sucesso!");
             setDados({});
             buscarReembolsos();
             localStorage.setItem('solicitacoes', JSON.stringify([]));
         } catch (error) {
             const erro = getApiError(error);
             console.error('Erro ao enviar as solicitações:', erro || error);
-            alert(erro || error);
+            toast.error(erro || error);
         } finally {
             setIsModalOpen(false);
         }

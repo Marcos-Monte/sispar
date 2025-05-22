@@ -9,11 +9,28 @@ import IconeHomeGray from '@/assets/icons/home.png';
 import IconeSeta from '@/assets/icons/seta.png';
 
 import { CrudContext } from '@/contexts/CrudContext.jsx';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
+
+import { Button } from '@/components/users/Buttons/Button';
 
 export default function Historico(){
 
     const {calcularFaturamento, registros} = useContext(CrudContext)
+
+    const [registrosFiltrados, setRegistrosFiltrados] = useState(registros)
+
+    function handleFiltrar(filtro){
+        if(filtro){
+            if(filtro === filtro){
+                const resultado = registros.filter((registro) => registro.status === filtro)
+                setRegistrosFiltrados(resultado)
+                return
+            }
+            
+        } else {
+            setRegistrosFiltrados(registros)
+        }
+    }
 
     return(
         <section className={styles.container}>
@@ -28,7 +45,42 @@ export default function Historico(){
                 <p>Histórico de Reembolsos</p>
             </Caminho>
 
-            <Tabela />
+            <section className={styles.buttons}>
+                <Button 
+                    tipo='container'
+                    texto="Entrar"
+                    cor="azulEscuro"
+                    funcao={() => handleFiltrar()}
+                >
+                    Todos
+                </Button>
+                <Button 
+                    tipo='container'
+                    texto="Entrar"
+                    cor="laranja"
+                    funcao={() => handleFiltrar('analisando')}
+                >
+                    Em análise
+                </Button>
+                <Button 
+                    tipo='container'
+                    texto="Entrar"
+                    cor="verde"
+                    funcao={() => handleFiltrar('aprovado')}
+                >
+                    Aprovados
+                </Button>
+                <Button 
+                    tipo='container'
+                    texto="Entrar"
+                    cor="vinho"
+                    funcao={() => handleFiltrar('rejeitado')}
+                >
+                    Rejeitados
+                </Button>
+            </section>
+
+            <Tabela registros={registrosFiltrados}/>
 
             <section className={styles.controles}>
 
@@ -36,7 +88,7 @@ export default function Historico(){
                     <p>Total Faturado</p>
 
                     <div className={styles.box}>
-                        {calcularFaturamento(registros, 'valor_faturado')}
+                        {calcularFaturamento(registrosFiltrados, 'valor_faturado')}
                     </div>
 
                 </div>
@@ -44,7 +96,7 @@ export default function Historico(){
                 <div>
                     <p>Total Despesa</p>
                     <div className={styles.box}>
-                        {calcularFaturamento(registros, 'despesa')}
+                        {calcularFaturamento(registrosFiltrados, 'despesa')}
                     </div>
                 </div>
 

@@ -9,8 +9,9 @@
 }
 
 .icon{
-    width: 3rem;
+    width: 3rem !important;
     height: 3rem;
+    display: block;
 }
 
 .container{
@@ -48,6 +49,15 @@
 .vinho{
     background-color: var(--accent);
 }
+
+.laranja {
+        background-color: #E56700;
+}
+
+.verde {
+    background-color: #007A6A;
+}
+
 
 .transparente {
     background-color: transparent;
