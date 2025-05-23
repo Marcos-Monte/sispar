@@ -245,7 +245,7 @@ function CrudProvider(props) {
     }
 
     // Edita uma solicitação existente, removendo-a da lista e preenchendo o formulário com os dados
-    function editarSolicitacao(obj) {
+    async function editarSolicitacao(obj) {
         try {
             if (!obj) {
                 console.warn('Nenhuma solicitação válida selecionada para edição.');
@@ -259,7 +259,19 @@ function CrudProvider(props) {
             }
 
             const solicitacoesFiltradas = solicitacoes.filter((_, i) => i !== index);
-            setDados(obj);
+            const cotacao = await getCotacao(obj.moeda)
+
+            if (!cotacao) {
+                toast.error('Não foi possível obter a cotação. Verifique a moeda informada.');
+                return; 
+            }
+
+            const objEditavel = {
+                ...obj,
+                valor_faturado: (obj.valor_faturado / cotacao).toFixed(2)
+            }
+            
+            setDados(objEditavel);
             localStorage.setItem('solicitacoes', JSON.stringify(solicitacoesFiltradas));
         } catch (error) {
             console.error('Erro ao editar a solicitação:', error);
