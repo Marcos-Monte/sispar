@@ -6,7 +6,6 @@ import { ToastContainer } from 'react-toastify';
 
 import './global.scss';
 
-// Componente Principal
 function App() {
 
   return (
@@ -14,7 +13,6 @@ function App() {
       // BrowserRouter está sendo utilizado aqui por conta do 'useLocation' usado dentro de 'RenderProvider'. Ele sempre tem que ficar 'ao redor' de um componente que utiliza dessa ferramenta
     <BrowserRouter>
       <RenderProvider>
-        {/* Atribui as Rotas da Aplicação */}
         <Rotas />
         <ToastContainer 
             position="top-right"

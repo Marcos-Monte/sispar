@@ -246,7 +246,7 @@ export default function Cadastro(){
                             <img 
                                 src={URL.createObjectURL(imagemSelecionada)} 
                                 alt="Prévia da imagem"
-                                className={styles.previewImagem} // ou aplique inline: style={{ width: '100px', marginTop: '1rem' }}
+                                className={styles.previewImagem}
                             />
                         )
                     }

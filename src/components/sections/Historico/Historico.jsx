@@ -1,12 +1,8 @@
-// Import de arquivo de estilização
-import styles from './Historico.module.scss';
-// Import componentes
-import Caminho from '../../template/Caminho/Caminho';
-import Tabela from '../../users/Tabela/Tabela';
-
-// Import de Icones e Imagens
 import IconeHomeGray from '@/assets/icons/home.png';
 import IconeSeta from '@/assets/icons/seta.png';
+import Caminho from '../../template/Caminho/Caminho';
+import Tabela from '../../users/Tabela/Tabela';
+import styles from './Historico.module.scss';
 
 import { CrudContext } from '@/contexts/CrudContext.jsx';
 import { useContext, useState } from 'react';

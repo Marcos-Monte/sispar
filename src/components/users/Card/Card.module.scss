@@ -1,6 +1,4 @@
 .cardIndividual{
-    // min-width: 250px !important;
-    // width: 25% !important;
     flex: 1;
     height: 209px !important;
     display: flex;
@@ -10,7 +8,6 @@
     gap: 1rem;
     border-radius: 6px;
     border: .8px solid var(--surface);
-    // background-color: blue;
 }
 
 .cardIndividual:hover {

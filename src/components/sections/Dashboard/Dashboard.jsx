@@ -1,9 +1,7 @@
-// Import de arquivo de Estilização
-import styles from './Dashboard.module.scss';
-// Import de Componentes
 import Caminho from '../../template/Caminho/Caminho.jsx';
 import { Card, CardIndicadores } from '../../users/Card/Card.jsx';
-// Import de Icones e Imagens
+import styles from './Dashboard.module.scss';
+
 import IconeHistorico from '@/assets/Dashboard/historico.png';
 import IconeReembolso from '@/assets/Dashboard/reembolso.png';
 import IconeAtualizado from '@/assets/Dashboard/sistema-atualizado.png';
@@ -13,10 +11,8 @@ import IconeSeta from '@/assets/icons/seta.png';
 import { useContext } from 'react';
 import { RenderContext } from '../../../contexts/RenderContext.jsx';
 
-// Componente Ilustrativo de Renderização
 export default function Dashboard(){
 
-    // Importando Funções de um Componente de Contexto'. Veio de um Contexto
     const {alterarRender} = useContext(RenderContext)
 
     return(
@@ -42,31 +38,16 @@ export default function Dashboard(){
                     <Card 
                         imagem={IconeReembolso}
                         texto='Solicitar Reembolso'
-                        // Função recebe outra função do Componente de Contexto
                         funcao={() => alterarRender('Reembolso')}
 
                     />
-                    {/* <Card 
-                        imagem={IconeAnalises}
-                        texto='Verificar Analises'
-                        // Função recebe outra função do Componente de Contexto
-                        funcao={() => alterarRender('Analises')}
-                    /> */}
                     <Card 
                         imagem={IconeHistorico}
                         texto='Histórico'
-                        // Função recebe outra função do Componente de Contexto
                         funcao={() => alterarRender('Historico')}
                     />
 
                 </section>
-
-                {/* <CardIndicadores 
-                    solicitados='182'
-                    analise='74'
-                    aprovados='195'
-                    rejeitados='41'
-                /> */}
 
                 <CardIndicadores />
 

@@ -12,15 +12,10 @@ export default function Tabela({registros}){
                     <th className={styles.overflow}>Colaborador(a)</th>
                     <th className={styles.overflow}>Empresa</th>
                     <th className={styles.overflow}>Data</th>
-                    {/* <th className={styles.overflow}>Motivo</th> */}
                     <th className={styles.overflow}>Tipo Reemb.</th>
                     <th className={styles.overflow}>Ctr. Custo</th>
-                    {/* <th className={styles.overflow}>Ord. Int.</th> */}
-                    {/* <th className={styles.overflow}>Div.</th> */}
                     <th className={styles.overflow}>PEP</th>
                     <th className={styles.overflow}>Moeda</th>
-                    {/* <th className={styles.overflow}>Dist. Km</th> */}
-                    {/* <th className={styles.overflow}>Val. Km</th> */}
                     <th className={styles.overflow}>Val. Faturado</th>
                     <th className={styles.overflow}>Despesa</th>
                     <th className={styles.overflow}>Status</th>
@@ -31,7 +26,7 @@ export default function Tabela({registros}){
 
             {   
                 registros.length === 0? <div className={styles.mensagemErro}><h2>Não há solicitações</h2></div>:
-                // Percorre o array 'registros' e adiciona cada registro na devida posição da tabela
+
                 registros.map((obj, index) => (
 
                     <tr className={styles.linha} key={index}>
@@ -53,10 +48,6 @@ export default function Tabela({registros}){
                             <span>{obj.data}</span>
                         </td>
 
-                        {/* <td>
-                            <span>{obj.descricao}</span>
-                        </td> */}
-
                         <td>
                             <span>{obj.tipo_reembolso.toUpperCase()}</span>
                         </td>
@@ -64,14 +55,6 @@ export default function Tabela({registros}){
                         <td>
                             <span>{obj.centro_custo.toUpperCase()}</span>
                         </td>
-                        
-                        {/* <td>
-                            <span>{obj.ordem_interna}</span>
-                        </td> */}
-                        
-                        {/* <td>
-                            <span>{obj.divisao}</span>
-                        </td> */}
 
                         <td>
                             <span>{obj.pep}</span>
@@ -80,14 +63,6 @@ export default function Tabela({registros}){
                         <td>
                             <span>{obj.moeda.toUpperCase()}</span>
                         </td>
-
-                        {/* <td>
-                            <span>{obj.distancia_km}</span>
-                        </td> */}
-
-                        {/* <td>
-                            <span>{obj.valor_km}</span>
-                        </td> */}
                         
                         <td>
                             <span>{obj.valor_faturado}</span>

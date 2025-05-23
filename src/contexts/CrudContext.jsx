@@ -1,22 +1,18 @@
-// Importação de dependências React e serviços
 import { createContext, useEffect, useState } from "react";
 import api from '../services/Api.jsx';
 import { getApiError } from "../services/utils.jsx";
 
 import { toast } from "react-toastify";
 
-// Criação do contexto com valor inicial vazio
 const CrudContext = createContext({});
 
 function CrudProvider(props) {
     // Usuário logado recuperado do localStorage
     const cadastro = JSON.parse(localStorage.getItem('user'));
 
-    // Estado principal para renderização de registros da API
     const [registros, setRegistros] = useState([]);
     const [colaboradores, setColaboradores] = useState([]);
 
-    // Estado para armazenar os dados do formulário
     const [dados, setDados] = useState({
         colaborador: '',
         empresa: '',
@@ -35,15 +31,12 @@ function CrudProvider(props) {
         id_colaborador: cadastro.id,
     });
 
-    // Estados relacionados ao controle de modais
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalType, setModalType] = useState(null);
     const [onModalConfirm, setOnModalConfirm] = useState(() => () => {});
 
-    // Array que armazena temporariamente as solicitações de reembolso
     let solicitacoes = [];
 
-    // useEffect para buscar reembolsos ao carregar a aplicação
     useEffect(() => {
         buscarReembolsos();
         buscarColaboradores();
@@ -69,7 +62,6 @@ function CrudProvider(props) {
         console.warn("Erro ao carregar 'solicitacoes' do localStorage.", e);
     }
 
-    // Busca os registros de reembolso da API
     async function buscarReembolsos() {
         try {
             const response = await api.get('/reembolso/reembolsos');
@@ -83,7 +75,7 @@ function CrudProvider(props) {
             toast.error(erro || error);
         }
     }
-    // Busca os registros de reembolso da API
+
     async function buscarColaboradores() {
         try {
             const response = await api.get('/colaborador/todos-colaboradores');
@@ -101,7 +93,6 @@ function CrudProvider(props) {
         }
     }
 
-    // Atualiza estado 'dados' com o valor digitado no formulário
     function handleChange(event) {
         setDados({
             ...dados,
@@ -134,7 +125,6 @@ function CrudProvider(props) {
         
     } 
 
-    // Salva uma nova solicitação no localStorage
     async function handleSalvar(obj) {
         const obrigatorios = ['colaborador', 'empresa', 'tipo_reembolso', 'centro_custo', 'moeda', 'valor_faturado', 'divisao', 'ordem_interna'];
 
@@ -172,7 +162,6 @@ function CrudProvider(props) {
         }
     }
 
-    // Reseta os campos do formulário para o estado inicial
     function limparDados() {
         setDados(prevState => ({
             ...prevState,
@@ -194,7 +183,6 @@ function CrudProvider(props) {
         }));
     }
 
-    // Exclui uma solicitação do localStorage
     async function excluirRegistro(obj) {
         try {
             if (!obj) {
@@ -218,14 +206,12 @@ function CrudProvider(props) {
         }
     }
 
-    // Cancela todas as solicitações e limpa o formulário
     function cancelarSolicitacao() {
         localStorage.setItem('solicitacoes', JSON.stringify([]));
         limparDados();
         setIsModalOpen(false);
     }
 
-    // Envia as solicitações de reembolso para a API
     async function enviarSolicitacao() {
         event.preventDefault();
 
@@ -244,7 +230,6 @@ function CrudProvider(props) {
         }
     }
 
-    // Edita uma solicitação existente, removendo-a da lista e preenchendo o formulário com os dados
     async function editarSolicitacao(obj) {
         try {
             if (!obj) {
@@ -280,7 +265,6 @@ function CrudProvider(props) {
         }
     }
 
-    // Soma os valores de um campo específico e formata como moeda
     function calcularFaturamento(array, nomeCampo) {
         try {
             const soma = array.reduce((total, item) => total + (parseFloat(item[nomeCampo]) || 0), 0);
@@ -295,7 +279,6 @@ function CrudProvider(props) {
         }
     }
 
-    // Conta quantos registros possuem um determinado status
     function contadorStatus(nomeCampo) {
         try {
             let soma;
@@ -316,21 +299,18 @@ function CrudProvider(props) {
         }
     }
 
-    // Abre o modal e define o tipo e a função de confirmação
     function abrirModal(tipo, confirmacao) {
         setModalType(tipo);
         setOnModalConfirm(() => confirmacao);
         setIsModalOpen(true);
     }
 
-    // Fecha o modal e limpa os estados relacionados
     function fecharModal() {
         setIsModalOpen(false);
         setModalType(null);
         setOnModalConfirm(() => () => {});
     }
 
-    // Retorno do Provider com todos os dados e funções disponíveis
     return (
         <CrudContext.Provider value={{
             cadastro,
@@ -360,7 +340,9 @@ function CrudProvider(props) {
             modalType,
             onModalConfirm,
         }}>
+
             {props.children}
+            
         </CrudContext.Provider>
     );
 }

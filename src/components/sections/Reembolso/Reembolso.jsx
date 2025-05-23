@@ -1,29 +1,24 @@
-// Import de hooks
-import { useContext } from 'react';
-// Import arquivo de Estilização
-import styles from './Reembolso.module.scss';
-// Import Componentes
-import Caminho from '../../template/Caminho/Caminho';
-import { Button } from '../../users/Buttons/Button';
-import { Input, InputData, InputMonetario, Select, TextArea } from '../../users/Inputs/Input';
-import TabelaReembolso from '../../users/Tabela/TabelaReembolso';
-// Import Icones
 import IconeApagar from '@/assets/icons/apagar.png';
 import IconeCancelar from '@/assets/icons/cancelar.png';
 import IconeEnviar from '@/assets/icons/enviar.png';
 import IconeHomeGray from '@/assets/icons/home.png';
 import IconeSalvar from '@/assets/icons/salvar.png';
 import IconeSeta from '@/assets/icons/seta.png';
-// Import Dados
+import { useContext } from 'react';
+import Caminho from '../../template/Caminho/Caminho';
+import { Button } from '../../users/Buttons/Button';
+import { Input, InputData, InputMonetario, Select, TextArea } from '../../users/Inputs/Input';
+import TabelaReembolso from '../../users/Tabela/TabelaReembolso';
+import styles from './Reembolso.module.scss';
+
 import { controleCustos, tiposDespesa, tiposMoeda } from '@/data/opcoes.js';
-// import solicitacoesReembolso from '@/data/registros.js';
+
 import { CrudContext } from '../../../contexts/CrudContext';
 
 import { toast } from 'react-toastify';
 
 export default function Reembolso(){
 
-    // Toda a lógica de CRUD da aplicação é responsabilidade do 'contexto' indicado
     const {dados, handleChange, handleSalvar, limparDados, enviarSolicitacao, cancelarSolicitacao, solicitacoes, calcularFaturamento, abrirModal, colaboradores} = useContext(CrudContext)
     const TOAST_ID = 'hover-toast';
 
@@ -64,7 +59,6 @@ export default function Reembolso(){
                 <p>Solicitação de Reembolso</p>
             </Caminho>
 
-            {/* Formulário recebe a função 'handleSalvar' para adicionar novo registro ao Array de Registros Local */}
             <form>
 
                 <div className={styles.boxIdentificacao}>
@@ -73,14 +67,6 @@ export default function Reembolso(){
 
                         <label>Nome Completo<p className={styles.asteristico}>*</p></label>
 
-                        {/* <Input 
-                            type='text'
-                            name='colaborador'
-                            value={dados.colaborador}
-                            onChange={handleChange}
-                            required
-                            placeholder="Informe o Nome do Colaborador"
-                        /> */}
                         <Select
                             array={colaboradores}
                             name='colaborador'
@@ -105,20 +91,6 @@ export default function Reembolso(){
                         />
 
                     </div>
-
-                    {/* <div className={styles.small}>
-
-                        <label>Nº Prest.Contas</label>
-
-                        <Input 
-                            type='text'
-                            name='num_prestacao'
-                            value={dados.num_prestacao}
-                            onChange={handleChange}
-                            required
-                        />
-
-                    </div> */}
 
                     <div className={styles.total}>
 
@@ -198,17 +170,6 @@ export default function Reembolso(){
                         />
                     </div>
 
-                    {/* <div className={styles.micro}>
-                        <label>PEP</label>
-                        <Input 
-                            type='text'
-                            name='pep'
-                            value={dados.pep}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div> */}
-
                     <div className={styles.micro}>
                         <label>Div.<p className={styles.asteristico}>*</p></label>
                         <Input 
@@ -232,8 +193,6 @@ export default function Reembolso(){
                             required
                         />
                     </div>
-
-                    
 
                     <div className={styles.small}>
                         <label>Valor / Km</label>
@@ -274,7 +233,6 @@ export default function Reembolso(){
                         <Button 
                             tipo='container'
                             cor='azulEscuro'
-                            // type='submit'
                             funcao={() => handleSalvar(dados)}
                         >
                             <img src={IconeSalvar} alt="Ícone de somar" />
@@ -284,7 +242,7 @@ export default function Reembolso(){
                         <Button 
                             tipo='icon'
                             cor='azulClaro'
-                            funcao={() => limparDados()} // Abrir Modal
+                            funcao={() => limparDados()} 
                         >
                             <img src={IconeApagar} alt="Ícone de apagar valores inseridos" />
                         </Button>
@@ -294,7 +252,6 @@ export default function Reembolso(){
 
             </form>
             
-            {/* Array de Registros renderizado diretamente no Componente Tabela */}
             <TabelaReembolso />
 
             <section className={styles.controles}>
@@ -327,7 +284,7 @@ export default function Reembolso(){
                 <Button 
                     tipo='containerGrande'
                     cor='vinho'
-                    funcao={handleCancelarSolicitacoes} // Abrir Modal
+                    funcao={handleCancelarSolicitacoes} 
                 >
                     <img src={IconeCancelar} alt="Ícone com um X" />
                     Cancelar Solicitação

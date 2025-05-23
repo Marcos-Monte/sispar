@@ -1,11 +1,10 @@
-// Import dependencias React
 import { useContext } from 'react';
-// Import de arquivo de estilização
+
 import styles from './Home.module.scss';
-// Import de Componentes
+
 import Header from '@/components/template/Header/Header.jsx';
 import { Modal } from '@/components/users/Modal/Modal.jsx';
-// Import de Contexto
+
 import { CrudContext, CrudProvider } from '../../contexts/CrudContext.jsx';
 import { RenderContext } from '../../contexts/RenderContext.jsx';
 

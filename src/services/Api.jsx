@@ -1,4 +1,3 @@
-// Importando Lib axios -> Usada para fazer requisições http
 import axios from 'axios';
 let baseURL;
 
@@ -14,7 +13,6 @@ switch (location.hostname) {
         break;
 }
 
-// Criando instancia personalizada do axios
 const api = axios.create({
     baseURL,
 });

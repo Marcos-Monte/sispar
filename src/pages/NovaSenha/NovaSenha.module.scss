@@ -53,10 +53,6 @@
 .box {
     width: 100% !important;
     position: relative;
-
-    // input {
-    //     width: 100% !important;
-    // }
 }
 
 .mask {
@@ -66,7 +62,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        background-color: rgba(0, 0, 0, .2); /* Fundo vermelho semi-transparente */
+        background-color: rgba(0, 0, 0, .2); /* Fundo semi-transparente */
         z-index: 1000; /* Fica acima do card */
         display: flex;
         align-items: center;

@@ -1,4 +1,4 @@
-import styles from './Modal.module.scss'; // se quiser aplicar estilos próprios
+import styles from './Modal.module.scss';
 
 import { Button } from '@/components/users/Buttons/Button.jsx';
 import Logo from '../../../assets/Login/logo-ws.png';
@@ -24,7 +24,6 @@ export function Modal({ isOpen, onClose, onConfirm, children }) {
                     <Button
                         tipo='container'
                         cor='cinza'
-                        // rota='/'
                         funcao={onClose}
                     >
                         Cancelar
@@ -32,7 +31,6 @@ export function Modal({ isOpen, onClose, onConfirm, children }) {
                     <Button
                         tipo='container'
                         cor='azul'
-                        // rota='/'
                         funcao={onConfirm}
                     >
                         Confirmar
