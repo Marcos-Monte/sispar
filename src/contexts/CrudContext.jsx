@@ -90,11 +90,37 @@ function CrudProvider(props) {
         });
     }
 
+    async function getCotacao(moeda){
+        const simbolo = `${moeda}BRL`
+        try {
+            if(moeda === 'BRL') {
+                return 1
+            }
+            const response = await api.get(`https://economia.awesomeapi.com.br/json/last/${moeda}-BRL`)
+            const data = response.data
+
+            if(!data[simbolo]){
+                console.warn('Conversão não encontrada');
+                return
+            }
+
+            const cotacao = data[simbolo].bid
+
+            return cotacao
+        } catch (error) {
+            const erro = getApiError(error);
+            console.error( erro || error);
+            toast.error(erro || error);
+        }
+        
+    } 
+
     // Salva uma nova solicitação no localStorage
     async function handleSalvar(obj) {
         const obrigatorios = ['colaborador', 'empresa', 'tipo_reembolso', 'centro_custo', 'moeda', 'valor_faturado', 'divisao', 'ordem_interna'];
 
         try {
+
             for (let campo of obrigatorios) {
                 if (!obj[campo]) {
                     toast.warn(`Por favor, preencha o campo obrigatório: ${campo.replace('_', ' ')}`);
@@ -108,7 +134,19 @@ function CrudProvider(props) {
                 obj.data = data.toISOString().replace('Z', '');
             }
 
-            localStorage.setItem('solicitacoes', JSON.stringify([...solicitacoes, obj]));
+            const cotacao = await getCotacao(obj.moeda)
+
+            if (!cotacao) {
+                toast.error('Não foi possível obter a cotação. Verifique a moeda informada.');
+                return; 
+            }
+
+            const novoObj = {
+                ...obj,
+                valor_faturado: (obj.valor_faturado * cotacao).toFixed(2)
+            }
+
+            localStorage.setItem('solicitacoes', JSON.stringify([...solicitacoes, novoObj]));
             limparDados();
         } catch (error) {
             console.error('Erro ao salvar a solicitação:', error);
