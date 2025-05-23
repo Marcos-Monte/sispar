@@ -1,7 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-import Analises from '@/components/sections/Analises/Analises.jsx';
 import Dashboard from '@/components/sections/Dashboard/Dashboard.jsx';
 import Historico from '@/components/sections/Historico/Historico.jsx';
 import Reembolso from '@/components/sections/Reembolso/Reembolso.jsx';
