@@ -14,10 +14,11 @@ function CrudProvider(props) {
 
     // Estado principal para renderização de registros da API
     const [registros, setRegistros] = useState([]);
+    const [colaboradores, setColaboradores] = useState([]);
 
     // Estado para armazenar os dados do formulário
     const [dados, setDados] = useState({
-        colaborador: '',
+        colaborador: 'Selec.',
         empresa: '',
         descricao: '',
         data: '',
@@ -45,6 +46,7 @@ function CrudProvider(props) {
     // useEffect para buscar reembolsos ao carregar a aplicação
     useEffect(() => {
         buscarReembolsos();
+        buscarColaboradores();
 
         const item = localStorage.getItem('solicitacoes');
         try {
@@ -81,6 +83,23 @@ function CrudProvider(props) {
             toast.error(erro || error);
         }
     }
+    // Busca os registros de reembolso da API
+    async function buscarColaboradores() {
+        try {
+            const response = await api.get('/colaborador/todos-colaboradores');
+
+            if (response.data.length !== undefined) {
+                const listaColaboradores = response.data.map(
+                    (colaborador) => `ID:${colaborador.id} - ${colaborador.nome}`
+                )
+                setColaboradores(listaColaboradores);
+            }
+        } catch (error) {
+            const erro = getApiError(error);
+            console.error('Erro ao buscar Colaboradores:', erro || error);
+            toast.error(erro || error);
+        }
+    }
 
     // Atualiza estado 'dados' com o valor digitado no formulário
     function handleChange(event) {
@@ -90,11 +109,37 @@ function CrudProvider(props) {
         });
     }
 
+    async function getCotacao(moeda){
+        const simbolo = `${moeda}BRL`
+        try {
+            if(moeda === 'BRL') {
+                return 1
+            }
+            const response = await api.get(`https://economia.awesomeapi.com.br/json/last/${moeda}-BRL`)
+            const data = response.data
+
+            if(!data[simbolo]){
+                console.warn('Conversão não encontrada');
+                return
+            }
+
+            const cotacao = data[simbolo].bid
+
+            return cotacao
+        } catch (error) {
+            const erro = getApiError(error);
+            console.error( erro || error);
+            toast.error(erro || error);
+        }
+        
+    } 
+
     // Salva uma nova solicitação no localStorage
     async function handleSalvar(obj) {
         const obrigatorios = ['colaborador', 'empresa', 'tipo_reembolso', 'centro_custo', 'moeda', 'valor_faturado', 'divisao', 'ordem_interna'];
 
         try {
+
             for (let campo of obrigatorios) {
                 if (!obj[campo]) {
                     toast.warn(`Por favor, preencha o campo obrigatório: ${campo.replace('_', ' ')}`);
@@ -108,7 +153,19 @@ function CrudProvider(props) {
                 obj.data = data.toISOString().replace('Z', '');
             }
 
-            localStorage.setItem('solicitacoes', JSON.stringify([...solicitacoes, obj]));
+            const cotacao = await getCotacao(obj.moeda)
+
+            if (!cotacao) {
+                toast.error('Não foi possível obter a cotação. Verifique a moeda informada.');
+                return; 
+            }
+
+            const novoObj = {
+                ...obj,
+                valor_faturado: (obj.valor_faturado * cotacao).toFixed(2)
+            }
+
+            localStorage.setItem('solicitacoes', JSON.stringify([...solicitacoes, novoObj]));
             limparDados();
         } catch (error) {
             console.error('Erro ao salvar a solicitação:', error);
@@ -119,7 +176,7 @@ function CrudProvider(props) {
     function limparDados() {
         setDados(prevState => ({
             ...prevState,
-            colaborador: '',
+            colaborador: 'Selec.',
             empresa: '',
             descricao: '',
             data: '',
@@ -268,6 +325,7 @@ function CrudProvider(props) {
             solicitacoes,
 
             registros,
+            colaboradores,
             dados,
 
             setDados,
