@@ -24,7 +24,7 @@ import { toast } from 'react-toastify';
 export default function Reembolso(){
 
     // Toda a lógica de CRUD da aplicação é responsabilidade do 'contexto' indicado
-    const {dados, handleChange, handleSalvar, limparDados, enviarSolicitacao, cancelarSolicitacao, solicitacoes, calcularFaturamento, abrirModal} = useContext(CrudContext)
+    const {dados, handleChange, handleSalvar, limparDados, enviarSolicitacao, cancelarSolicitacao, solicitacoes, calcularFaturamento, abrirModal, colaboradores} = useContext(CrudContext)
     const TOAST_ID = 'hover-toast';
 
     function handleEnviarSolicitacoes(){
@@ -73,13 +73,20 @@ export default function Reembolso(){
 
                         <label>Nome Completo<p className={styles.asteristico}>*</p></label>
 
-                        <Input 
+                        {/* <Input 
                             type='text'
                             name='colaborador'
                             value={dados.colaborador}
                             onChange={handleChange}
                             required
                             placeholder="Informe o Nome do Colaborador"
+                        /> */}
+                        <Select
+                            array={colaboradores}
+                            name='colaborador'
+                            value={dados.colaborador}
+                            onChange={handleChange}
+                            required
                         />
 
                     </div>

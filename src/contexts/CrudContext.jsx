@@ -14,10 +14,11 @@ function CrudProvider(props) {
 
     // Estado principal para renderização de registros da API
     const [registros, setRegistros] = useState([]);
+    const [colaboradores, setColaboradores] = useState([]);
 
     // Estado para armazenar os dados do formulário
     const [dados, setDados] = useState({
-        colaborador: '',
+        colaborador: 'Selec.',
         empresa: '',
         descricao: '',
         data: '',
@@ -45,6 +46,7 @@ function CrudProvider(props) {
     // useEffect para buscar reembolsos ao carregar a aplicação
     useEffect(() => {
         buscarReembolsos();
+        buscarColaboradores();
 
         const item = localStorage.getItem('solicitacoes');
         try {
@@ -78,6 +80,23 @@ function CrudProvider(props) {
         } catch (error) {
             const erro = getApiError(error);
             console.error('Erro ao buscar reembolsos:', erro || error);
+            toast.error(erro || error);
+        }
+    }
+    // Busca os registros de reembolso da API
+    async function buscarColaboradores() {
+        try {
+            const response = await api.get('/colaborador/todos-colaboradores');
+
+            if (response.data.length !== undefined) {
+                const listaColaboradores = response.data.map(
+                    (colaborador) => `ID:${colaborador.id} - ${colaborador.nome}`
+                )
+                setColaboradores(listaColaboradores);
+            }
+        } catch (error) {
+            const erro = getApiError(error);
+            console.error('Erro ao buscar Colaboradores:', erro || error);
             toast.error(erro || error);
         }
     }
@@ -157,7 +176,7 @@ function CrudProvider(props) {
     function limparDados() {
         setDados(prevState => ({
             ...prevState,
-            colaborador: '',
+            colaborador: 'Selec.',
             empresa: '',
             descricao: '',
             data: '',
@@ -306,6 +325,7 @@ function CrudProvider(props) {
             solicitacoes,
 
             registros,
+            colaboradores,
             dados,
 
             setDados,
