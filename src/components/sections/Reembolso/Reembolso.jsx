@@ -19,10 +19,13 @@ import { controleCustos, tiposDespesa, tiposMoeda } from '@/data/opcoes.js';
 // import solicitacoesReembolso from '@/data/registros.js';
 import { CrudContext } from '../../../contexts/CrudContext';
 
+import { toast } from 'react-toastify';
+
 export default function Reembolso(){
 
     // Toda a lógica de CRUD da aplicação é responsabilidade do 'contexto' indicado
     const {dados, handleChange, handleSalvar, limparDados, enviarSolicitacao, cancelarSolicitacao, solicitacoes, calcularFaturamento, abrirModal} = useContext(CrudContext)
+    const TOAST_ID = 'hover-toast';
 
     function handleEnviarSolicitacoes(){
         abrirModal('enviar', () => enviarSolicitacao())
@@ -30,6 +33,21 @@ export default function Reembolso(){
 
     function handleCancelarSolicitacoes(){
         abrirModal('cancelar', () => cancelarSolicitacao())
+    }
+
+    function handleMouseEnter() {
+        if (!toast.isActive(TOAST_ID)) {
+            toast.info('💰 Valor Faturado será convertido para Real automaticamente.', {
+            toastId: TOAST_ID,
+            autoClose: false,
+            closeButton: false,
+            closeOnClick: false,
+            draggable: false
+            });
+        }
+    }
+    function handleMouseLeave() {
+        toast.dismiss(TOAST_ID);
     }
 
     return(
@@ -155,6 +173,8 @@ export default function Reembolso(){
                             name='moeda'
                             value={dados.moeda}
                             onChange={handleChange}
+                            mouseEnter={handleMouseEnter}
+                            mouseLeave={handleMouseLeave}
                             required
                         />
                     </div>

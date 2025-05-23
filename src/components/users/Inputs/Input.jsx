@@ -70,6 +70,8 @@ function Select(props){
                     name={props.name}
                     value={props.value}
                     onChange={props.onChange}
+                    onMouseEnter={props.mouseEnter}
+                    onMouseLeave={props.mouseLeave}
                 >
                     {/* Opção padrão que não conta como seleção */}
                     <option disabled>Selec.</option>
