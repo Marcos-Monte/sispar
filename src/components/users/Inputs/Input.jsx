@@ -74,7 +74,7 @@ function Select(props){
                     onMouseLeave={props.mouseLeave}
                 >
                     {/* Opção padrão que não conta como seleção */}
-                    <option disabled>Selec.</option>
+                    <option disabled value=''>Selec.</option>
                     {/* Utilizando 'Array.map' para renderizar valores de um Array como 'option' do Select */}
                     {
                         props.array.map(
