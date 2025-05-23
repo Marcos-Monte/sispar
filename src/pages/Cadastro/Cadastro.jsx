@@ -63,6 +63,10 @@ export default function Cadastro(){
         event.preventDefault()
 
         try {
+            for(let dado in dadosCadastrais){
+                dadosCadastrais[dado] = dadosCadastrais[dado].toLowerCase()
+                console.log(dadosCadastrais[dado])
+            }
 
             if(dadosCadastrais.email !== dadosCadastrais.emailConfirm){
                 toast.warn('E-mail e Confirmação de E-mail devem ser iguais.')
